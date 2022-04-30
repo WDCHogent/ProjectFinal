@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/ACHBBrCUta3YWBLWG+SddRTCrHRnOnyvxYbTYX1y2hCWQTUSum1tJ+0Urv/+IhOnytUAr7k3dWuvBvqMFM+KA==",
+  "dgSpecHash": "6I4m2+dSAN6wROkuS2dWKqDx2S/hr56pbCF1IcB19DI5Rk+aHAcX2gXV3t75y0lMLl1Uokg6fijXsklqBU8K9A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\xFitnessReservatieDomein\\xFitnessReservatieDomein.csproj",
+  "projectFilePath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\xFitnessReservatieDomein\\xFitnessReservatieDomein.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\woutd\\.nuget\\packages\\coverlet.collector\\3.1.0\\coverlet.collector.3.1.0.nupkg.sha512",
     "C:\\Users\\woutd\\.nuget\\packages\\microsoft.codecoverage\\16.11.0\\microsoft.codecoverage.16.11.0.nupkg.sha512",

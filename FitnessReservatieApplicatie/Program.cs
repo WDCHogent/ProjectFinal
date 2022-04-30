@@ -1,12 +1,15 @@
-﻿using System;
+﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Enums;
+using System;
 
 namespace FitnessReservatieApplicatie
 {
-    internal class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Klant klant = new Klant(1, "De Crop", "Wout", "woutdecrop@hotmail.com", AbonnementType.Gold);
+            Console.WriteLine(klant);
         }
     }
 }

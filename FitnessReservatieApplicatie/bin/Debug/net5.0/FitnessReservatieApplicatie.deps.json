@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v5.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v5.0": {
+      "FitnessReservatieApplicatie/1.0.0": {
+        "dependencies": {
+          "FitnessReservatieBL": "1.0.0"
+        },
+        "runtime": {
+          "FitnessReservatieApplicatie.dll": {}
+        }
+      },
+      "FitnessReservatieBL/1.0.0": {
+        "runtime": {
+          "FitnessReservatieBL.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "FitnessReservatieApplicatie/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "FitnessReservatieBL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieDL\\FitnessReservatieDL.csproj",
+      "projectUniqueName": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieDL\\FitnessReservatieDL.csproj",
       "projectName": "FitnessReservatieDL",
-      "projectPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieDL\\FitnessReservatieDL.csproj",
+      "projectPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieDL\\FitnessReservatieDL.csproj",
       "packagesPath": "C:\\Users\\woutd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieDL\\obj\\",
+      "outputPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieDL\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\woutd\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -5,9 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domeinen\" />
-    <Folder Include="Managers\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Interfaces\" />
   </ItemGroup>
 

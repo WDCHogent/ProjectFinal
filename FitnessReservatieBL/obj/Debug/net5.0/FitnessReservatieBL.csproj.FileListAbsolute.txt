@@ -1,0 +1,12 @@
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\bin\Debug\net5.0\FitnessReservatieBL.deps.json
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\bin\Debug\net5.0\FitnessReservatieBL.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\bin\Debug\net5.0\FitnessReservatieBL.pdb
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.csproj.AssemblyReference.cache
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.AssemblyInfoInputs.cache
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.AssemblyInfo.cs
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.csproj.CoreCompileInputs.cache
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\refint\FitnessReservatieBL.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\FitnessReservatieBL.pdb
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatieBL\obj\Debug\net5.0\ref\FitnessReservatieBL.dll

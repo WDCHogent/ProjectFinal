@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net5.0": {}
+    "net5.0": {
+      "FitnessReservatieBL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v5.0",
+        "compile": {
+          "bin/placeholder/FitnessReservatieBL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FitnessReservatieBL.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "FitnessReservatieBL/1.0.0": {
+      "type": "project",
+      "path": "../FitnessReservatieBL/FitnessReservatieBL.csproj",
+      "msbuildProject": "../FitnessReservatieBL/FitnessReservatieBL.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net5.0": []
+    "net5.0": [
+      "FitnessReservatieBL >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\woutd\\.nuget\\packages\\": {}
@@ -13,11 +32,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieApplicatie\\FitnessReservatieApplicatie.csproj",
+      "projectUniqueName": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieApplicatie\\FitnessReservatieApplicatie.csproj",
       "projectName": "FitnessReservatieApplicatie",
-      "projectPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieApplicatie\\FitnessReservatieApplicatie.csproj",
+      "projectPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieApplicatie\\FitnessReservatieApplicatie.csproj",
       "packagesPath": "C:\\Users\\woutd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\FitnessReservatieApplicatie\\obj\\",
+      "outputPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieApplicatie\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\woutd\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -33,7 +52,11 @@
       "frameworks": {
         "net5.0": {
           "targetAlias": "net5.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieBL\\FitnessReservatieBL.csproj": {
+              "projectPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatieBL\\FitnessReservatieBL.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

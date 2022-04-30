@@ -5978,11 +5978,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\xFitnessReservatieManager\\xFitnessReservatieManager.csproj",
+      "projectUniqueName": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\xFitnessReservatieManager\\xFitnessReservatieManager.csproj",
       "projectName": "xFitnessReservatieManager",
-      "projectPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\xFitnessReservatieManager\\xFitnessReservatieManager.csproj",
+      "projectPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\xFitnessReservatieManager\\xFitnessReservatieManager.csproj",
       "packagesPath": "C:\\Users\\woutd\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\woutd\\Documents\\Graduaat Programmeren 2021-2022 - DAG 1B\\Semester II\\Programmeren Gevorderd\\Assignments\\ProjectFinal\\xFitnessReservatieManager\\obj\\",
+      "outputPath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\xFitnessReservatieManager\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\woutd\\AppData\\Roaming\\NuGet\\NuGet.Config",
