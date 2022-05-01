@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers
 {
-    internal class ToestelManager
+    public class ToestelManager
     {
     }
 }

@@ -50,7 +50,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public void ZetAbonnementType(AbonnementType abonnementType)
         {
-            if (abonnementType.GetType() != typeof(AbonnementType)) throw new KlantException("Klant - ZetAbonnementType - 'Geen geldig mailadres'");
+            if (abonnementType.GetType() != typeof(AbonnementType)) throw new KlantException("Klant - ZetAbonnementType - 'Geen geldig abonnementtype'");
             AbonnementType = abonnementType;
         }
 
