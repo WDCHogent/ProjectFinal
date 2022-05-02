@@ -1,6 +1,8 @@
 ﻿using FitnessReservatieBL.Domeinen.Enums;
 using FitnessReservatieBL.Exceptions;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace FitnessReservatieBL.Domeinen
@@ -19,6 +21,7 @@ namespace FitnessReservatieBL.Domeinen
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public string Mailadres { get; private set; }
+        public List<Reservatie> Reservaties { get; set; }
 
         public void ZetKlantnummer(int klantnummer)
         {
@@ -46,6 +49,19 @@ namespace FitnessReservatieBL.Domeinen
             else throw new KlantException("Klant - ZetMailadres - 'Geen geldig mailadres'");
         }
 
+        internal void VoegReservatieToe(Reservatie reservatie)
+        {
+            if (reservatie == null) throw new KlantException("Klant - VoegReservatieToe");
+            if (Reservaties.Contains(reservatie)) throw new KlantException("Klant - VoegReservatieToe - 'Reservatie bestaat al'");
+
+            Reservaties.Add(reservatie);
+        }
+
+        public bool HeeftReservatie(Reservatie reservatie)
+        {
+            return Reservaties.Contains(reservatie);
+        }
+
         public override bool Equals(object obj)
         {
             return obj is Klant klant &&
@@ -55,6 +71,11 @@ namespace FitnessReservatieBL.Domeinen
         public override int GetHashCode()
         {
             return HashCode.Combine(Klantnummer);
+        }
+
+        public IReadOnlyList<Reservatie> GeefReservaties()
+        {
+            return (IReadOnlyList<Reservatie>)Reservaties.AsReadOnly().OrderBy(r => r.Datum).ThenBy(r => r.Tijdslot);
         }
 
         //TEMPORARY

@@ -1,4 +1,4 @@
-﻿using FitnessReservatieBL.DTO;
+﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -26,14 +26,14 @@ namespace FitnessReservatieDL.ADO.NET
             SqlConnection connection = new SqlConnection(_connectiestring);
             return connection;
         }
-        public KlantInfo SelecteerKlant(int? klantnummer, string mailadres)
+        public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
             if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
             string query = "SELECT * FROM klant";
             if (klantnummer.HasValue) query += "WHERE klantnummer=@klantnummer";
             else query += "WHERE mailadres=@mailadres";
             SqlConnection conn = GetConnection();
-            KlantInfo klantinfo = null;
+            Klant klant = null;
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query;
@@ -51,15 +51,9 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        int id = (int)reader["klantnummer"];
-                        string naam = (string)reader["naam"];
-                        string voornaam = (string)reader["voornaam"];
-                        string mail = (string)reader["mailadres"];
-                        string abonnementtype = (string)reader["abonnementtype"];
-
-                        klantinfo = new KlantInfo(id, naam, voornaam, mail, abonnementtype);
+                        klant = new Klant((int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"]);
                     }
-                    return klantinfo;
+                    return klant;
                 }
                 catch (Exception ex)
                 {

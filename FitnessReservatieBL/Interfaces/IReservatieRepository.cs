@@ -1,4 +1,4 @@
-﻿using FitnessReservatieBL.Domeinen;
+﻿using FitnessReservatieBL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Interfaces
 {
-    public interface IKlantRepository
+    public interface IReservatieRepository
     {
-        Klant SelecteerKlant(int? klantnummer, string mailadres);
+
     }
 }

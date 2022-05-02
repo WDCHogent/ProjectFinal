@@ -8,11 +8,11 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 {
     public class Tijdslot
     {
-        public Tijdslot(int tijdslot)
+        public Tijdslot(DateTime tijdslot)
         {
             TSlot = tijdslot;
         }
 
-        public int TSlot { get; private set; }
+        public DateTime TSlot { get; private set; }
     }
 }

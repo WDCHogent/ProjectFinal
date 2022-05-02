@@ -1,4 +1,5 @@
-﻿using FitnessReservatieBL.DTO;
+﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
@@ -11,19 +12,19 @@ namespace FitnessReservatieBL.Managers
 {
     public class KlantManager
     {
-        private IKlantRepository _repo;
+        private IKlantRepository _klantRepo;
 
         public KlantManager(IKlantRepository repo)
         {
-            this._repo = repo;
+            this._klantRepo = repo;
         }
 
-        public KlantInfo SelecteerKlant(int? klantnummer, string mailadres)
+        public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
             if ((!klantnummer.HasValue) && string.IsNullOrWhiteSpace(mailadres)) throw new KlantManagerException("KlantManagerException - SelecteerKlant");
             try
             {
-                return _repo.SelecteerKlant(klantnummer, mailadres);
+                return _klantRepo.SelecteerKlant(klantnummer, mailadres);
             }
             catch (Exception ex)
             {
