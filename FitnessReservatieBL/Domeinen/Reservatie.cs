@@ -18,20 +18,20 @@ namespace FitnessReservatieBL.Domeinen
             ZetToestel(toestel);
         }
 
-        internal Reservatie(Klant klant, DateTime datum, Tijdslot tijdslot, ToestelType toestelType)
-        {
-            ZetKlant(klant);
-            ZetDatum(datum);
-            ZetTijdslot(tijdslot);
-            ZetToestelType(toestelType);
-        }
+        //internal Reservatie(Klant klant, DateTime datum, Tijdslot tijdslot, ToestelType toestelType)
+        //{
+        //    ZetKlant(klant);
+        //    ZetDatum(datum);
+        //    ZetTijdslot(tijdslot);
+        //    ZetToestelType(toestelType);
+        //}
 
         public Klant Klant { get; private set; }
         public DateTime Datum { get; private set; }
         public Tijdslot Tijdslot { get; private set; }
         public Toestel Toestel { get; private set; }
 
-        public ToestelType ToestelType { get; private set; }
+        //public ToestelType ToestelType { get; private set; }
 
         public void ZetKlant(Klant klant)
         {
@@ -58,10 +58,10 @@ namespace FitnessReservatieBL.Domeinen
             Toestel = toestel;
         }
 
-        public void ZetToestelType(ToestelType toestelType)
-        {
-            if (ToestelType == null) throw new ReservatieException("Reservatie - ZetToestelType - 'Gelieve een toesteltype op te geven'");
-            ToestelType = toestelType;
-        }
+        //public void ZetToestelType(ToestelType toestelType)
+        //{
+        //    if (ToestelType == null) throw new ReservatieException("Reservatie - ZetToestelType - 'Gelieve een toesteltype op te geven'");
+        //    ToestelType = toestelType;
+        //}
     }
 }

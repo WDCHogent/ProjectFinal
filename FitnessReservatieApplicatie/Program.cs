@@ -8,7 +8,7 @@ namespace FitnessReservatieApplicatie
     {
         static void Main(string[] args)
         {
-            Klant klant = new Klant(1, "De Crop", "Wout", "woutdecrop@hotmail.com", AbonnementType.Gold);
+            Klant klant = new Klant(1, "De Crop", "Wout", "woutdecrop@hotmail.com");
             Console.WriteLine(klant);
         }
     }

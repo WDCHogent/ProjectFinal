@@ -7,20 +7,18 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Klant
     {
-        public Klant(int klantnummer, string naam, string voornaam, string mailadres, AbonnementType abonnementType)
+        public Klant(int klantnummer, string naam, string voornaam, string mailadres)
         {
             ZetKlantnummer(klantnummer);
             ZetNaam(naam);
             ZetVoornaam(voornaam);
             ZetMailadres(mailadres);
-            ZetAbonnementType(abonnementType);
         }
 
         public int Klantnummer { get; private set; }
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public string Mailadres { get; private set; }
-        public AbonnementType AbonnementType { get; private set; }
 
         public void ZetKlantnummer(int klantnummer)
         {
@@ -48,12 +46,6 @@ namespace FitnessReservatieBL.Domeinen
             else throw new KlantException("Klant - ZetMailadres - 'Geen geldig mailadres'");
         }
 
-        public void ZetAbonnementType(AbonnementType abonnementType)
-        {
-            if (abonnementType.GetType() != typeof(AbonnementType)) throw new KlantException("Klant - ZetAbonnementType - 'Geen geldig abonnementtype'");
-            AbonnementType = abonnementType;
-        }
-
         public override bool Equals(object obj)
         {
             return obj is Klant klant &&
@@ -68,7 +60,7 @@ namespace FitnessReservatieBL.Domeinen
         //TEMPORARY
         public override string ToString()
         {
-            return $"{Klantnummer}, {Naam}, {Voornaam}, {Mailadres}, {AbonnementType}";
+            return $"{Klantnummer}, {Naam}, {Voornaam}, {Mailadres}";
         }
     }
 }
