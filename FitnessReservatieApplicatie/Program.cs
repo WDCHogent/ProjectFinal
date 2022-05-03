@@ -29,7 +29,10 @@ namespace FitnessReservatieApplicatie
             klant2.VoegReservatieToe(new Reservatie(klant2, DateTime.Now.AddDays(4).Date, new Tijdslot(9), toestel2));
 
             //controle zelfde reservatie
-            klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(9), toestel1));
+            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(1).Date, new Tijdslot(9), toestel1)); //check
+
+            //controle zelfde tijdslot (met ander toestel)
+            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(1).Date, new Tijdslot(9), toestel2)); //check
 
             //controle juiste klant
             //klant1.VoegReservatieToe(new Reservatie(klant2, DateTime.Now.AddDays(2).Date, new Tijdslot(9), toestel1)); //check
@@ -37,14 +40,11 @@ namespace FitnessReservatieApplicatie
             //controle max 1 week
             //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(10).Date, new Tijdslot(9), toestel1)); //check
 
-            //controle zelfde tijdslot (met ander toestel)
-            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(9), toestel2));
+            //controle max 2 tijdsloten na elkaar                                                                        //check
+            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(1).Date, new Tijdslot(10), toestel1));
+            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(1).Date, new Tijdslot(11), toestel1));
 
-            //controle max 2 tijdsloten na elkaar
-            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(10), toestel1));
-            //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(11), toestel1));
-
-            //controle max 4 tijdsloten per dag
+            //controle max 4 tijdsloten per dag                                                                          //check
             //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(12), toestel1));
             //klant1.VoegReservatieToe(new Reservatie(klant1, DateTime.Now.AddDays(2).Date, new Tijdslot(13), toestel1));
 
