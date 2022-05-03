@@ -34,5 +34,10 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
             if (string.IsNullOrEmpty(toestelNaam)) throw new ToestelException("ToestelType - ZetToestelNaam - 'Mag niet leeg zijn'");
             ToestelNaam = toestelNaam.Trim();
         }
+
+        public override string ToString()
+        {
+            return $"{ToestelId},{ToestelNaam}";
+        }
     }
 }

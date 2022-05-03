@@ -44,7 +44,12 @@ namespace FitnessReservatieBL.Domeinen
 
         public void ZetToestelType(ToestelType toestelType)
         {
+            ToestelType = toestelType;
+        }
 
+        public override string ToString()
+        {
+            return $"{ToestelNummer}, {ToestelNaam}, {Status.ToString()}, {ToestelType}";
         }
     }
 }

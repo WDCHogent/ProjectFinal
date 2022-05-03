@@ -21,7 +21,7 @@ namespace FitnessReservatieBL.Domeinen
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public string Mailadres { get; private set; }
-        public List<Reservatie> Reservaties { get; set; }
+        private List<Reservatie> _reservaties = new List<Reservatie>();
 
         public void ZetKlantnummer(int klantnummer)
         {
@@ -52,15 +52,14 @@ namespace FitnessReservatieBL.Domeinen
         public void VoegReservatieToe(Reservatie reservatie)
         {
             if (reservatie == null) throw new KlantException("Klant - VoegReservatieToe");
-            if (Reservaties.Contains(reservatie)) throw new KlantException("Klant - VoegReservatieToe - 'Reservatie bestaat al'");
-
-            Reservaties.Add(reservatie);
-            if (reservatie.Klant != this) reservatie.ZetKlant(this);
+            if (reservatie.Klant != this) throw new KlantException("Klant - VoegReservatieToe");
+            if (this.HeeftReservatie(reservatie)) throw new KlantException("Klant - VoegReservatieToe - 'Deze reservatie bestaat al'");
+            _reservaties.Add(reservatie);
         }
 
         public bool HeeftReservatie(Reservatie reservatie)
         {
-            return Reservaties.Contains(reservatie);
+            return _reservaties.Contains(reservatie);
         }
 
         public override bool Equals(object obj)
@@ -76,7 +75,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public IReadOnlyList<Reservatie> GeefReservaties()
         {
-            return (IReadOnlyList<Reservatie>)Reservaties.AsReadOnly().OrderBy(r => r.Datum).ThenBy(r => r.Tijdslot);
+            return _reservaties.AsReadOnly();
         }
 
         //TEMPORARY
