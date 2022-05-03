@@ -16,9 +16,11 @@ namespace FitnessReservatieApplicatie
 
             Toestel toestel = new Toestel(2, "Loopband", Status.operatief, toesteltype);
 
-            Tijdslot tijdslot = new Tijdslot(DateTime.Now);
+            Tijdslot tijdslot = new Tijdslot(DateTime.Now.AddDays(1).AddHours(5));
 
-            Reservatie reservatie = new Reservatie(klant, DateTime.Now, tijdslot, toestel);
+            klant.VoegReservatieToe(new Reservatie(DateTime.Now.AddDays(1), tijdslot, toestel));
+
+           
         }
     }
 }

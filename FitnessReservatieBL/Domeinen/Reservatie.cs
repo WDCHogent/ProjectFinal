@@ -10,7 +10,7 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Reservatie
     {
-        public Reservatie(Klant klant, DateTime datum, Tijdslot tijdslot, Toestel toestel)
+        public Reservatie(Klant klant,DateTime datum, Tijdslot tijdslot, Toestel toestel)
         {
             ZetKlant(klant);
             ZetDatum(datum);
@@ -26,9 +26,6 @@ namespace FitnessReservatieBL.Domeinen
         public void ZetKlant(Klant klant)
         {
             if (klant == null) throw new ReservatieException("Reservatie - ZetKlant - 'Klant bestaat niet'");
-            if (klant.HeeftReservatie(this)) throw new ReservatieException("Reservatie - ZetKlant - 'Deze reservatie werd reeds geregistreerd'");
-            if ((klant.GeefReservaties().Where(r => r.Tijdslot.TSlot.AddHours(-1) == this.Tijdslot.TSlot && r.Tijdslot.TSlot.AddHours(-2) == this.Tijdslot.TSlot)).Count() > 0) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
-            if (klant.GeefReservaties().Where(r => r.Datum == this.Datum).Count() >= 4) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Klant = klant;
         }
 
@@ -36,12 +33,14 @@ namespace FitnessReservatieBL.Domeinen
         {
             if (datum < DateTime.Now) throw new ReservatieException("Reservatie - ZetDatum - 'ongeldige datum'");
             if (datum >= DateTime.Now.AddDays(7)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
+            if (Klant.GeefReservaties().Where(r => r.Datum == this.Datum).Count() >= 4) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Datum = datum;
         }
 
         public void ZetTijdslot(Tijdslot tijdslot)
         {
             if (tijdslot == null) throw new ReservatieException("Reservatie - ZetTijdslot - 'Gelieve een tijdslot op te geven'");
+            if ((Klant.GeefReservaties().Where(r => r.Tijdslot.TSlot.AddHours(-1) == this.Tijdslot.TSlot && r.Tijdslot.TSlot.AddHours(-2) == this.Tijdslot.TSlot)).Count() > 0) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Tijdslot = tijdslot;
         }
 
@@ -50,6 +49,8 @@ namespace FitnessReservatieBL.Domeinen
             if (toestel == null) throw new ReservatieException("Reservatie - ZetToestel - 'Gelieve een toestel op te geven'");
             Toestel = toestel;
         }
+
+        internal void 
 
         public override string ToString()
         {

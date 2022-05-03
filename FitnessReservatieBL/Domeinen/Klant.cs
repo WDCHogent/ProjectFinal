@@ -49,12 +49,13 @@ namespace FitnessReservatieBL.Domeinen
             else throw new KlantException("Klant - ZetMailadres - 'Geen geldig mailadres'");
         }
 
-        internal void VoegReservatieToe(Reservatie reservatie)
+        public void VoegReservatieToe(Reservatie reservatie)
         {
             if (reservatie == null) throw new KlantException("Klant - VoegReservatieToe");
             if (Reservaties.Contains(reservatie)) throw new KlantException("Klant - VoegReservatieToe - 'Reservatie bestaat al'");
 
             Reservaties.Add(reservatie);
+            if (reservatie.Klant != this) reservatie.ZetKlant(this);
         }
 
         public bool HeeftReservatie(Reservatie reservatie)
