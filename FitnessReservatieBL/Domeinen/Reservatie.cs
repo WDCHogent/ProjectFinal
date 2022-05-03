@@ -17,7 +17,7 @@ namespace FitnessReservatieBL.Domeinen
             ZetTijdslot(tijdslot);
             ZetToestel(toestel);
 
-            //Replacment for program-class
+            //TODO : Replacment for program-class
             //Klant.VoegReservatieToe(this);
         }
 
@@ -52,7 +52,6 @@ namespace FitnessReservatieBL.Domeinen
         {
             if (toestel == null) throw new ReservatieException("Reservatie - ZetToestel - 'Gelieve een toestel op te geven'");
             Toestel = toestel;
-
         }
 
         public override string ToString()

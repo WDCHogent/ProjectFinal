@@ -9,6 +9,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IReservatieRepository
     {
-
+        IReadOnlyList<ReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer);
     }
 }

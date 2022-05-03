@@ -69,7 +69,6 @@ namespace FitnessReservatieBL.Domeinen
             return _reservaties;
         }
 
-        //TEMPORARY
         public override string ToString()
         {
             return $"{Klantnummer}, {Naam}, {Voornaam}, {Mailadres}";
