@@ -13,11 +13,15 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
         {
             ZetBeginuur(beginuur);
             ZetEinduur(einduur);
+            ZetTijdslotDuur();
         }
 
         public int Beginuur { get; private set; }
         public int Einduur { get; private set; }
 
+        public int TijdslotDuur { get; set; }
+
+        //Later new SortedSet<int>() en tijdsloten in db
         private SortedSet<int> Tijdsloten = new SortedSet<int> { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 };
 
         public void ZetBeginuur(int beginuur)
@@ -31,6 +35,11 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
             if (!Tijdsloten.Contains(einduur)) throw new TijdslotException("Tijdslot - ZetBeginuur - 'Tijdslot mag niet langer zijn dan 2u'");
             if (einduur < Beginuur) throw new TijdslotException("Tijdslot - ZetEinduur - 'Einduur kan niet vroeger zijn dan beginuur'");
             Einduur = einduur;
+        }
+
+        private void ZetTijdslotDuur()
+        {
+            TijdslotDuur = Einduur - Beginuur;
         }
 
         private void VoegTijdslotToe(int tijdslot)
