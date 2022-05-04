@@ -21,6 +21,7 @@ namespace FitnessReservatieBL.Domeinen
         public string Naam { get; private set; }
         public string Voornaam { get; private set; }
         public string Mailadres { get; private set; }
+
         private List<Reservatie> _reservaties = new List<Reservatie>();
 
         public void ZetKlantnummer(int klantnummer)
@@ -49,6 +50,7 @@ namespace FitnessReservatieBL.Domeinen
             else throw new KlantException("Klant - ZetMailadres - 'Geen geldig mailadres'");
         }
 
+        //TODO : Change to "internal"
         public void VoegReservatieToe(Reservatie reservatie)
         {
             if (reservatie == null) throw new KlantException("Klant - VoegReservatieToe");
@@ -62,23 +64,11 @@ namespace FitnessReservatieBL.Domeinen
             return _reservaties.Contains(reservatie);
         }
 
-        public override bool Equals(object obj)
-        {
-            return obj is Klant klant &&
-                   Klantnummer == klant.Klantnummer;
-        }
-
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(Klantnummer);
-        }
-
         public IReadOnlyList<Reservatie> GeefReservaties()
         {
-            return _reservaties.AsReadOnly();
+            return _reservaties;
         }
 
-        //TEMPORARY
         public override string ToString()
         {
             return $"{Klantnummer}, {Naam}, {Voornaam}, {Mailadres}";

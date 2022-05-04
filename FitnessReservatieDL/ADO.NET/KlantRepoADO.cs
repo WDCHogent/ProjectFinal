@@ -26,6 +26,7 @@ namespace FitnessReservatieDL.ADO.NET
             SqlConnection connection = new SqlConnection(_connectiestring);
             return connection;
         }
+
         public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
             if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
