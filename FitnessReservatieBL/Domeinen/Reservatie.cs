@@ -10,7 +10,17 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Reservatie
     {
-        public Reservatie(Klant klant,DateTime datum, Tijdslot tijdslot, Toestel toestel)
+        //UI opvraag constructor.
+        public Reservatie(int reservatienummer, Klant klant, DateTime datum, Tijdslot tijdslot, ToestelType toesteltype)
+        {
+            ZetKlant(klant);
+            ZetDatum(datum);
+            ZetToestelType(toesteltype);
+            ZetTijdslot(tijdslot);
+        }
+
+        //ReservatieConstructor
+        public Reservatie(int reservatienummer, Klant klant, DateTime datum, Tijdslot tijdslot, Toestel toestel)
         {
             ZetKlant(klant);
             ZetDatum(datum);
@@ -18,10 +28,19 @@ namespace FitnessReservatieBL.Domeinen
             ZetToestel(toestel);
         }
 
+        public int Reservatienummer { get; set; }
         public Klant Klant { get; private set; }
         public DateTime Datum { get; private set; }
+        public ToestelType ToestelType { get; private set; }
         public Tijdslot Tijdslot { get; private set; }
+
         public Toestel Toestel { get; private set; }
+
+        public void ZetReservatienummer(int reservatienummer)
+        {
+            if (reservatienummer <= 0) throw new ReservatieException("Reservatie - ZetReservatrie");
+            Reservatienummer = reservatienummer;
+        }
 
         public void ZetKlant(Klant klant)
         {
@@ -36,13 +55,20 @@ namespace FitnessReservatieBL.Domeinen
             if (Klant.GeefReservaties().Where(r => r.Datum.ToShortDateString() == datum.ToShortDateString()).Count() >= 4) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Datum = datum;
         }
+        public void ZetToestelType(ToestelType toesteltype)
+        {
+            if (toesteltype == null) throw new ReservatieException("Reservatie - ZetToestel - 'Gelieve een toestel op te geven'");
+            ToestelType = toesteltype;
+        }
 
         public void ZetTijdslot(Tijdslot tijdslot)
         {
             if (tijdslot == null) throw new ReservatieException("Reservatie - ZetTijdslot - 'Gelieve een tijdslot op te geven'");
-            if ((Klant.GeefReservaties().Where(r => (r.Tijdslot.TSlot+1).Equals(tijdslot) && (r.Tijdslot.TSlot+2).Equals(tijdslot))).Count() > 0) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
+            if ((Klant.GeefReservaties().Count() > 0)) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Tijdslot = tijdslot;
         }
+
+
 
         public void ZetToestel(Toestel toestel)
         {
