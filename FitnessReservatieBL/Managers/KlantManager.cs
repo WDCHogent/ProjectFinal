@@ -28,7 +28,20 @@ namespace FitnessReservatieBL.Managers
             }
             catch (Exception ex)
             {
-                throw new KlantManagerException("KlantManagerException - SelecteerKlant", ex);
+                throw new KlantManagerException("KlantManager - SelecteerKlant", ex);
+            }
+        }
+
+        public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
+        {
+            if (klantnummer <= 0) throw new KlantManagerException("KlantManager - UpdateKlantReservatie - Klant is null");
+            try
+            {
+                return (IReadOnlyList<KlantReservatieInfo>)_klantRepo.GeefKlantReservaties(klantnummer);
+            }
+            catch (Exception ex)
+            {
+                throw new KlantManagerException("KlantManager - GeefKlantReservaties", ex); ;
             }
         }
     }

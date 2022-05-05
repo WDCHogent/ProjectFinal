@@ -1,4 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -59,6 +60,52 @@ namespace FitnessReservatieDL.ADO.NET
                 catch (Exception ex)
                 {
                     throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
+        {
+            if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
+            string query = "SELECT klantreservaties " +
+                "FROM dbo.Klant " +
+                "WHERE klantnummer = @klantnummer";
+            SqlConnection conn = GetConnection();
+            List<KlantReservatieInfo> teams = new List<KlantReservatieInfo>();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                conn.Open();
+                try
+                {
+                    if (stamnummer.HasValue)
+                    {
+                        cmd.Parameters.AddWithValue("@stamnummer", stamnummer);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@naam", naam);
+                    }
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        int stamnummerTeam = (int)reader["stamnummer"];
+                        string teamNaam = (string)reader["naam"];
+                        string teamBijnaam = null;
+                        if (!reader.IsDBNull(reader.GetOrdinal("teamBijnaam"))) teamBijnaam = (string)reader["teamBijnaam"];
+
+                        TeamInfo teaminfo = new TeamInfo(stamnummerTeam, teamNaam, teamBijnaam);
+                        teams.Add(teaminfo);
+                    }
+                    return teams.AsReadOnly();
+                }
+                catch (Exception ex)
+                {
+                    throw new TeamRepoADOException("GeefTeams", ex);
                 }
                 finally
                 {
