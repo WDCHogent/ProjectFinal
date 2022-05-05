@@ -71,41 +71,38 @@ namespace FitnessReservatieDL.ADO.NET
         public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
             if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-            string query = "SELECT klantreservaties " +
-                "FROM dbo.Klant " +
-                "WHERE klantnummer = @klantnummer";
+            string query = "SELECT CONCAT(r.reservatienummer, r.datum, r.tijdslot, t.toestelnaam " +
+                "FROM klant k " +
+                "LEFT JOIN reservatie r ON k.reservatienummer=r.reservatienummer " +
+                "WHERE k.klantnummer = @klantnummer " +
+                "LEFT JOIN tijdslot s ON r.toestelnummer=t.toestelnummer " +
+                "WHERE t.reservatienummer=r.reservatienummer " +
+                "LEFT JOIN toestel t ON r.toestelnummer=t.toestelnummer " +
+                "WHERE t.reservatienummer=r.reservatienummer ";
             SqlConnection conn = GetConnection();
-            List<KlantReservatieInfo> teams = new List<KlantReservatieInfo>();
+            List<KlantReservatieInfo> klantenreservaties = new List<KlantReservatieInfo>();
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query;
                 conn.Open();
                 try
                 {
-                    if (stamnummer.HasValue)
-                    {
-                        cmd.Parameters.AddWithValue("@stamnummer", stamnummer);
-                    }
-                    else
-                    {
-                        cmd.Parameters.AddWithValue("@naam", naam);
-                    }
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        int stamnummerTeam = (int)reader["stamnummer"];
-                        string teamNaam = (string)reader["naam"];
-                        string teamBijnaam = null;
+                        int reservatienummer = (int)reader["stamnummer"];
+                        DateTime datum = (DateTime)reader["datum"];
+                         teamBijnaam = null;
                         if (!reader.IsDBNull(reader.GetOrdinal("teamBijnaam"))) teamBijnaam = (string)reader["teamBijnaam"];
 
-                        TeamInfo teaminfo = new TeamInfo(stamnummerTeam, teamNaam, teamBijnaam);
-                        teams.Add(teaminfo);
+                        KlantReservatieInfo klantenreservatie = new KlantReservatieInfo();
+                        klantenreservaties.Add(klantenreservatie);
                     }
-                    return teams.AsReadOnly();
+                    return klantenreservaties.AsReadOnly();
                 }
                 catch (Exception ex)
                 {
-                    throw new TeamRepoADOException("GeefTeams", ex);
+                    throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties", ex);
                 }
                 finally
                 {
