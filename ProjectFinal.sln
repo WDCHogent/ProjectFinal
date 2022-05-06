@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32414.318
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatieApplicatie", "FitnessReservatieApplicatie\FitnessReservatieApplicatie.csproj", "{19BCB4B7-6E4D-454E-AD23-7F429E2D3012}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieApplicatie", "FitnessReservatieApplicatie\FitnessReservatieApplicatie.csproj", "{19BCB4B7-6E4D-454E-AD23-7F429E2D3012}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatieBL", "FitnessReservatieBL\FitnessReservatieBL.csproj", "{D002F4BF-C644-4B02-B02F-6F4CB2EDBA63}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieBL", "FitnessReservatieBL\FitnessReservatieBL.csproj", "{D002F4BF-C644-4B02-B02F-6F4CB2EDBA63}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatieDL", "FitnessReservatieDL\FitnessReservatieDL.csproj", "{E9A9DD82-2A6A-4913-B52A-AA3646339A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieDL", "FitnessReservatieDL\FitnessReservatieDL.csproj", "{E9A9DD82-2A6A-4913-B52A-AA3646339A23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFitnessReservatieDomein", "xFitnessReservatieDomein\xFitnessReservatieDomein.csproj", "{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFitnessReservatieDomein", "xFitnessReservatieDomein\xFitnessReservatieDomein.csproj", "{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "xFitnessReservatieManager", "xFitnessReservatieManager\xFitnessReservatieManager.csproj", "{83591C9D-9B01-4DC8-8D55-B181F32B808E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFitnessReservatieManager", "xFitnessReservatieManager\xFitnessReservatieManager.csproj", "{83591C9D-9B01-4DC8-8D55-B181F32B808E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FitnessReservatie.UI", "FitnessReservatie.UI\FitnessReservatie.UI.csproj", "{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
