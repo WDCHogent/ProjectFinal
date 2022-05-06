@@ -92,7 +92,7 @@ namespace FitnessReservatieDL.ADO.NET
                     {
                         int reservatienummer = (int)reader["stamnummer"];
                         DateTime datum = (DateTime)reader["datum"];
-                         teamBijnaam = null;
+                        teamBijnaam = null;
                         if (!reader.IsDBNull(reader.GetOrdinal("teamBijnaam"))) teamBijnaam = (string)reader["teamBijnaam"];
 
                         KlantReservatieInfo klantenreservatie = new KlantReservatieInfo();

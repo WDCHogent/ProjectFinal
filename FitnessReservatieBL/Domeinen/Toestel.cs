@@ -49,8 +49,7 @@ namespace FitnessReservatieBL.Domeinen
             ToestelType = toestelType;
         }
 
-        //TODO : Change to "internal"
-        public void VoegReservatieToe(Reservatie reservatie)
+        internal void VoegReservatieToe(Reservatie reservatie)
         {
             if (reservatie == null) throw new ToestelException("Toestel - VoegReservatieToe");
             if (reservatie.Toestel != this) throw new ToestelException("Toestel - VoegReservatieToe");
@@ -58,7 +57,7 @@ namespace FitnessReservatieBL.Domeinen
             _reservaties.Add(reservatie);
         }
 
-        public bool HeeftReservatie(Reservatie reservatie)
+        internal bool HeeftReservatie(Reservatie reservatie)
         {
             return _reservaties.Contains(reservatie);
         }

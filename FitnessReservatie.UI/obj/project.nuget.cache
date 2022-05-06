@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "OtlBQMle4cXkv9lyap0EshIrbG3ap4pczk9Y/pAKkJOkf8ktFIqtFoO4FP0wJi7QhoAfEhD0mAKNn2hQGEqg8g==",
+  "dgSpecHash": "Wy8Ulae2B/JrmVcLIz0VoiGrrQLshAmVZ1sfFYH54IaK20a7gu3J4f6xGzEJ955mXz6rKt1dOCn/XnBlrLZe/Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatie.UI\\FitnessReservatie.UI.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\woutd\\.nuget\\packages\\wpfanimatedgif\\2.0.2\\wpfanimatedgif.2.0.2.nupkg.sha512"
+  ],
   "logs": []
 }

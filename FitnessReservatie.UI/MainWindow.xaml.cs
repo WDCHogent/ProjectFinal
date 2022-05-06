@@ -24,5 +24,22 @@ namespace FitnessReservatie.UI
         {
             InitializeComponent();
         }
+
+        private void TextBoxKlantnummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) ButtonLogin.IsEnabled = true;
+            else ButtonLogin.IsEnabled = false;
+        }
+
+        private void TextBoxEmailadres_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) ButtonLogin.IsEnabled = true;
+            else ButtonLogin.IsEnabled = false;
+        }
+
+        private void ButtonLogin_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

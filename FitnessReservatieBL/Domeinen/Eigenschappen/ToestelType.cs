@@ -15,11 +15,6 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
             ToestelNaam = toestelNaam;
         }
 
-        internal ToestelType(string toestelnaam)
-        {
-            ZetToestelNaam(toestelnaam);
-        }
-
         public int ToestelId { get; private set; }
         public string ToestelNaam { get; private set; }
 
