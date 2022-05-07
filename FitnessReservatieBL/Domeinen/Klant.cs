@@ -9,6 +9,7 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Klant
     {
+
         public Klant(int klantnummer, string naam, string voornaam, string mailadres)
         {
             ZetKlantnummer(klantnummer);

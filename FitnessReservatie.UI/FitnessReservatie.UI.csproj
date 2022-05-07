@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <None Remove="Background.png" />
-    <None Remove="icon-admin.png" />
     <None Remove="loopband.gif" />
   </ItemGroup>
 
@@ -18,8 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FitnessReservatieBL\FitnessReservatieBL.csproj" />
+    <ProjectReference Include="..\FitnessReservatieDL\FitnessReservatieDL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="Background.png" />
-    <Resource Include="icon-admin.png" />
     <Resource Include="loopband.gif" />
   </ItemGroup>
 
