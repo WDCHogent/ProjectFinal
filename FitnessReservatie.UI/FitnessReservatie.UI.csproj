@@ -5,12 +5,17 @@
     <TargetFramework>net5.0-windows</TargetFramework>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>Walter.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Background.png" />
     <None Remove="Fiets.gif" />
     <None Remove="loopband.gif" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Walter.ico" />
   </ItemGroup>
 
   <ItemGroup>

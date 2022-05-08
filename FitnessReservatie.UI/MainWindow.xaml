@@ -6,8 +6,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         mc:Ignorable="d"
-        Title="Fitness Login" Height="500" Width="1000" ResizeMode="NoResize">
-    <Grid Visibility="Visible" Background="#FFF3CA00">
+        Title="Login Panel" Height="500" Width="1000" ResizeMode="NoResize">
+    <Grid Background="#FFF3CA00">
         
         <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="0,-50,0,0"/>
         <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="478,-54,0,0"/>

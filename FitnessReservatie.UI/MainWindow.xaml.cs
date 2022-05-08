@@ -50,14 +50,18 @@ namespace FitnessReservatie.UI
                 if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) klantnummer = int.Parse(TextBoxKlantnummer.Text);
                 else klantnummer = null;
                 mailadres = TextBoxEmailadres.Text;
-                var x = _klantManager.SelecteerKlant(klantnummer, mailadres);
-                if (x != null) MessageBox.Show($"Welkom terug\r\r{x.Voornaam} {x.Naam}", "Login Successful");
+                var klant = _klantManager.SelecteerKlant(klantnummer, mailadres);
+                if (klant != null)
+                {
+                    KlantWindow klantWindow = new KlantWindow();
+                    klantWindow.LabelWelkomKlant.Content = $"Welcome back {klant.Voornaam} {klant.Naam},";
+                    this.Close();
+                    klantWindow.ShowDialog();
+                }
                 else MessageBox.Show($"Deze klant bestaat niet :(", "Something went wrong");
-                Close();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.Message, "Login Failed");
             }
         }
@@ -70,8 +74,14 @@ namespace FitnessReservatie.UI
 
                 if (string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) MessageBox.Show("Ongeldig adminnummer", "Something went wrong");
                 adminnummer = TextBoxAdmin.Text;
-                var x = _adminManager.SelecteerAdmin(adminnummer);
-                if (x != null) MessageBox.Show($"Admin :\r\r{x.Voornaam} {x.Naam}", "Login Successful");
+                var admin = _adminManager.SelecteerAdmin(adminnummer);
+                if (admin != null)
+                {
+                    AdminWindow adminWindow = new AdminWindow();
+                    adminWindow.LabelWelkomAdmin.Content = $"Logged-in as : {admin.Voornaam} {admin.Naam}";
+                    this.Close();
+                    adminWindow.ShowDialog();
+                }
                 else MessageBox.Show($"Geen Admin", "Something went wrong");
                 Close();
             }

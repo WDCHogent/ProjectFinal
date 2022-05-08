@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET5_0;NETCOREAPP
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\App.xaml
-11407045341
-
-5681283730
+3-1824982192
+11195042777
+71504087076
 208-1681224974
-MainWindow.xaml;
+AdminWindow.xaml;KlantWindow.xaml;MainWindow.xaml;
 
 True
 
