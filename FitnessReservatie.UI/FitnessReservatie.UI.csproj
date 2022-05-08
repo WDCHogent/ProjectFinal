@@ -9,6 +9,7 @@
 
   <ItemGroup>
     <None Remove="Background.png" />
+    <None Remove="Fiets.gif" />
     <None Remove="loopband.gif" />
   </ItemGroup>
 
@@ -22,8 +23,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Background.png" />
-    <Resource Include="loopband.gif" />
+    <Resource Include="Images\Background.png" />
+    <Resource Include="Images\Fiets.gif" />
+    <Resource Include="Images\loopband.gif" />
   </ItemGroup>
 
 </Project>

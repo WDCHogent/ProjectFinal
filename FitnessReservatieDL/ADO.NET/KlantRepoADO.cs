@@ -48,20 +48,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        int klantId; string klantemail;
-
-                        if (klantnummer.HasValue)
-                        {
-                            klantId = Convert.ToInt32(klantnummer);
-                            klantemail = (string)reader["mailadres"];      
-                        }
-                        else
-                        {
-                            klantId = (int)reader["klantnummer"];
-                            klantemail = mailadres;
-                        }
-
-                        klant = new Klant(klantId, (string)reader["naam"], (string)reader["voornaam"], klantemail);
+                        klant = new Klant((int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"]);
                     }
                     reader.Close();
                     return klant;
