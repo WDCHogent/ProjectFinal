@@ -13,10 +13,13 @@ namespace FitnessReservatie.UI
     public partial class MainWindow : Window
     {
         private KlantManager _klantManager;
+        private AdminManager _adminManager;
+
         public MainWindow()
         {
             InitializeComponent();
             _klantManager = new KlantManager(new KlantRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString()));
+            _adminManager = new AdminManager(new AdminRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString()));
         }
 
         private void TextBoxKlantnummer_TextChanged(object sender, TextChangedEventArgs e)
@@ -32,8 +35,8 @@ namespace FitnessReservatie.UI
         }
         private void TextBoxAdmin_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) ButtonKlantLogin.IsEnabled = true;
-            else ButtonKlantLogin.IsEnabled = false;
+            if (!string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) ButtonAdminLogin.IsEnabled = true;
+            else ButtonAdminLogin.IsEnabled = false;
         }
 
         private void ButtonKlantLogin_Click(object sender, RoutedEventArgs e)
@@ -48,7 +51,7 @@ namespace FitnessReservatie.UI
                 else klantnummer = null;
                 mailadres = TextBoxEmailadres.Text;
                 var x = _klantManager.SelecteerKlant(klantnummer, mailadres);
-                if (x != null) MessageBox.Show($"Welkom terug\r{x.Voornaam} {x.Naam}", "Login Successful");
+                if (x != null) MessageBox.Show($"Welkom terug\r\r{x.Voornaam} {x.Naam}", "Login Successful");
                 else MessageBox.Show($"Deze klant bestaat niet :(", "Something went wrong");
                 Close();
             }
@@ -61,24 +64,22 @@ namespace FitnessReservatie.UI
 
         private void ButtonAdminLogin_Click(object sender, RoutedEventArgs e)
         {
-            //try
-            //{
-            //    string adminnummer;
+            try
+            {
+                string adminnummer;
 
-            //    if (string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text) && string.IsNullOrWhiteSpace(TextBoxEmailadres.Text)) MessageBox.Show("Ongeldig klantnummer of mailadres", "Something went wrong");
-            //    if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) klantnummer = int.Parse(TextBoxKlantnummer.Text);
-            //    else klantnummer = null;
-            //    mailadres = TextBoxEmailadres.Text;
-            //    var x = _klantManager.SelecteerKlant(klantnummer, mailadres);
-            //    if (x != null) MessageBox.Show($"Hallo {x.Voornaam} {x.Naam}", "Login Successful");
-            //    else MessageBox.Show($"Deze klant bestaat niet :(", "Something went wrong");
-            //    Close();
-            //}
-            //catch (Exception ex)
-            //{
+                if (string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) MessageBox.Show("Ongeldig adminnummer", "Something went wrong");
+                adminnummer = TextBoxAdmin.Text;
+                var x = _adminManager.SelecteerAdmin(adminnummer);
+                if (x != null) MessageBox.Show($"Admin :\r\r{x.Voornaam} {x.Naam}", "Login Successful");
+                else MessageBox.Show($"Geen Admin", "Something went wrong");
+                Close();
+            }
+            catch (Exception ex)
+            {
 
-            //    MessageBox.Show(ex.Message, "Login Failed");
-            //}
+                MessageBox.Show(ex.Message, "Login Failed");
+            }
         }
 
         private void ButtonKlant_Click(object sender, RoutedEventArgs e)

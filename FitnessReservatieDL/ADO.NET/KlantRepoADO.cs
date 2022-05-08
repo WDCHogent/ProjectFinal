@@ -26,7 +26,7 @@ namespace FitnessReservatieDL.ADO.NET
         public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
             if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
-            string query = "SELECT klantnummer,voornaam,naam,mailadres FROM Klant ";
+            string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
             if (klantnummer.HasValue) query += "WHERE klantnummer=@klantnummer";
             else query += "WHERE mailadres=@mailadres";
             Klant klant = null;
