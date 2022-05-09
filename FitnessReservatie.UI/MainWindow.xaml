@@ -14,36 +14,7 @@
         <Image Name="ImageBackgroundKlant" HorizontalAlignment="Left" Height="525" Margin="516,-59,0,0" VerticalAlignment="Top" Width="525" gif:ImageBehavior.AnimatedSource="/Images/loopband.gif" Visibility="Visible"/>
         <Image Name="ImageBackgroundAdmin" HorizontalAlignment="Left" Height="456" Margin="567,-22,0,0" VerticalAlignment="Top" Width="500" gif:ImageBehavior.AnimatedSource="/Images/Fiets.gif" Visibility="Hidden"/>
         
-        <Button Name="ButtonKlant" Content="@" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonKlant_Click" Visibility="Visible" FontSize="20" FontFamily="Webdings">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-            </Button.Resources>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+        
         <Button Name="ButtonAdmin" Content="f" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonAdmin_Click" Visibility="Hidden" FontSize="20" FontFamily="Wingdings 3">
             <Button.Resources>
                 <Style TargetType="Border">
@@ -74,12 +45,15 @@
                 </Style>
             </Button.Style>
         </Button>
-        
         <Label Name="LabelAdminTitel" Content="HI THERE," HorizontalAlignment="Left" Margin="77,153,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="54" Foreground="White" Background="{x:Null}" Width="329" Visibility="Hidden"/>
-
         <Label Name ="LabelAdmin" Content="Admin login" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="77,238,0,0" Foreground="White" Width="118" Visibility="Hidden"/>
-        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="273" Margin="200,242,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged"/>
-
+        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="273" Margin="200,242,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Button Name="ButtonAdminLogin" Content="LOGIN" Height="35" Width="350" IsEnabled="False" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonAdminLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Hidden">
         <Button.Resources>
             <Style TargetType="Border">
@@ -108,15 +82,55 @@
             </Style>
         </Button.Resources>
         </Button>
-    
+
+
+        <Button Name="ButtonKlant" Content="@" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonKlant_Click" Visibility="Visible" FontSize="20" FontFamily="Webdings">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="15"/>
+                </Style>
+            </Button.Resources>
+            <Button.Style>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Background" Value="#FFF4F4F4"/>
+                    <Setter Property="Foreground" Value="#FF323232"/>
+                    <Setter Property="Opacity" Value="0.8"/>
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border Background="{TemplateBinding Background}">
+                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                    <Style.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#FF323232"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Opacity" Value="1"/>
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
         <Label Name="LabelKlantTitel" Content="HEY BUDDY," HorizontalAlignment="Left" Margin="77,108,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="65" Foreground="White" Background="{x:Null}" Width="396" Visibility="Visible"/>
-
         <Label Name="LabelKlantnummer" Content="Klantnummer" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="77,196,0,0" Foreground="White" Width="118" Visibility="Visible"/>
-        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="273" Margin="200,200,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible"/>
-
+        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="273" Margin="200,200,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible">
+        <TextBox.Resources>
+            <Style TargetType="Border">
+                <Setter Property="CornerRadius" Value="5"/>
+            </Style>
+        </TextBox.Resources>
+        </TextBox>
         <Label Name="LabelEmailadres" Content="Emailadres" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Margin="77,239,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White" Width="98" Visibility="Visible"/>
-        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="273" Background="White" FontFamily="Trebuchet MS" Margin="200,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible"/>
-
+        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="273" Background="White" FontFamily="Trebuchet MS" Margin="200,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible">
+            <TextBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
         <Button Name="ButtonKlantLogin" Height="35" Width="350" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonKlantLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Visible" Content="LOGIN" FontWeight="Normal" IsEnabled="False">
             <Button.Resources>
                 <Style TargetType="Border">

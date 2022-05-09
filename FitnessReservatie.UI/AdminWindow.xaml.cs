@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FitnessReservatieBL.Domeinen;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,9 +20,12 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public AdminWindow()
+        private Admin _ingelogdeAdmin;
+        public AdminWindow(Admin admin)
         {
             InitializeComponent();
+            this._ingelogdeAdmin = admin;
+            LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
         }
     }
 }

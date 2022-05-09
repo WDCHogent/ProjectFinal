@@ -6,9 +6,13 @@
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         mc:Ignorable="d"
         Title="My Admin Panel" Height="500" Width="1000">
-    <Grid Background="#FFF3CA00">
-        <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="0,-50,0,0"/>
-        <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="478,-54,0,0"/>
-        <Label Name="LabelWelkomAdmin" HorizontalAlignment="Center" Height="40" Margin="0,15,0,0" VerticalAlignment="Top" Width="948" Foreground="White" FontFamily="Unispace" FontSize="24"/>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFE9A500" Offset="0.557"/>
+                <GradientStop Color="#FFF3CA00" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label Name="LabelWelkomAdmin" Content="Logged-in as : " HorizontalAlignment="Left" Height="40" Margin="15,15,0,0" VerticalAlignment="Top" Foreground="White" FontFamily="Unispace" FontSize="24"/>
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
-﻿using FitnessReservatieBL.Managers;
+﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Managers;
 using FitnessReservatieDL.ADO.NET;
 using System;
 using System.Configuration;
@@ -50,11 +51,10 @@ namespace FitnessReservatie.UI
                 if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) klantnummer = int.Parse(TextBoxKlantnummer.Text);
                 else klantnummer = null;
                 mailadres = TextBoxEmailadres.Text;
-                var klant = _klantManager.SelecteerKlant(klantnummer, mailadres);
+                Klant klant = _klantManager.SelecteerKlant(klantnummer, mailadres);
                 if (klant != null)
                 {
-                    KlantWindow klantWindow = new KlantWindow();
-                    klantWindow.LabelWelkomKlant.Content = $"Welcome back {klant.Voornaam} {klant.Naam},";
+                    KlantWindow klantWindow = new KlantWindow(klant);
                     this.Close();
                     klantWindow.ShowDialog();
                 }
@@ -74,11 +74,10 @@ namespace FitnessReservatie.UI
 
                 if (string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) MessageBox.Show("Ongeldig adminnummer", "Something went wrong");
                 adminnummer = TextBoxAdmin.Text;
-                var admin = _adminManager.SelecteerAdmin(adminnummer);
+                Admin admin = _adminManager.SelecteerAdmin(adminnummer);
                 if (admin != null)
                 {
-                    AdminWindow adminWindow = new AdminWindow();
-                    adminWindow.LabelWelkomAdmin.Content = $"Logged-in as : {admin.Voornaam} {admin.Naam}";
+                    AdminWindow adminWindow = new AdminWindow(admin);
                     this.Close();
                     adminWindow.ShowDialog();
                 }

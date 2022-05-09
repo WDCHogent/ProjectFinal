@@ -14,11 +14,11 @@ namespace FitnessReservatieBL.Domeinen
         //    //Klant.VoegReservatieToe(this);
         //    //Toestel.VoegReservatieToe(this);
 
-        public Reservatie(int reservatienummer, Klant klant, DateTime datum, ToestelType toesteltype, Tijdslot tijdslot)
+        public Reservatie(int reservatienummer, Klant klant, DateTime datum, Toestel toestel, Tijdslot tijdslot)
         {
             ZetKlant(klant);
             ZetDatum(datum);
-            ZetToestelType(toesteltype);
+            ZetToestel(toestel);
             ZetTijdslot(tijdslot);
         }
 
@@ -48,12 +48,6 @@ namespace FitnessReservatieBL.Domeinen
             if (datum >= DateTime.Now.AddDays(7)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
             //if (Klant.GeefReservaties().Where(r => r.Datum.ToShortDateString().Contains(datum.ToShortDateString())).Count() >= 4) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Datum = datum;
-        }
-
-        public void ZetToestelType(ToestelType toesteltype)
-        {
-            if (ToestelType == null) throw new ReservatieException("Reservatie - ZetToestelType - 'Mag niet leeg zijnt'");
-            ToestelType = toesteltype;
         }
 
         public void ZetToestel(Toestel toestel)

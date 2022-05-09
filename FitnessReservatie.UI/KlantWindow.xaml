@@ -6,9 +6,69 @@
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         mc:Ignorable="d"
         Title="My Personal Panel" Height="500" Width="1000">
-    <Grid Background="#FFF3CA00">
-        <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="0,-50,0,0"/>
-        <Image HorizontalAlignment="Left" Height="525" VerticalAlignment="Top" Width="525" Source="/Images/Background.png" Margin="478,-54,0,0"/>
-        <Label Name="LabelWelkomKlant" HorizontalAlignment="Center" Height="40" Margin="0,15,0,0" VerticalAlignment="Top" Width="948" Foreground="White" FontFamily="Unispace" FontSize="24"/>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FFE9A500" Offset="0.557"/>
+                <GradientStop Color="#FFF3CA00" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Label Name="LabelWelkomKlant" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Top" Foreground="White" FontFamily="Unispace" FontSize="24"/>
+        <TabControl Grid.Row="2" Margin="15,0,15,15">
+            <TabControl.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="0,5,5,5"/>
+                </Style>
+            </TabControl.Resources>
+            <TabItem Header="My Reservations">
+                <TabItem.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="5,5,0,0"/>
+                    </Style>
+                </TabItem.Resources>
+                <Grid Background="#FFE5E5E5">
+                    <ListView d:ItemsSource="{d:SampleData ItemCount=5}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                    <Button Content="Make New Reservation" Width="180" Height="35" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="0,0,15,15" Click="Button_Click">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="15"/>
+                            </Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FFF4F4F4"/>
+                                <Setter Property="Foreground" Value="#FF323232"/>
+                                <Setter Property="Opacity" Value="0.8"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Setter Property="Background" Value="#FF323232"/>
+                                        <Setter Property="Foreground" Value="White"/>
+                                        <Setter Property="Opacity" Value="1"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>

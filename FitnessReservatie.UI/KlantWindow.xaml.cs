@@ -20,10 +20,18 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class KlantWindow : Window
     {
-        public KlantWindow()
+        private Klant _ingelogdeKlant; 
+
+        public KlantWindow(Klant klant)
         {
             InitializeComponent();
+            this._ingelogdeKlant = klant;
+            LabelWelkomKlant.Content += $"{_ingelogdeKlant.Voornaam} {_ingelogdeKlant.Naam},";
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
