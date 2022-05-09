@@ -1,4 +1,6 @@
-﻿using FitnessReservatieBL.DTO;
+﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Eigenschappen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
@@ -29,6 +31,32 @@ namespace FitnessReservatieBL.Managers
             {
                 throw new ReservatieManagerException("ReservatieManagerException", ex);
             }
+        }
+
+        public Reservatie MaakReservatie(Klant klant, DateTime datum, ToestelType toesteltype, Tijdslot tijdslot)
+        {
+            //try
+            //{
+            //    Reservatie reservatie = new Reservatie(klant, datum, toesteltype, tijdslot);
+            //    if (!_reservatieRepo.BestaatReservatie(reservatie))
+            //    {
+            //        reservatie = _reservatieRepo.MaakReservatie(reservatie);
+            //        return reservatie;
+            //    }
+            //    else
+            //    {
+            //        throw new SpelerManagerException("RegistreerSpeler - speler bestaat al");
+            //    }
+            //}
+            //catch (SpelerManagerException)
+            //{
+            //    throw;
+            //}
+            //catch (Exception ex)
+            //{
+            //    throw new SpelerManagerException("RegistreerSpeler", ex);
+            //}
+            return null;
         }
     }
 }

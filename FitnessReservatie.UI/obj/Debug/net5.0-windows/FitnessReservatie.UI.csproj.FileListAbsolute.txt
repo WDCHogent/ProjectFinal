@@ -1,4 +1,5 @@
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.exe
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.dll.config
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.deps.json
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.runtimeconfig.json
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.runtimeconfig.dev.json
@@ -30,10 +31,15 @@ C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatieBL.pdb
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatieDL.pdb
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI.csproj.AssemblyReference.cache
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\AdminWindow.g.cs
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\KlantWindow.g.cs
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\MainWindow.g.cs
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\App.g.cs
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI_Content.g.cs
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI_MarkupCompile.cache
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI_MarkupCompile.lref
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\AdminWindow.baml
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\KlantWindow.baml
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\MainWindow.baml
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI.g.resources
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI.GeneratedMSBuildEditorConfig.editorconfig
@@ -46,9 +52,3 @@ C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI.pdb
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI.genruntimeconfig.cache
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\ref\FitnessReservatie.UI.dll
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\FitnessReservatie.UI.dll.config
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\KlantWindow.g.cs
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\KlantWindow.baml
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\FitnessReservatie.UI_Content.g.cs
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\AdminWindow.g.cs
-C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\AdminWindow.baml

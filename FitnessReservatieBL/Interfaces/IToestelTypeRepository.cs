@@ -1,4 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen.Eigenschappen;
+using FitnessReservatieBL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IToestelTypeRepository
     {
-        ToestelType SelecteerToestelType(string toestelNaam);
-        bool BestaatToestelType(string toestelNaam);
+        IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType();
     }
 }

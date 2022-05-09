@@ -1,31 +1,26 @@
 ﻿using FitnessReservatieBL.Domeinen.Eigenschappen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
+using System.Collections.Generic;
 
 namespace FitnessReservatieBL.Managers.Eigenschappen
 {
     public class ToestelTypeManager
     {
-        private IToestelTypeRepository _repo;
+        private IToestelTypeRepository _toestelTypeRepo;
 
         public ToestelTypeManager(IToestelTypeRepository repo)
         {
-            this._repo = repo;
+            this._toestelTypeRepo = repo;
         }
 
-        public ToestelType SelecteerToestelType(string toestelNaam)
+        public IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType()
         {
             try
             {
-                if (this._repo.BestaatToestelType(toestelNaam))
-                {
-                    return _repo.SelecteerToestelType(toestelNaam);
-                }
-                else
-                {
-                    throw new ToestelTypeManagerException("ToestelTypeManager - SelecteerToestelType");
-                }
+                return _toestelTypeRepo.SelecteerToestelOpToestelType();
             }
             catch (Exception ex)
             {

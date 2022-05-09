@@ -16,6 +16,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public Reservatie(int reservatienummer, Klant klant, DateTime datum, Toestel toestel, Tijdslot tijdslot)
         {
+            ZetReservatienummer(reservatienummer);
             ZetKlant(klant);
             ZetDatum(datum);
             ZetToestel(toestel);
@@ -56,6 +57,14 @@ namespace FitnessReservatieBL.Domeinen
             //controle voor query
             //if (Toestel.GeefReservaties().Where(r => r.Datum == this.Datum).Count() > 14) throw new ReservatieException($"Reservatie - ZetToestel - 'Geen {toestel.ToestelType.ToString()} beschikbaar voor {Datum.ToShortDateString()}'");
             Toestel = toestel;
+        }
+
+        public void ZetToestelType(ToestelType toesteltype)
+        {
+            if (toesteltype == null) throw new ReservatieException("Reservatie - ZetToestelType'");
+            //controle voor query
+            //if (Toestel.GeefReservaties().Where(r => r.Datum == this.Datum).Count() > 14) throw new ReservatieException($"Reservatie - ZetToestel - 'Geen {toestel.ToestelType.ToString()} beschikbaar voor {Datum.ToShortDateString()}'");
+            ToestelType = toesteltype;
         }
 
         public void ZetTijdslot(Tijdslot tijdslot)

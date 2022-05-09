@@ -1,8 +1,11 @@
 ﻿using FitnessReservatieBL.Domeinen.Eigenschappen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Collections.Generic;
+using System.Data;
 
 namespace FitnessReservatieDL.ADO.NET
 {
@@ -21,37 +24,31 @@ namespace FitnessReservatieDL.ADO.NET
             return connectie;
         }
 
-        public bool BestaatToestelType(string toestelNaam)
+        public IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType()
         {
-            SqlConnection conn = GetConnection();
-            string query = "SELECT count(*) FROM dbo.ToestelType WHERE toestelNaam=@toestelNaam";
-            using (SqlCommand cmd = conn.CreateCommand())
+            string query = "SELECT toesteltypenaam FROM Toesteltype";
+            List<ToestelTypeInfo> toesteltypes = new List<ToestelTypeInfo>();
+            SqlConnection connection = GetConnection();
+            using (SqlCommand command = connection.CreateCommand())
             {
-                cmd.CommandText = query;
-                conn.Open();
+                command.CommandText = query;
+                connection.Open();
                 try
                 {
-                    cmd.Parameters.Add(new SqlParameter("@toestelNaam", System.Data.SqlDbType.NVarChar));
-                    cmd.Parameters["@toestelNaam"].Value = toestelNaam;
-
-                    int n = (int)cmd.ExecuteScalar();
-                    if (n > 0) return true;
-                    else return false;
+                    IDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        toesteltypes.Add(new ToestelTypeInfo((string)reader["toesteltypenaam"]));
+                    }
+                    reader.Close();
+                    return toesteltypes;
                 }
                 catch (Exception ex)
                 {
-                    throw new ToestelTypeRepoADOException("ToestelTypeRepoADOBestaatToestelType", ex);
+                    throw new ToestelRepoADOException("SelecteerToestelOpToestelType", ex);
                 }
-                finally
-                {
-                    conn.Close();
-                }
+                finally { connection.Close(); }
             }
-        }
-
-        public ToestelType SelecteerToestelType(string toestelNaam)
-        {
-            throw new NotImplementedException();
         }
     }
 }

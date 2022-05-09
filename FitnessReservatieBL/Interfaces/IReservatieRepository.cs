@@ -1,4 +1,5 @@
-﻿using FitnessReservatieBL.DTO;
+﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,5 +11,7 @@ namespace FitnessReservatieBL.Interfaces
     public interface IReservatieRepository
     {
         IReadOnlyList<ReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer);
+        bool BestaatReservatie(Reservatie reservatie);
+        Reservatie MaakReservatie(Reservatie reservatie);
     }
 }
