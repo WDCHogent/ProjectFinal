@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         xmlns:Managers="clr-namespace:FitnessReservatieBL.Managers;assembly=FitnessReservatieBL" x:Class="FitnessReservatie.UI.KlantWindow"
         mc:Ignorable="d"
@@ -27,17 +28,25 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="12*"/>
         </Grid.RowDefinitions>
-        <Label Grid.ColumnSpan="7" Grid.Row="0" Name="LabelWelkomKlant" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Top" Foreground="White" FontFamily="Unispace" FontSize="24"/>
-        <Button Grid.Column="6" Grid.Row="1" Content="Make New Reservation" Width="140" Height="34" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" Click="Button_Click">
+        <Label Grid.ColumnSpan="7" Grid.Row="0" Name="LabelWelkomKlant" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Center" Foreground="White" FontFamily="Unispace" FontSize="24"/>
+        <ComboBox Grid.Column="3" Grid.Row="1" Name="ComboBox_ToesteltypeSelector" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15"/>
+        <DatePicker Name="DatePicker" Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="120" Margin="15" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday"/>
+        <ComboBox Grid.Column="5" Grid.Row="1" Name="ComboBox_TijdslotSelector" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15"/>
+        <ListView Grid.ColumnSpan="7" Grid.Row="3">
+            <ListView.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="15,15,0,0"/>
+                </Style>
+            </ListView.Resources>
+        </ListView>
+        <Button Grid.ColumnSpan="7" Grid.Row="3" Content="Make New Reservation" Width="515" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" Click="Button_Click" FontFamily="Unispace" Margin="15,-20,15,15 " Background="#FF323232" Foreground="#FFF4F4F4">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="15"/>
+                    <Setter Property="CornerRadius" Value="10"/>
                 </Style>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -47,41 +56,8 @@
                             </ControlTemplate>
                         </Setter.Value>
                     </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
                 </Style>
             </Button.Resources>
         </Button>
-        <TabControl Grid.ColumnSpan="7" Grid.Row="2" Margin="15,0,15,15">
-            <TabControl.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="0,5,5,5"/>
-                </Style>
-            </TabControl.Resources>
-            <TabItem Header="My Reservations">
-                <TabItem.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="5,5,0,0"/>
-                    </Style>
-                </TabItem.Resources>
-                <Grid Background="#FFE5E5E5">
-                    <ListView d:ItemsSource="{d:SampleData ItemCount=5}" Foreground="#FF323232" Background="#FFF4F4F4">
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <ComboBox Grid.Column="3" Grid.Row="1" Name="ComboBox_ToesteltypeSelector" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15"/>
-        <DatePicker Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" Width="120" Margin="15" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday"/>
-        <ComboBox Grid.Column="5" Grid.Row="1" Name="ComboBox_TijdslotSelector" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15"/>
     </Grid>
 </Window>

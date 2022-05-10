@@ -37,6 +37,8 @@ namespace FitnessReservatie.UI
             IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
             ComboBox_ToesteltypeSelector.ItemsSource = _toestelTypeManager.SelecteerToestelOpToestelType();
+            DatePicker.BlackoutDates.AddDatesInPast();
+            DatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.Today.AddMonths(1).AddDays(-1)));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

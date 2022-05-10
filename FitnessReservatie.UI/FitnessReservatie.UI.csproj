@@ -9,9 +9,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="adminIcon.png" />
     <None Remove="Background.png" />
     <None Remove="Fiets.gif" />
     <None Remove="loopband.gif" />
+    <None Remove="mailIcon.png" />
+    <None Remove="userIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,9 +31,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\adminIcon.png" />
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\Fiets.gif" />
     <Resource Include="Images\loopband.gif" />
+    <Resource Include="Images\userIcon.png" />
+    <Resource Include="Images\mailIcon.png" />
   </ItemGroup>
 
 </Project>
