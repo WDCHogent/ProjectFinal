@@ -38,16 +38,16 @@
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>
-        <Label Name="LabelAdminTitel" Content="HI THERE," HorizontalAlignment="Left" Margin="77,153,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="54" Foreground="White" Background="{x:Null}" Width="329" Visibility="Hidden"/>
-        <Label Name ="LabelAdmin" Content="Admin login" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,238,0,0" Foreground="White" Width="118" Visibility="Hidden"/>
-        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,242,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged">
+        <Label Name="LabelAdminTitel" Content="HI THERE," HorizontalAlignment="Left" Margin="77,153,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="54" Foreground="#FFF4F4F4" Background="{x:Null}" Width="329" Visibility="Hidden"/>
+        <Label Name ="LabelAdmin" Content="Admin login" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,238,0,0" Foreground="#FFF4F4F4" Width="118" Visibility="Hidden"/>
+        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" Background="#FFF4F4F4" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,242,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -76,14 +76,13 @@
                     <Style.Triggers>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Resources>
         </Button>
-
 
         <Button Name="ButtonKlant" Content="@" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonKlant_Click" Visibility="Visible" FontSize="20" FontFamily="Webdings">
             <Button.Resources>
@@ -108,7 +107,7 @@
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </Style.Triggers>
@@ -118,17 +117,17 @@
         <Image Name="ImageKlantUser" HorizontalAlignment="Left" Height="21" Margin="77,200,0,0" VerticalAlignment="Top" Width="20" Source="/Images/userIcon.png" Visibility="Visible"/>
         <Image Name="ImageKlantEmail" HorizontalAlignment="Left" Height="21" Margin="77,244,0,0" VerticalAlignment="Top" Width="20" Source="/Images/mailIcon.png" Visibility="Visible"/>
 
-        <Label Name="LabelKlantTitel" Content="HEY BUDDY," HorizontalAlignment="Left" Margin="77,108,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="65" Foreground="White" Background="{x:Null}" Width="396" Visibility="Visible"/>
-        <Label Name="LabelKlantnummer" Content="Klantnummer" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,196,0,0" Foreground="White" Width="120" Visibility="Visible"/>
-        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="White" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,200,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible">
+        <Label Name="LabelKlantTitel" Content="HEY BUDDY," HorizontalAlignment="Left" Margin="77,108,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="65" Foreground="#FFF4F4F4" Background="{x:Null}" Width="396" Visibility="Visible"/>
+        <Label Name="LabelKlantnummer" Content="Klantnummer" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,196,0,0" Foreground="#FFF4F4F4" Width="120" Visibility="Visible"/>
+        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="#FFF4F4F4" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,200,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label Name="LabelEmailadres" Content="Emailadres" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Margin="102,239,0,0" VerticalAlignment="Top" FontSize="16" Foreground="White" Width="120" Visibility="Visible"/>
-        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="248" Background="White" FontFamily="Trebuchet MS" Margin="222,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible">
+        <Label Name="LabelEmailadres" Content="Emailadres" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Margin="102,239,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FFF4F4F4" Width="120" Visibility="Visible"/>
+        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="248" Background="#FFF4F4F4" FontFamily="Trebuchet MS" Margin="222,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible">
             <TextBox.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="5"/>
@@ -156,7 +155,7 @@
                     <Style.Triggers>
                         <Trigger Property="IsEnabled" Value="True">
                             <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
                             <Setter Property="Opacity" Value="1"/>
                         </Trigger>
                     </Style.Triggers>

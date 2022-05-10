@@ -1,5 +1,6 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Eigenschappen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
@@ -28,6 +29,7 @@ namespace FitnessReservatie.UI
     {
         private Klant _ingelogdeKlant;
         private ToestelTypeManager _toestelTypeManager;
+        private KlantManager _klantManager;
 
         public KlantWindow(Klant klant)
         {
@@ -36,14 +38,14 @@ namespace FitnessReservatie.UI
             LabelWelkomKlant.Content += $"{_ingelogdeKlant.Voornaam} {_ingelogdeKlant.Naam},";
             IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
-            ComboBox_ToesteltypeSelector.ItemsSource = _toestelTypeManager.SelecteerToestelOpToestelType();
-            DatePicker.BlackoutDates.AddDatesInPast();
-            DatePicker.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.Today.AddMonths(1).AddDays(-1)));
-        }
+            ComboBoxToesteltypeSelector.ItemsSource = _toestelTypeManager.SelecteerToestelOpToestelType();
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
+            DatePickerDatumSelector.BlackoutDates.AddDatesInPast();
+            DatePickerDatumSelector.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.Today.AddMonths(1).AddDays(-1)));
 
+            IKlantRepository klantRepo = new KlantRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
+            _klantManager = new KlantManager(klantRepo);
+            ListViewReservations.ItemsSource = _klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer);
         }
     }
 }

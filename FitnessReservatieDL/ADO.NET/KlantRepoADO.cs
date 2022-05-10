@@ -28,7 +28,7 @@ namespace FitnessReservatieDL.ADO.NET
             if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
             string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
             if (klantnummer.HasValue) query += "WHERE klantnummer=@klantnummer";
-            else query += "WHERE mailadres=@mailadres";
+            else query += "WHERE mailadres=@mailadres"; 
             Klant klant = null;
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
@@ -66,50 +66,39 @@ namespace FitnessReservatieDL.ADO.NET
 
         public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
-            throw new NotImplementedException();
+            if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
+            string query = "SELECT r.reservatienummer, r.datum, s.beginuur, s.einduur, t.toestelnaam, t.toestelnummer " +
+                "FROM Reservatie r " +
+                "LEFT JOIN tijdslot s ON r.tijdslotid = s.tijdslotid " +
+                "LEFT JOIN toestel t ON r.toestelnummer = t.toestelnummer " +
+                "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
+                "WHERE r.klantnummer=@klantnummer";
+            SqlConnection conn = GetConnection();
+            List<KlantReservatieInfo> klantenreservaties = new List<KlantReservatieInfo>();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
+                conn.Open();
+                try
+                {
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        KlantReservatieInfo klantenreservatie = new KlantReservatieInfo((int)reader["reservatienummer"],(DateTime)reader["datum"],(int)reader["beginuur"],(int)reader["einduur"],(string)reader["toestelNaam"],(int)reader["toestelnummer"]);
+                        klantenreservaties.Add(klantenreservatie);
+                    }
+                    return klantenreservaties.AsReadOnly();
+                }
+                catch (Exception ex)
+                {
+                    throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
         }
-
-        //public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
-        //{
-        //    if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-        //    string query = "SELECT CONCAT(r.reservatienummer, r.datum, r.tijdslot, t.toestelnaam " +
-        //        "FROM klant k " +
-        //        "LEFT JOIN reservatie r ON k.reservatienummer=r.reservatienummer " +
-        //        "WHERE k.klantnummer = @klantnummer " +
-        //        "LEFT JOIN tijdslot s ON r.toestelnummer=t.toestelnummer " +
-        //        "WHERE t.reservatienummer=r.reservatienummer " +
-        //        "LEFT JOIN toestel t ON r.toestelnummer=t.toestelnummer " +
-        //        "WHERE t.reservatienummer=r.reservatienummer ";
-        //    SqlConnection conn = GetConnection();
-        //    List<KlantReservatieInfo> klantenreservaties = new List<KlantReservatieInfo>();
-        //    using (SqlCommand cmd = conn.CreateCommand())
-        //    {
-        //        cmd.CommandText = query;
-        //        conn.Open();
-        //        try
-        //        {
-        //            IDataReader reader = cmd.ExecuteReader();
-        //            while (reader.Read())
-        //            {
-        //                int reservatienummer = (int)reader["stamnummer"];
-        //                DateTime datum = (DateTime)reader["datum"];
-        //                teamBijnaam = null;
-        //                if (!reader.IsDBNull(reader.GetOrdinal("teamBijnaam"))) teamBijnaam = (string)reader["teamBijnaam"];
-
-        //                KlantReservatieInfo klantenreservatie = new KlantReservatieInfo();
-        //                klantenreservaties.Add(klantenreservatie);
-        //            }
-        //            return klantenreservaties.AsReadOnly();
-        //        }
-        //        catch (Exception ex)
-        //        {
-        //            throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties", ex);
-        //        }
-        //        finally
-        //        {
-        //            conn.Close();
-        //        }
-        //    }
-        //}
     }
 }
