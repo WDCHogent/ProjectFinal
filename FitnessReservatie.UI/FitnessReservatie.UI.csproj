@@ -12,11 +12,14 @@
     <None Remove="adminIcon.png" />
     <None Remove="Background.png" />
     <None Remove="Fiets.gif" />
+    <None Remove="Images\userIcon1.png" />
     <None Remove="Images\Walter2.png" />
     <None Remove="loopband.gif" />
     <None Remove="mailIcon.png" />
     <None Remove="userIcon.png" />
+    <None Remove="userIcon1.png" />
     <None Remove="Walter2.png" />
+    <None Remove="Walter3.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,6 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MaterialDesignThemes" Version="4.5.0" />
     <PackageReference Include="WpfAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
@@ -39,7 +43,9 @@
     <Resource Include="Images\loopband.gif" />
     <Resource Include="Images\userIcon.png" />
     <Resource Include="Images\mailIcon.png" />
+    <Resource Include="Images\userIcon1.png" />
     <Resource Include="Images\Walter2.png" />
+    <Resource Include="Images\Walter3.png" />
   </ItemGroup>
 
 </Project>

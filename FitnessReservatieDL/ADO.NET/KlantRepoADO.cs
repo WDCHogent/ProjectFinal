@@ -67,9 +67,10 @@ namespace FitnessReservatieDL.ADO.NET
         public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
             if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-            string query = "SELECT r.reservatienummer, r.datum, s.beginuur, s.einduur, t.toestelnaam, t.toestelnummer " +
+            string query = "SELECT r.reservatienummer, r.datum, s1.tijdslot beginuur, s2.tijdslot einduur, t.toestelnaam, t.toestelnummer " +
                 "FROM Reservatie r " +
-                "LEFT JOIN tijdslot s ON r.tijdslotid = s.tijdslotid " +
+                "LEFT JOIN tijdslot s1 ON r.beginuur = s1.tijdslotid " +
+                "LEFT JOIN tijdslot s2 ON r.einduur = s2.tijdslotid " +
                 "LEFT JOIN toestel t ON r.toestelnummer = t.toestelnummer " +
                 "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
                 "WHERE r.klantnummer=@klantnummer";

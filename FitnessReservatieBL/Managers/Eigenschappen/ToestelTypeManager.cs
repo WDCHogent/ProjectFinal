@@ -16,11 +16,11 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
             this._toestelTypeRepo = repo;
         }
 
-        public IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType()
+        public IReadOnlyList<ToestelType> SelecteerToestelType()
         {
             try
             {
-                return _toestelTypeRepo.SelecteerToestelOpToestelType();
+                return _toestelTypeRepo.SelecteerToestelType();
             }
             catch (Exception ex)
             {

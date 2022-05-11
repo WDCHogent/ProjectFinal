@@ -24,10 +24,10 @@ namespace FitnessReservatieDL.ADO.NET
             return connectie;
         }
 
-        public IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType()
+        public IReadOnlyList<ToestelType> SelecteerToestelType()
         {
-            string query = "SELECT toesteltypenaam FROM Toesteltype";
-            List<ToestelTypeInfo> toesteltypes = new List<ToestelTypeInfo>();
+            string query = "SELECT * FROM Toesteltype";
+            List<ToestelType> toesteltypes = new List<ToestelType>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = connection.CreateCommand())
             {
@@ -38,14 +38,14 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        toesteltypes.Add(new ToestelTypeInfo((string)reader["toesteltypenaam"]));
+                        toesteltypes.Add(new ToestelType((int)reader["toesteltypeid"],(string)reader["toesteltypenaam"]));
                     }
                     reader.Close();
                     return toesteltypes;
                 }
                 catch (Exception ex)
                 {
-                    throw new ToestelRepoADOException("SelecteerToestelOpToestelType", ex);
+                    throw new ToestelRepoADOException("SelecteerToestelType", ex);
                 }
                 finally { connection.Close(); }
             }

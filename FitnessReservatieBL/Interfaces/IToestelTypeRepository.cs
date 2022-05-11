@@ -10,6 +10,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IToestelTypeRepository
     {
-        IReadOnlyList<ToestelTypeInfo> SelecteerToestelOpToestelType();
+        IReadOnlyList<ToestelType> SelecteerToestelType();
     }
 }

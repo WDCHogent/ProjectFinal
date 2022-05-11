@@ -25,14 +25,30 @@ namespace FitnessReservatie.UI
 
         private void TextBoxKlantnummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) ButtonKlantLogin.IsEnabled = true;
-            else ButtonKlantLogin.IsEnabled = false;
+            if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text))
+            {
+                ButtonKlantLogin.IsEnabled = true;
+                TextBoxEmailadres.IsEnabled = false;
+            }
+            else
+            {
+                ButtonKlantLogin.IsEnabled = false;
+                TextBoxEmailadres.IsEnabled = true;
+            }
         }
 
         private void TextBoxEmailadres_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(TextBoxEmailadres.Text)) ButtonKlantLogin.IsEnabled = true;
-            else ButtonKlantLogin.IsEnabled = false;
+            if (!string.IsNullOrWhiteSpace(TextBoxEmailadres.Text))
+            {
+                ButtonKlantLogin.IsEnabled = true;
+                TextBoxKlantnummer.IsEnabled = false;
+            }
+            else
+            {
+                ButtonKlantLogin.IsEnabled = false;
+                TextBoxKlantnummer.IsEnabled = true;
+            }
         }
         private void TextBoxAdmin_TextChanged(object sender, TextChangedEventArgs e)
         {

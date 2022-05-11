@@ -27,23 +27,23 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.ColumnSpan="7" Grid.Row="4" Stroke="#FFF4F4F4" Fill="#FFF4F4F4" RadiusX="10" RadiusY="10" Margin="0,0,0,-10"/>
-        <Label Grid.ColumnSpan="7" Grid.Row="0" Name="LabelWelkomKlant" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Center" Foreground="#FFF4F4F4" FontFamily="Unispace" FontSize="24"/>
-        <Image Grid.Row="1" Grid.ColumnSpan="7" Width="auto" Height="auto" Margin="0,-75,0,0" Source="/Images/Walter2.png"/>
+        <Rectangle Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="2" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,0,-10"/>
+        <Label Name="LabelWelkomKlant" Grid.ColumnSpan="7" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Center" Foreground="#FFF4F4F4" FontFamily="Unispace" FontSize="24"/>
+        <Image Name="ImageMyReservation" Grid.Row="1" Grid.ColumnSpan="7" Width="auto" Height="auto" Margin="0,-75,0,0" Source="/Images/Walter2.png" Visibility="Visible"/>
+        <Image Name="ImageNewReservation" Grid.Row="1" Grid.ColumnSpan="7" Width="auto" Height="auto" Margin="0,-60,0,0" Source="/Images/Walter3.png" Visibility="Hidden"/>
 
-        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" Width="120" Margin="15" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday"/>
-        <ComboBox Name="ComboBoxToesteltypeSelector" Grid.Column="3" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15"/>
-        <ComboBox Name="ComboBoxTijdslotSelector" Grid.Column="5" Grid.Row="3"  HorizontalAlignment="Right" VerticalAlignment="Center" Width="120" Margin="15"/>
-        <ListView Name="ListViewReservations" Grid.ColumnSpan="7" Grid.Row="4" HorizontalContentAlignment="Center" Padding="25,35,25,25" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}">
+        <ListView Name="ListViewReservations" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="2" HorizontalContentAlignment="Center" Padding="25,35,25,25" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}">
             <ListView.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10,10,0,0"/>
                 </Style>
             </ListView.Resources>
         </ListView>
-        <Button Grid.ColumnSpan="7" Grid.Row="2" Content="My Reservations" Width="515" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Unispace" Margin="15,-20,15,15 " Background="#FF323232" Foreground="#FFF4F4F4" IsEnabled="False">
+        <Button Name="LabelTitle" Grid.ColumnSpan="7" Grid.Row="2" Content="My Reservations" Width="600" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Unispace" Margin="15,-20,15,15 " Background="#FF323232" Foreground="#FFF4F4F4" IsEnabled="False" FontSize="16">
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
@@ -61,7 +61,7 @@
                 </Style>
             </Button.Resources>
         </Button>
-        <Button Grid.Column="6" Grid.Row="2" Name="Button" Content="~" HorizontalAlignment="Right" VerticalAlignment="Bottom" Width="35" Height="35" FontSize="20" FontFamily="Webdings" Margin="25">
+        <Button Grid.ColumnSpan="7" Grid.Row="3" Name="Button" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Margin="25" BorderBrush="#FF323232" Click="Button_Click">
             <Button.Resources>
                 <Style TargetType="Border">
                     <Setter Property="CornerRadius" Value="15"/>
@@ -69,8 +69,12 @@
             </Button.Resources>
             <Button.Style>
                 <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FF323232"/>
-                    <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                    <Setter Property="Background" Value="#FFE9A500"/>
+                    <Setter Property="Foreground" Value="#FFF3CA00"/>
+                    <Setter Property="FontFamily" Value="Webdings"/>
+                    <Setter Property="FontSize" Value="25"/>
+                    <Setter Property="Content" Value="~"/>
+                    <Setter Property="Width" Value="50"/>
                     <Setter Property="Template">
                         <Setter.Value>
                             <ControlTemplate TargetType="{x:Type Button}">
@@ -82,12 +86,49 @@
                     </Setter>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FFF3CA00"/>
-                            <Setter Property="Foreground" Value="#FFE9A500"/>
+                            <Setter Property="Background" Value="#FF323232"/>
+                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                            <Setter Property="FontFamily" Value="Unispace"/>
+                            <Setter Property="FontSize" Value="12"/>
+                            <Setter Property="Content" Value="New Reservation"/>
+                            <Setter Property="Width" Value="180"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>
+
+
+        <Label Name="LabelDatePickerSelector" Content="Date" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
+        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday" Margin="0,35,0,15" Visibility="Hidden">
+            <DatePicker.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </DatePicker.Resources>
+        </DatePicker>
+        <Label Name="LabelToestelSelector"  Content="Device type" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
+        <ComboBox Name="ComboBoxToesteltypeSelector" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" Visibility="Hidden">
+            <ComboBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ComboBox.Resources>
+        </ComboBox>
+        <Label Name="LabelTijdslotSelector" Content="Time slot" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
+        <ComboBox Name="ComboBoxBeginuurSelector" Text="Please Select" Grid.Column="5" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" SelectionChanged="ComboBoxBeginuurSelector_SelectionChanged" Visibility="Hidden">
+            <ComboBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ComboBox.Resources>
+        </ComboBox>
+        <ComboBox Name="ComboBoxEinduurSelector" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" Visibility="Hidden">
+            <ComboBox.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="5"/>
+                </Style>
+            </ComboBox.Resources>
+        </ComboBox>
     </Grid>
 </Window>

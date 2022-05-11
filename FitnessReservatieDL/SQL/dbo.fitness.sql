@@ -24,8 +24,7 @@ CONSTRAINT [FK_Toestel_Toesteltype] FOREIGN KEY ([toesteltype]) REFERENCES [Toes
 CREATE TABLE [Tijdslot]
 (
 [tijdslotid] INT NOT NULL PRIMARY KEY IDENTITY,
-[beginuur] INT NOT NULL,
-[einduur] INT NOT NULL,
+[tijdslot] INT NOT NULL
 );
 
 CREATE TABLE [Reservatie]
@@ -33,10 +32,12 @@ CREATE TABLE [Reservatie]
 [reservatienummer] INT NOT NULL PRIMARY KEY IDENTITY,
 [klantnummer] INT NOT NULL,
 [datum] DATE NOT NULL,
-[tijdslotid] INT NOT NULL,
+[beginuur] INT NOT NULL,
+[einduur] INT NOT NULL,
 [toestelnummer] INT NOT NULL,
 CONSTRAINT [FK_Reservatie_Klant] FOREIGN KEY ([klantnummer]) REFERENCES [Klant]([klantnummer]),
-CONSTRAINT [FK_Reservatie_Tijdslot] FOREIGN KEY (tijdslotid) REFERENCES [Tijdslot](tijdslotid),
+CONSTRAINT [FK_Reservatie_Beginuur] FOREIGN KEY (beginuur) REFERENCES [Tijdslot](tijdslotid),
+CONSTRAINT [FK_Reservatie_Einduur] FOREIGN KEY (einduur) REFERENCES [Tijdslot](tijdslotid),
 CONSTRAINT [FK_Reservatie_Toestel] FOREIGN KEY ([toestelnummer]) REFERENCES [Toestel]([toestelnummer])
 );
 

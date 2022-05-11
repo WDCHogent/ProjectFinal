@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "3/TusC6MGiEHZECk88jC7+TgHm3FFjbVW1FE/SXiYFcN2UrsnKL8VOwvbeCrduiyB8nzzoAIGHzThpawlLclGQ==",
+  "dgSpecHash": "l6qvl+gRqduF0I4+WiFcdtlP/LKXPdNOtwcXrmgC2pWjcPCDnspFs9Lfgt/B/KPVJCaZdHe5gzZUjMxuwt4KkQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\woutd\\Documents\\GitHub\\ProjectFinal\\FitnessReservatie.UI\\FitnessReservatie.UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\woutd\\.nuget\\packages\\azure.core\\1.6.0\\azure.core.1.6.0.nupkg.sha512",
     "C:\\Users\\woutd\\.nuget\\packages\\azure.identity\\1.3.0\\azure.identity.1.3.0.nupkg.sha512",
+    "C:\\Users\\woutd\\.nuget\\packages\\materialdesigncolors\\2.0.6\\materialdesigncolors.2.0.6.nupkg.sha512",
+    "C:\\Users\\woutd\\.nuget\\packages\\materialdesignthemes\\4.5.0\\materialdesignthemes.4.5.0.nupkg.sha512",
     "C:\\Users\\woutd\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.0.0\\microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
     "C:\\Users\\woutd\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\woutd\\.nuget\\packages\\microsoft.data.sqlclient\\4.1.0\\microsoft.data.sqlclient.4.1.0.nupkg.sha512",

@@ -32,7 +32,7 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 
         public override string ToString()
         {
-            return $"{ToestelId},{ToestelNaam}";
+            return $"{ToestelNaam}";
         }
     }
 }
