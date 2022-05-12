@@ -92,22 +92,5 @@ namespace FitnessReservatie.UI
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            LabelTitle.Content = "New Reservation";
-
-            ImageMyReservation.Visibility = Visibility.Hidden;
-            ImageNewReservation.Visibility = Visibility.Visible;
-
-            ListViewReservations.Visibility = Visibility.Hidden;
-
-            LabelDatePickerSelector.Visibility = Visibility.Visible;
-            DatePickerDatumSelector.Visibility = Visibility.Visible;
-            LabelToestelSelector.Visibility = Visibility.Visible;
-            ComboBoxToesteltypeSelector.Visibility = Visibility.Visible;
-            LabelTijdslotSelector.Visibility = Visibility.Visible;
-            ComboBoxBeginuurSelector.Visibility = Visibility.Visible;
-            ComboBoxEinduurSelector.Visibility = Visibility.Visible;
-        }
     }
 }

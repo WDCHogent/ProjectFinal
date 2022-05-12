@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         xmlns:Managers="clr-namespace:FitnessReservatieBL.Managers;assembly=FitnessReservatieBL" x:Class="FitnessReservatie.UI.KlantWindow"
         mc:Ignorable="d"
-        Title="My Personal Panel" Height="800" Width="1200">
+        Title="My Personal Panel" Height="820" Width="1600">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -18,85 +18,54 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="2" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,0,-10"/>
-        <Label Name="LabelWelkomKlant" Grid.ColumnSpan="7" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="40" Margin="15" VerticalAlignment="Center" Foreground="#FFF4F4F4" FontFamily="Unispace" FontSize="24"/>
-        <Image Name="ImageMyReservation" Grid.Row="1" Grid.ColumnSpan="7" Width="auto" Height="auto" Margin="0,-75,0,0" Source="/Images/Walter2.png" Visibility="Visible"/>
-        <Image Name="ImageNewReservation" Grid.Row="1" Grid.ColumnSpan="7" Width="auto" Height="auto" Margin="0,-60,0,0" Source="/Images/Walter3.png" Visibility="Hidden"/>
-
-        <ListView Name="ListViewReservations" Grid.ColumnSpan="7" Grid.Row="2" Grid.RowSpan="2" HorizontalContentAlignment="Center" Padding="25,35,25,25" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}">
-            <ListView.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10,10,0,0"/>
-                </Style>
-            </ListView.Resources>
-        </ListView>
-        <Button Name="LabelTitle" Grid.ColumnSpan="7" Grid.Row="2" Content="My Reservations" Width="600" Height="40" HorizontalAlignment="Center" VerticalAlignment="Top" FontFamily="Unispace" Margin="15,-20,15,15 " Background="#FF323232" Foreground="#FFF4F4F4" IsEnabled="False" FontSize="16">
-            <Button.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="10"/>
-                </Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Template">
+        <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0"/>
+        <TabControl TabStripPlacement="Right" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="20" Margin="10,0,-5,0" BorderBrush="{x:Null}">
+            <TabControl.Resources>
+                <Style TargetType="{x:Type TabItem}">
+                    <Setter Property="HeaderTemplate">
                         <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
+                            <DataTemplate>
+                                <ContentPresenter Content="{TemplateBinding Content}">
+                                    <ContentPresenter.LayoutTransform>
+                                        <RotateTransform Angle="270" />
+                                    </ContentPresenter.LayoutTransform>
+                                </ContentPresenter>
+                            </DataTemplate>
                         </Setter.Value>
                     </Setter>
+                    <Setter Property="Padding" Value="3" />
                 </Style>
-            </Button.Resources>
-        </Button>
-        <Button Grid.ColumnSpan="7" Grid.Row="3" Name="Button" HorizontalAlignment="Right" VerticalAlignment="Bottom" Height="35" Margin="25" BorderBrush="#FF323232" Click="Button_Click">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-            </Button.Resources>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFE9A500"/>
-                    <Setter Property="Foreground" Value="#FFF3CA00"/>
-                    <Setter Property="FontFamily" Value="Webdings"/>
-                    <Setter Property="FontSize" Value="25"/>
-                    <Setter Property="Content" Value="~"/>
-                    <Setter Property="Width" Value="50"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                            <Setter Property="FontFamily" Value="Unispace"/>
-                            <Setter Property="FontSize" Value="12"/>
-                            <Setter Property="Content" Value="New Reservation"/>
-                            <Setter Property="Width" Value="180"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
+            </TabControl.Resources>
+            <TabItem Width="140" Height="140">
+                <TabItem.Header>
+                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                </TabItem.Header>
+                <Label Name="LabelWelkomKlant" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="50" Margin="15" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF323232" FontFamily="Unispace" FontSize="30"/>
+            </TabItem>
+            <TabItem Width="140" Height="140">
+                <TabItem.Header>
+                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                </TabItem.Header>
+                <Label Content="Content goes here..." />
+            </TabItem>
+            <TabItem Width="140" Height="140">
+                <TabItem.Header>
+                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                </TabItem.Header>
+                <ListView Name="ListViewReservations" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalContentAlignment="Center" Padding="25" Margin="25,100,25,25" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}"/>
+            </TabItem>
+            <TabItem Width="140" Height="140">
+                <TabItem.Header>
+                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                </TabItem.Header>
+                <Label Content="Content goes here..." />
+            </TabItem>
+        </TabControl>
+        <Image Name="ImageMyReservation" Grid.Row="0" Grid.RowSpan="20" Width="auto" Height="auto" Source="/Images/WalterKlant.png" Visibility="Visible"/>
 
 
         <Label Name="LabelDatePickerSelector" Content="Date" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
