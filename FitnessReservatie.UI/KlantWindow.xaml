@@ -1,29 +1,31 @@
 ﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:FitnessReservatie.UI"
         xmlns:Managers="clr-namespace:FitnessReservatieBL.Managers;assembly=FitnessReservatieBL" x:Class="FitnessReservatie.UI.KlantWindow"
         mc:Ignorable="d"
-        Title="My Personal Panel" Height="820" Width="1600">
+        Title="My Personal Panel" Height="548" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FFE9A500" Offset="0.557"/>
-                <GradientStop Color="#FFF3CA00" Offset="1"/>
+                <GradientStop Color="#FFE9A500" Offset="0.171"/>
+                <GradientStop Color="#FFF3CA00" Offset="0.8"/>
             </LinearGradientBrush>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="2*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0"/>
-        <TabControl TabStripPlacement="Right" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="20" Margin="10,0,-5,0" BorderBrush="{x:Null}">
+        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="Uniform" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-194,-200,966,-4"/>
+        <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
+        <TabControl TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="25" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" >
             <TabControl.Resources>
                 <Style TargetType="{x:Type TabItem}">
                     <Setter Property="HeaderTemplate">
@@ -39,65 +41,285 @@
                     </Setter>
                     <Setter Property="Padding" Value="3" />
                 </Style>
+                <ControlTemplate x:Key="simpleTI" TargetType="TabItem">
+                    <Grid>
+                        <Border Name="Border" 
+                            BorderThickness="0,0,5,0" 
+                            Background="#FFE5E5E5"
+                            BorderBrush="#FFE5E5E5" 
+                            CornerRadius="0" >
+                            <ContentPresenter x:Name="ContentSite" Margin="5,0"  VerticalAlignment="Center" HorizontalAlignment="Center"
+                                          ContentSource="Header"  RecognizesAccessKey="True"/>
+                        </Border>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFE9A500" />
+                            <Setter TargetName="Border" Property="Background" Value="White" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Border" Property="Background" Value="#FFEAEAEA" />
+                            <Setter TargetName="Border" Property="BorderBrush" Value="#FFEAEAEA" />
+                            <Setter Property="Foreground" Value="#FFEAEAEA" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
             </TabControl.Resources>
-            <TabItem Width="140" Height="140">
-                <TabItem.Header>
-                    <Image Width="70" Source="/Images/userIcon1.png"/>
-                </TabItem.Header>
-                <Label Name="LabelWelkomKlant" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="50" Margin="15" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF323232" FontFamily="Unispace" FontSize="30"/>
+            <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
+                <Label Name="LabelWelkomKlant" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF323232" FontFamily="Unispace" FontSize="30"/>
             </TabItem>
-            <TabItem Width="140" Height="140">
+            <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
                     <Image Width="70" Source="/Images/userIcon1.png"/>
                 </TabItem.Header>
-                <Label Content="Content goes here..." />
+                <StackPanel>
+
+                </StackPanel>
             </TabItem>
-            <TabItem Width="140" Height="140">
+            <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                    <Image Width="70" Source="/Images/ListIcon.png"/>
                 </TabItem.Header>
-                <ListView Name="ListViewReservations" Grid.Column="3" Grid.ColumnSpan="4" Grid.RowSpan="4" HorizontalContentAlignment="Center" Padding="25" Margin="25,100,25,25" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                <StackPanel>
+                    <Button Content="My Reservations" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="10"/>
+                            </Style>
+                        </Button.Resources>
+                        <Button.Style>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="#FF323232"/>
+                                <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#FF323232"/>
+                                        <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                    </Button>
+                    <ListView Name="ListViewReservations" HorizontalContentAlignment="Center" Margin="15" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0"/>
+                </StackPanel>
             </TabItem>
-            <TabItem Width="140" Height="140">
+            <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                    <Image Width="70" Source="/Images/addIcon.png"/>
                 </TabItem.Header>
-                <Label Content="Content goes here..." />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <StackPanel Grid.ColumnSpan="3" Grid.Row="0">
+                        <Button Content="Make Reservation" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#FF323232"/>
+                                    <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FF323232"/>
+                                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1">
+                        <Label Name="LabelDatePickerSelector" Content="Date : " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Name="LabelToestelSelector1"  Content="Device type : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Name="LabelTijdslotSelector1" Content="Time slot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1">
+                        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday" Margin="15">
+                            <DatePicker.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </DatePicker.Resources>
+                        </DatePicker>
+                        <ComboBox Name="ComboBoxToesteltypeSelector1" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
+                        <ComboBox Name="ComboBoxBeginuurSelector1" Text="Please Select" Grid.Column="5" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxBeginuurSelector_SelectionChanged1">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom">
+                        <ComboBox Name="ComboBoxEinduurSelector1" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxEinduurSelector1_SelectionChanged">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Column="0" Grid.Row="3">
+                        <Label Name="LabelToestelSelector2"  Content="Device type : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="0" Grid.Row="4">
+                        <Label Name="LabelTijdslotSelector2" Content="Time slot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
+                    </StackPanel>
+                    
+                    <StackPanel Grid.Column="1" Grid.Row="3">
+                        <ComboBox Name="ComboBoxToesteltypeSelector2" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden">
+                        <ComboBox.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="5"/>
+                            </Style>
+                        </ComboBox.Resources>
+                    </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="2" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="Center">
+                        <CheckBox Name="CheckboxAddAnother" Content="Add another." Checked="CheckboxAddAnother_Checked" Unchecked="CheckboxAddAnother_Unchecked" IsEnabled="false"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom">
+                        <ComboBox Name="ComboBoxBeginuurSelector2" Text="Please Select" Grid.Column="5" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxBeginuurSelector2_SelectionChanged">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Grid.Row="4" VerticalAlignment="Bottom">
+                        <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden">
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
+                    </StackPanel>
+
+
+
+                    <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,15,0,0">
+                        <Button Content="Confirm Selction" Margin="325,0,325,0" Height="30" FontSize="12" FontFamily="Unispace">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#FF323232"/>
+                                    <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsEnabled" Value="True">
+                                            <Setter Property="Background" Value="#FFF4F4F4"/>
+                                            <Setter Property="Foreground" Value="#FF323232"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+            </TabItem>
+            <TabItem Name="TabItemLogOut" Width="100" Height="100" Template="{StaticResource simpleTI}">
+                <TabItem.Header>
+                    <Button Name="ButtonLogOut" Width="100" Height="100" Click="ButtonLogOut_Click" Margin="0,-8,0,0">
+                        <Button.Background>
+                            <ImageBrush ImageSource="/Images/signOutIcon.png">
+                                <ImageBrush.RelativeTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.7" ScaleY="0.7"/>
+                                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
+                                        <RotateTransform CenterX="0.5" CenterY="0.5"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </ImageBrush.RelativeTransform>
+                            </ImageBrush>
+                        </Button.Background>
+                        <Button.Resources>
+                            <Style TargetType="{x:Type Button}">
+                                <Setter Property="Background" Value="{x:Null}"/>
+                                <Setter Property="Foreground" Value="{x:Null}"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type Button}">
+                                            <Border Background="{TemplateBinding Background}">
+                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                            </Border>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Style.Triggers>
+                                    <Trigger Property="IsEnabled" Value="True">
+                                        <Setter Property="Background" Value="{x:Null}"/>
+                                        <Setter Property="Foreground" Value="{x:Null}"/>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                    <!--<Image Width="70" Source="/Images/signOutIcon.png"/>-->
+                </TabItem.Header>
             </TabItem>
         </TabControl>
-        <Image Name="ImageMyReservation" Grid.Row="0" Grid.RowSpan="20" Width="auto" Height="auto" Source="/Images/WalterKlant.png" Visibility="Visible"/>
-
-
-        <Label Name="LabelDatePickerSelector" Content="Date" Grid.Column="0" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
-        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday" Margin="0,35,0,15" Visibility="Hidden">
-            <DatePicker.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </DatePicker.Resources>
-        </DatePicker>
-        <Label Name="LabelToestelSelector"  Content="Device type" Grid.Column="2" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
-        <ComboBox Name="ComboBoxToesteltypeSelector" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" Visibility="Hidden">
-            <ComboBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </ComboBox.Resources>
-        </ComboBox>
-        <Label Name="LabelTijdslotSelector" Content="Time slot" Grid.Column="4" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,35,0,15" Visibility="Hidden"/>
-        <ComboBox Name="ComboBoxBeginuurSelector" Text="Please Select" Grid.Column="5" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" SelectionChanged="ComboBoxBeginuurSelector_SelectionChanged" Visibility="Hidden">
-            <ComboBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </ComboBox.Resources>
-        </ComboBox>
-        <ComboBox Name="ComboBoxEinduurSelector" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="0,35,0,15" Visibility="Hidden">
-            <ComboBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </ComboBox.Resources>
-        </ComboBox>
     </Grid>
 </Window>

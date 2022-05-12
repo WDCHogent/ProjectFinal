@@ -9,19 +9,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="addIcon.png" />
     <None Remove="adminIcon.png" />
     <None Remove="Background.png" />
+    <None Remove="calendarIcon.png" />
     <None Remove="Fiets.gif" />
-    <None Remove="Images\userIcon1.png" />
     <None Remove="Images\Walter2.png" />
     <None Remove="Images\WalterKlant.png" />
+    <None Remove="ListIcon.png" />
     <None Remove="loopband.gif" />
     <None Remove="mailIcon.png" />
+    <None Remove="signOutIcon.png" />
     <None Remove="userIcon.png" />
     <None Remove="userIcon1.png" />
     <None Remove="Walter2.png" />
     <None Remove="Walter3.png" />
     <None Remove="WalterKlant.png" />
+    <None Remove="Weights.gif" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,14 +43,18 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\addIcon.png" />
     <Resource Include="Images\adminIcon.png" />
     <Resource Include="Images\Background.png" />
     <Resource Include="Images\Fiets.gif" />
     <Resource Include="Images\loopband.gif" />
     <Resource Include="Images\userIcon.png" />
     <Resource Include="Images\mailIcon.png" />
-    <Resource Include="Images\userIcon1.png" />
     <Resource Include="Images\WalterKlant.png" />
+    <Resource Include="Images\signOutIcon.png" />
+    <Resource Include="Images\ListIcon.png" />
+    <Resource Include="Images\userIcon1.png" />
+    <Resource Include="Images\Weights.gif" />
   </ItemGroup>
 
 </Project>
