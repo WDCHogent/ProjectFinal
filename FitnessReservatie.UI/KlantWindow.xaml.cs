@@ -1,4 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Eigenschappen;
 using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
@@ -19,6 +20,7 @@ namespace FitnessReservatie.UI
     {
         private Klant _ingelogdeKlant;
         private IReadOnlyList<KlantReservatieInfo> _reservatiesKlant;
+        private IReadOnlyList<Tijdslot> _einduurItemsSource;
 
         private ToestelTypeManager _toestelTypeManager;
         private TijdslotManager _tijdslotManager;
@@ -45,6 +47,7 @@ namespace FitnessReservatie.UI
             _tijdslotManager = new TijdslotManager(tijdslotRepo);
 
             ComboBoxBeginuurSelector1.ItemsSource = _tijdslotManager.SelecteerBeginuur();
+            _einduurItemsSource = _tijdslotManager.SelecteerEinduur();
 
             DatePickerDatumSelector.BlackoutDates.AddDatesInPast();
             DatePickerDatumSelector.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.Today.AddMonths(1).AddDays(-1)));
@@ -61,35 +64,39 @@ namespace FitnessReservatie.UI
             mainwindow.Show();
         }
 
-        private void ComboBoxBeginuurSelector_SelectionChanged1(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxBeginuurSelector1_SelectionChanged1(object sender, SelectionChangedEventArgs e)
         {
+            CheckboxAddAnother.IsChecked = false;
+            CheckboxAddAnother.IsEnabled = false;
+
             ComboBoxEinduurSelector1.Items.Clear();
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 1)
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 1)
             {
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex]);
             }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 2)
+            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 2)
             {
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
             }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 3)
+            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 3)
             {
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
             }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4)
+            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 4)
             {
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
             }
             else
             {
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                ComboBoxEinduurSelector1.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
             }
+            ButtonBevestigReservatie.IsEnabled = false;
         }
 
         private void CheckboxAddAnother_Checked(object sender, RoutedEventArgs e)
@@ -112,45 +119,50 @@ namespace FitnessReservatie.UI
         private void ComboBoxEinduurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxBeginuurSelector2.Items.Clear();
-            //Beginuur = 21u
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 2 && ComboBoxEinduurSelector1.SelectedIndex == 0)
+            //Beginuur1 = 21u
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 2)
             {
                 CheckboxAddAnother.IsEnabled = false;
             }
             //
 
-            //Beginuur = 20u
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 3 && ComboBoxEinduurSelector1.SelectedIndex == 1)
+            //Beginuur1 = 20u
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 3)
             {
-                CheckboxAddAnother.IsEnabled = false;
-            }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 3 && ComboBoxEinduurSelector1.SelectedIndex == 0)
-            {
-                CheckboxAddAnother.IsEnabled = true;
-                ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-            }
-            //
-
-            //Beginuur = 19u
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 2)
-            {
-                CheckboxAddAnother.IsEnabled = false;
-            }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 1)
-            {
-                CheckboxAddAnother.IsEnabled = true;
-                ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-            }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 0)
-            {
-                CheckboxAddAnother.IsEnabled = true;
-                ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                if (ComboBoxEinduurSelector1.SelectedIndex == 1)
+                {
+                    CheckboxAddAnother.IsEnabled = false;
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
+                {
+                    CheckboxAddAnother.IsEnabled = true;
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                }
             }
             //
 
-            //Beginuur tot= 18u
-            if (ComboBoxBeginuurSelector1.SelectedIndex <= _tijdslotManager.SelecteerEinduur().Count - 5)
+            //Beginuur1 = 19u
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 4)
+            {
+                if (ComboBoxEinduurSelector1.SelectedIndex == 2)
+                {
+                    CheckboxAddAnother.IsEnabled = false;
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 1)
+                {
+                    CheckboxAddAnother.IsEnabled = true;
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
+                {
+                    CheckboxAddAnother.IsEnabled = true;
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                }
+            }
+            //
+
+            //Beginuur1 tot= 18u
+            if (ComboBoxBeginuurSelector1.SelectedIndex <= _einduurItemsSource.Count - 5)
             {
                 if (ComboBoxEinduurSelector1.SelectedIndex == 3)
                 {
@@ -159,44 +171,76 @@ namespace FitnessReservatie.UI
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 2)
                 {
                     CheckboxAddAnother.IsEnabled = true;
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
                 }
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 1)
                 {
                     CheckboxAddAnother.IsEnabled = true;
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
                 }
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
                 {
                     CheckboxAddAnother.IsEnabled = true;
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                }
+            }
+            //
+
+            ButtonBevestigReservatie.IsEnabled = true;
+        }
+
+        private void ComboBoxBeginuurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxEinduurSelector2.Items.Clear();
+
+            //Beginuur2 = 21u
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 3 && ComboBoxEinduurSelector1.SelectedIndex == 0)
+            {
+                ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+            }
+            //
+
+            //Beginuur2 = 20u
+            if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 4)
+            {
+                if (ComboBoxEinduurSelector1.SelectedIndex == 1)
+                {
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
+                {
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                }
+            }
+            //
+
+            //Beginuur2 tot = 19u
+            if (ComboBoxBeginuurSelector1.SelectedIndex <= _einduurItemsSource.Count - 5)
+            {
+                if (ComboBoxEinduurSelector1.SelectedIndex == 2)
+                {
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 1)
+                {
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
+                }
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
+                {
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
                 }
             }
             //
         }
 
-            private void ComboBoxBeginuurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
-            {
-                ComboBoxEinduurSelector2.Items.Clear();
 
-                if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 0 && ComboBoxBeginuurSelector2.SelectedIndex == 0)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                }
-                else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 0 && ComboBoxBeginuurSelector2.SelectedIndex == 1)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                }
-                //
-
-                else if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotManager.SelecteerEinduur().Count - 4 && ComboBoxEinduurSelector1.SelectedIndex == 1 && ComboBoxBeginuurSelector2.SelectedIndex == 0)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotManager.SelecteerEinduur()[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                }
-            }
+        private void ComboBoxEinduurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ButtonBevestigReservatie.IsEnabled = true;
         }
     }
+}
