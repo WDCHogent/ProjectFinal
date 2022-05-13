@@ -30,7 +30,6 @@ namespace FitnessReservatieBL.Domeinen
         public Tijdslot Beginuur { get; private set; }
         public Tijdslot Einduur { get; private set; }
         public Toestel Toestel { get; private set; }
-        public ToestelType ToestelType { get; private set; }
 
         public void ZetReservatienummer(int reservatienummer)
         {
@@ -48,35 +47,14 @@ namespace FitnessReservatieBL.Domeinen
         {
             if (datum < DateTime.Now) throw new ReservatieException("Reservatie - ZetDatum - 'ongeldige datum'");
             if (datum >= DateTime.Now.AddDays(7)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
-            //if (Klant.GeefReservaties().Where(r => r.Datum.ToShortDateString().Contains(datum.ToShortDateString())).Count() >= 4) throw new ReservatieException("Reservatie - ZetKlant - 'Aantal reservaties mag niet meer dan 4 zijn per dag'");
             Datum = datum;
         }
 
         public void ZetToestel(Toestel toestel)
         {
             if (toestel == null) throw new ReservatieException("Reservatie - ZetToestel'");
-            //controle voor query
-            //if (Toestel.GeefReservaties().Where(r => r.Datum == this.Datum).Count() > 14) throw new ReservatieException($"Reservatie - ZetToestel - 'Geen {toestel.ToestelType.ToString()} beschikbaar voor {Datum.ToShortDateString()}'");
             Toestel = toestel;
         }
-
-        public void ZetToestelType(ToestelType toesteltype)
-        {
-            if (toesteltype == null) throw new ReservatieException("Reservatie - ZetToestelType'");
-            //controle voor query
-            //if (Toestel.GeefReservaties().Where(r => r.Datum == this.Datum).Count() > 14) throw new ReservatieException($"Reservatie - ZetToestel - 'Geen {toestel.ToestelType.ToString()} beschikbaar voor {Datum.ToShortDateString()}'");
-            ToestelType = toesteltype;
-        }
-
-        //public void ZetTijdslot(Tijdslot tijdslot)
-        //{
-        //    if (tijdslot == null) throw new ReservatieException("Reservatie - ZetTijdslot - 'Gelieve een tijdslot op te geven'");
-        //    // controles voor query
-        //    //if ((Klant.GeefReservaties().Where(r => (r.Datum.ToShortDateString().Contains(Datum.ToShortDateString()) && r.Toestel == Toestel && r.Tijdslot.Einduur == tijdslot.Beginuur - 1) || (r.Datum.ToShortDateString().Contains(Datum.ToShortDateString()) && r.Toestel == Toestel && r.Tijdslot.Einduur == tijdslot.Beginuur - 2)).Count() > 1)) throw new ReservatieException("Reservatie - ZetTijdslot - 'Geen Toestel vrij op dit tijdslot'");
-        //    //if ((Klant.GeefReservaties().Where(r => (r.Datum.ToShortDateString().Contains(Datum.ToShortDateString()) && r.Toestel == Toestel && r.Tijdslot.Beginuur == tijdslot.Einduur + 1) || (r.Datum.ToShortDateString().Contains(Datum.ToShortDateString()) && r.Toestel == Toestel && r.Tijdslot.Beginuur == tijdslot.Einduur + 2)).Count() > 1)) throw new ReservatieException("Reservatie - ZetKlant - 'Geen Toestel vrij op dit tijdslot'");
-        //    //if (Toestel.GeefReservaties().Where(r => (r.Datum.ToShortDateString().Contains(Datum.ToShortDateString()) && r.Tijdslot == r.Tijdslot)).Count() > 1) throw new ReservatieException("Reservatie - ZetKlant - 'Geen Toestel vrij op dit tijdslot'");
-        //    Tijdslot = tijdslot;
-        //}
 
         public void ZetBeginuur(Tijdslot beginuur)
         {

@@ -10,6 +10,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IToestelRepository
     {
-        //Toestel GeefVrijToestel(int klantnummer, DateTime datum, string beginuur, string einduur, string toesteltype);
+
     }
 }

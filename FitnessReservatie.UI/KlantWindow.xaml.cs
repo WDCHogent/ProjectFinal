@@ -22,6 +22,8 @@ namespace FitnessReservatie.UI
         private IReadOnlyList<KlantReservatieInfo> _reservatiesKlant;
         private IReadOnlyList<Tijdslot> _einduurItemsSource;
 
+        private int _aantalGereserveerdeUrenPerDatum;
+
         private ToestelTypeManager _toestelTypeManager;
         private TijdslotManager _tijdslotManager;
 
@@ -51,7 +53,7 @@ namespace FitnessReservatie.UI
             _einduurItemsSource = _tijdslotManager.SelecteerEinduur();
 
             DatePickerDatumSelector.BlackoutDates.AddDatesInPast();
-            DatePickerDatumSelector.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.Today.AddMonths(1).AddDays(-1)));
+            DatePickerDatumSelector.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.MaxValue));
 
             IReservatieRepository reservatieRepo = new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _reservatieManager = new ReservatieManager(reservatieRepo);
@@ -66,7 +68,23 @@ namespace FitnessReservatie.UI
         }
         private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            ComboBoxToesteltypeSelector1.IsEnabled = true;
+            ComboBoxEinduurSelector1.Items.Clear();
+            ComboBoxBeginuurSelector2.Items.Clear();
+            ComboBoxEinduurSelector2.Items.Clear();
+            _aantalGereserveerdeUrenPerDatum = 0;
+            foreach (KlantReservatieInfo klantreservatie in _reservatiesKlant)
+            {
+                ComboBoxToesteltypeSelector1.IsEnabled = true;
+                if (klantreservatie.Datum == DatePickerDatumSelector.SelectedDate)
+                {
+                    _aantalGereserveerdeUrenPerDatum += klantreservatie.Einduur - klantreservatie.Beginuur;
+                    if (_aantalGereserveerdeUrenPerDatum >= 4)
+                    {
+                        ComboBoxToesteltypeSelector1.IsEnabled = false;
+                    }
+                }
+            }
+
         }
         private void ComboBoxToesteltypeSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -83,7 +101,7 @@ namespace FitnessReservatie.UI
             {
                 ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex]);
             }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 2)
+            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 2 || _aantalGereserveerdeUrenPerDatum >= 3)
             {
                 ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
             }
@@ -134,6 +152,7 @@ namespace FitnessReservatie.UI
                 {
                     CheckboxAddAnother.IsEnabled = true;
                     ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                    if (_aantalGereserveerdeUrenPerDatum >= 3) CheckboxAddAnother.IsEnabled = false;
                 }
             }
             //
@@ -149,6 +168,7 @@ namespace FitnessReservatie.UI
                 {
                     CheckboxAddAnother.IsEnabled = true;
                     ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                    if (_aantalGereserveerdeUrenPerDatum >= 2) CheckboxAddAnother.IsEnabled = false;
                 }
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
                 {
@@ -174,11 +194,13 @@ namespace FitnessReservatie.UI
                 {
                     CheckboxAddAnother.IsEnabled = true;
                     ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                    if (_aantalGereserveerdeUrenPerDatum >= 2) CheckboxAddAnother.IsEnabled = false;
                 }
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
                 {
                     CheckboxAddAnother.IsEnabled = true;
                     ComboBoxBeginuurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
+                    if (_aantalGereserveerdeUrenPerDatum >= 3) CheckboxAddAnother.IsEnabled = false;
                 }
             }
             //

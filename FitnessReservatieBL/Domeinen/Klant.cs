@@ -23,8 +23,6 @@ namespace FitnessReservatieBL.Domeinen
         public string Voornaam { get; private set; }
         public string Mailadres { get; private set; }
 
-        private List<Reservatie> _reservaties = new List<Reservatie>();
-
         public void ZetKlantnummer(int klantnummer)
         {
             if (klantnummer <= 0) throw new KlantException("Klant - ZetKlantnummer - 'Mag niet leeg zijn'");
@@ -49,25 +47,6 @@ namespace FitnessReservatieBL.Domeinen
             var regex = new Regex(pattern, RegexOptions.IgnoreCase);
             if(regex.IsMatch(mailadres)) Mailadres = mailadres.Trim();
             else throw new KlantException("Klant - ZetMailadres - 'Geen geldig mailadres'");
-        }
-
-        //TODO : Change to "internal"
-        public void VoegReservatieToe(Reservatie reservatie)
-        {
-            if (reservatie == null) throw new KlantException("Klant - VoegReservatieToe");
-            if (reservatie.Klant != this) throw new KlantException("Klant - VoegReservatieToe");
-            if (this.HeeftReservatie(reservatie)) throw new KlantException("Klant - VoegReservatieToe - 'Deze reservatie bestaat al'");
-            _reservaties.Add(reservatie);
-        }
-
-        public bool HeeftReservatie(Reservatie reservatie)
-        {
-            return _reservaties.Contains(reservatie);
-        }
-
-        public IReadOnlyList<Reservatie> GeefReservaties()
-        {
-            return _reservaties;
         }
 
         public override string ToString()
