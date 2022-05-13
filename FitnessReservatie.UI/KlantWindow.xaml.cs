@@ -42,6 +42,7 @@ namespace FitnessReservatie.UI
             IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
             ComboBoxToesteltypeSelector1.ItemsSource = _toestelTypeManager.SelecteerToestelType();
+            ComboBoxToesteltypeSelector2.ItemsSource = ComboBoxToesteltypeSelector1.ItemsSource;
 
             ITijdslotRepository tijdslotRepo = new TijdslotRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _tijdslotManager = new TijdslotManager(tijdslotRepo);
@@ -63,8 +64,16 @@ namespace FitnessReservatie.UI
             this.Close();
             mainwindow.Show();
         }
+        private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxToesteltypeSelector1.IsEnabled = true;
+        }
+        private void ComboBoxToesteltypeSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxBeginuurSelector1.IsEnabled = true;
+        }
 
-        private void ComboBoxBeginuurSelector1_SelectionChanged1(object sender, SelectionChangedEventArgs e)
+        private void ComboBoxBeginuurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckboxAddAnother.IsChecked = false;
             CheckboxAddAnother.IsEnabled = false;
@@ -78,25 +87,13 @@ namespace FitnessReservatie.UI
             {
                 ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
             }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 3)
-            {
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-            }
-            else if (ComboBoxBeginuurSelector1.SelectedIndex == _einduurItemsSource.Count - 4)
-            {
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-            }
             else
             {
                 ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
                 ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                ComboBoxEinduurSelector1.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
             }
             ButtonBevestigReservatie.IsEnabled = false;
+            ComboBoxEinduurSelector1.IsEnabled = true;
         }
 
         private void CheckboxAddAnother_Checked(object sender, RoutedEventArgs e)
@@ -187,6 +184,11 @@ namespace FitnessReservatie.UI
             //
 
             ButtonBevestigReservatie.IsEnabled = true;
+            ComboBoxToesteltypeSelector2.IsEnabled = true;
+        }
+        private void ComboBoxToesteltypeSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxBeginuurSelector2.IsEnabled = true;
         }
 
         private void ComboBoxBeginuurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -231,16 +233,21 @@ namespace FitnessReservatie.UI
                 {
                     ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
                     ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                    ComboBoxEinduurSelector2.Items.Add(_einduurItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
                 }
             }
             //
-        }
 
+            ComboBoxEinduurSelector2.IsEnabled = true;
+        }
 
         private void ComboBoxEinduurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonBevestigReservatie.IsEnabled = true;
+        }
+
+        private void ButtonBevestigReservatie_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

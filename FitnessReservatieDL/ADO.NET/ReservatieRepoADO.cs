@@ -34,9 +34,5 @@ namespace FitnessReservatieDL.ADO.NET
             throw new NotImplementedException();
         }
 
-        public Reservatie MaakReservatie(Reservatie reservatie)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

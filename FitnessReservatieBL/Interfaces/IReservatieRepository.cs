@@ -12,6 +12,5 @@ namespace FitnessReservatieBL.Interfaces
     {
         IReadOnlyList<ReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer);
         bool BestaatReservatie(Reservatie reservatie);
-        Reservatie MaakReservatie(Reservatie reservatie);
     }
 }
