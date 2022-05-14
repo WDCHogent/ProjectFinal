@@ -64,3 +64,11 @@ LEFT JOIN ReservatieInfo i ON r.reservatienummer=i.reservatienummer
 LEFT JOIN toestel t ON i.toestelnummer=t.toestelnummer
 
 
+SELECT t.toestelnummer,t.toestelnaam,t.status,tt.toesteltypenaam FROM Toestel t
+LEFT JOIN Toesteltype tt ON t.toesteltype=tt.toesteltypeid
+WHERE t.[status]='operatief' AND tt.toesteltypenaam='x' AND t.toestelnummer 
+NOT IN(SELECT i.toestelnummer FROM ReservatieInfo i 
+LEFT JOIN Reservatie r ON i.reservatienummer=r.reservatienummer 
+WHERE r.datum LIKE 'x' AND (i.beginuur BETWEEN x AND x-1 OR i.einduur BETWEEN x+1 AND x));
+
+

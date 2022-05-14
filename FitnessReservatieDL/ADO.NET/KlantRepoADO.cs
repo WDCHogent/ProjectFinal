@@ -64,18 +64,16 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer)
+        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
             if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-            string query = "SELECT r.reservatienummer, r.datum, s1.tijdslot beginuur, s2.tijdslot einduur, t.toestelnaam, t.toestelnummer " +
-                "FROM Reservatie r " +
-                "LEFT JOIN tijdslot s1 ON r.beginuur = s1.tijdslotid " +
-                "LEFT JOIN tijdslot s2 ON r.einduur = s2.tijdslotid " +
-                "LEFT JOIN toestel t ON r.toestelnummer = t.toestelnummer " +
-                "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
-                "WHERE r.klantnummer=@klantnummer";
+            string query = "SELECT r.reservatienummer, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +
+            "LEFT JOIN ReservatieInfo i ON r.reservatienummer = i.reservatienummer " +
+            "LEFT JOIN toestel t ON i.toestelnummer = t.toestelnummer " +
+            "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
+            "WHERE r.klantnummer = @klantnummer";
             SqlConnection conn = GetConnection();
-            List<KlantReservatieInfo> klantenreservaties = new List<KlantReservatieInfo>();
+            List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query;
@@ -86,7 +84,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        KlantReservatieInfo klantenreservatie = new KlantReservatieInfo((int)reader["reservatienummer"],(DateTime)reader["datum"],(int)reader["beginuur"],(int)reader["einduur"],(string)reader["toestelNaam"],(int)reader["toestelnummer"]);
+                        DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"],(DateTime)reader["datum"],(int)reader["beginuur"],(int)reader["einduur"],(string)reader["toestelNaam"]);
                         klantenreservaties.Add(klantenreservatie);
                     }
                     return klantenreservaties.AsReadOnly();

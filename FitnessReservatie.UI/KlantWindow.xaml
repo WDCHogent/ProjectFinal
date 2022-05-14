@@ -72,9 +72,58 @@
                 <TabItem.Header>
                     <Image Width="70" Source="/Images/userIcon1.png"/>
                 </TabItem.Header>
-                <StackPanel>
-
-                </StackPanel>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
+                        <Button Content="My Personal Information" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#FF323232"/>
+                                    <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FF323232"/>
+                                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
+                        <Label Name="LabelKlantnummer" Content="Clientnumber" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelNaam" Content="Last Name" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelVoornaam" Content="First Name" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelMailadres" Content="Email Address" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" >
+                        <Label Name="LabelKlantnummerReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
+                        <Label Name="LabelNaamReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
+                        <Label Name="LabelVoornaamReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
+                        <Label Name="LabelMailadresReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>

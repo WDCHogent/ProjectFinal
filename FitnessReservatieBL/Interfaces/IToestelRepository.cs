@@ -10,6 +10,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IToestelRepository
     {
-
+        IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(string datum, string toesteltype, int beginuur, int einduur);
     }
 }

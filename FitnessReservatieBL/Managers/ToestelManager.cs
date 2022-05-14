@@ -19,17 +19,17 @@ namespace FitnessReservatieBL.Managers
             this._toestelRepo = repo;
         }
 
-        //public Toestel GeefVrijToestel(int klantnummer, DateTime datum, string beginuur, string einduur, string toesteltype)
-        //{
-        //    if (klantnummer <= 0) throw new ToestelManagerException("ToestelManager - GeefVrijToestel - Ongeldige input");
-        //    try
-        //    {
-        //        return _toestelRepo.GeefVrijToestel(klantnummer, datum, beginuur, einduur, toesteltype);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw new ToestelManagerException("ToestelManager - GeefVrijToestel", ex);
-        //    }
-        //}
+        public IReadOnlyList<Toestel> GeefVrijeToestellenVoorGeselecteerdTijdslot(string datum, string toesteltype, int beginuur, int einduur)
+        {
+            //if (klantnummer <= 0) throw new ToestelManagerException("ToestelManager - GeefVrijToestel - Ongeldige input");
+            try
+            {
+                return _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toesteltype, beginuur, einduur);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelManagerException("ToestelManager - GeefVrijToestel", ex);
+            }
+        }
     }
 }

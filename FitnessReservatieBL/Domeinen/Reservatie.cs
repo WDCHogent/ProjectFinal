@@ -14,14 +14,21 @@ namespace FitnessReservatieBL.Domeinen
         //    //Klant.VoegReservatieToe(this);
         //    //Toestel.VoegReservatieToe(this);
 
-        public Reservatie(int reservatienummer, Klant klant, DateTime datum, Toestel toestel, Tijdslot beginuur, Tijdslot einduur)
+        //public Reservatie(int reservatienummer, Klant klant, DateTime datum, Toestel toestel, Tijdslot beginuur, Tijdslot einduur)
+        //{
+        //    ZetReservatienummer(reservatienummer);
+        //    ZetKlant(klant);
+        //    ZetDatum(datum);
+        //    ZetToestel(toestel);
+        //    ZetBeginuur(beginuur);
+        //    ZetEinduur(einduur);
+        //}
+
+        public Reservatie(int reservatienummer, Klant klant, DateTime datum)
         {
             ZetReservatienummer(reservatienummer);
             ZetKlant(klant);
             ZetDatum(datum);
-            ZetToestel(toestel);
-            ZetBeginuur(beginuur);
-            ZetEinduur(einduur);
         }
 
         public int Reservatienummer { get; set; }

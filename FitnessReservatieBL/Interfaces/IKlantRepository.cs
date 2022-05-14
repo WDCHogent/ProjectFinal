@@ -11,6 +11,6 @@ namespace FitnessReservatieBL.Interfaces
     public interface IKlantRepository
     {
         Klant SelecteerKlant(int? klantnummer, string mailadres);
-        IReadOnlyList<KlantReservatieInfo> GeefKlantReservaties(int klantnummer);
+        IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer);
     }
 }

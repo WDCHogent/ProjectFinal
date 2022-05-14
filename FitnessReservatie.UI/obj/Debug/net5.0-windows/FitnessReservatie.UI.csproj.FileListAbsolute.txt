@@ -54,3 +54,7 @@ C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\obj\Debug\net5.0-windows\ref\FitnessReservatie.UI.dll
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\MaterialDesignColors.dll
 C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\MaterialDesignThemes.Wpf.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\ControlzEx.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\MahApps.Metro.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\MaterialDesignThemes.MahApps.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\FitnessReservatie.UI\bin\Debug\net5.0-windows\Microsoft.Xaml.Behaviors.dll

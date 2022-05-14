@@ -24,7 +24,7 @@ namespace FitnessReservatieDL.ADO.NET
             SqlConnection connection = new SqlConnection(_connectiestring);
             return connection;
         }
-        public IReadOnlyList<ReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer)
+        public IReadOnlyList<DTOReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer)
         {
             throw new NotImplementedException();
         }

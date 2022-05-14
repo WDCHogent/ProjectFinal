@@ -28,7 +28,7 @@ namespace FitnessReservatieDL.ADO.NET
 
         public IReadOnlyList<Tijdslot> SelecteerBeginuur()
         {
-            string query = "SELECT * FROM Tijdslot WHERE tijdslotid < (SELECT MAX(tijdslotid) FROM Tijdslot)";
+            string query = "SELECT * FROM Tijdslot WHERE tijdslot < (SELECT MAX(tijdslot) FROM Tijdslot)";
             List<Tijdslot> tijdsloten = new List<Tijdslot>();
             SqlConnection connection = GetConnection();
             using (SqlCommand command = connection.CreateCommand())
@@ -40,7 +40,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        tijdsloten.Add(new Tijdslot((int)reader["tijdslotid"], (int)reader["tijdslot"]));
+                        tijdsloten.Add(new Tijdslot((int)reader["tijdslot"]));
                     }
                     reader.Close();
                     return tijdsloten;
@@ -67,7 +67,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        tijdsloten.Add(new Tijdslot((int)reader["tijdslotid"], (int)reader["tijdslot"]));
+                        tijdsloten.Add(new Tijdslot((int)reader["tijdslot"]));
                     }
                     reader.Close();
                     return tijdsloten;

@@ -20,7 +20,7 @@ namespace FitnessReservatieBL.Managers
             this._reservatieRepo = repo;
         }
 
-        public IReadOnlyList<ReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer)
+        public IReadOnlyList<DTOReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer)
         {
             if ((!klantnummer.HasValue) && (!toestelnummer.HasValue)) throw new ReservatieManagerException("ReservatieManagerException");
             try
@@ -32,5 +32,7 @@ namespace FitnessReservatieBL.Managers
                 throw new ReservatieManagerException("ReservatieManagerException", ex);
             }
         }
+
+
     }
 }
