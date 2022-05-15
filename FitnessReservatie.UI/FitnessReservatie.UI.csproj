@@ -23,6 +23,7 @@
     <None Remove="userIcon.png" />
     <None Remove="userIcon1.png" />
     <None Remove="Walter2.png" />
+    <None Remove="Walter3.gif" />
     <None Remove="Walter3.png" />
     <None Remove="WalterKlant.png" />
     <None Remove="Weights.gif" />
@@ -57,6 +58,7 @@
     <Resource Include="Images\ListIcon.png" />
     <Resource Include="Images\userIcon1.png" />
     <Resource Include="Images\Weights.gif" />
+    <Resource Include="Walter3.gif" />
   </ItemGroup>
 
 </Project>

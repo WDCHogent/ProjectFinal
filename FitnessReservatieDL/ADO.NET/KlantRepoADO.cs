@@ -71,7 +71,7 @@ namespace FitnessReservatieDL.ADO.NET
             "LEFT JOIN ReservatieInfo i ON r.reservatienummer = i.reservatienummer " +
             "LEFT JOIN toestel t ON i.toestelnummer = t.toestelnummer " +
             "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
-            "WHERE r.klantnummer = @klantnummer";
+            "WHERE r.klantnummer = @klantnummer ORDER BY r.datum, i.beginuur";
             SqlConnection conn = GetConnection();
             List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
             using (SqlCommand cmd = conn.CreateCommand())

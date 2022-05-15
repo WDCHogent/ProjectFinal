@@ -106,6 +106,9 @@ namespace FitnessReservatie.UI
                     if (_aantalGereserveerdeUrenPerDatum >= _maxAantalTijdsloten)
                     {
                         ComboBoxToesteltypeSelector1.IsEnabled = false;
+                        ComboBoxBeginuurSelector1.IsEnabled = false;
+                        ComboBoxEinduurSelector1.IsEnabled = false;
+                        break;
                     }
                 }
             }

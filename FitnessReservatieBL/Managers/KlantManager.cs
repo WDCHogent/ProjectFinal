@@ -37,7 +37,7 @@ namespace FitnessReservatieBL.Managers
             if (klantnummer <= 0) throw new KlantManagerException("KlantManager - UpdateKlantReservatie - Klant is null");
             try
             {
-                return (IReadOnlyList<DTOKlantReservatieInfo>)_klantRepo.GeefKlantReservaties(klantnummer);
+                return _klantRepo.GeefKlantReservaties(klantnummer);
             }
             catch (Exception ex)
             {

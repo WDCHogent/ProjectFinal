@@ -57,11 +57,6 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public IReadOnlyList<DTOReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer)
-        {
-            throw new NotImplementedException();
-        }
-
         public Reservatie MaakReservatie(Reservatie reservatie)
         {
             SqlConnection conn = GetConnection();

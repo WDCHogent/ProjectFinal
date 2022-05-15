@@ -23,7 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="Uniform" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-194,-200,966,-4"/>
+        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="Uniform" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-110,-116,966,-4"/>
         <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
         <TabControl TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="25" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" >
             <TabControl.Resources>
@@ -366,7 +366,6 @@
                             </Style>
                         </Button.Resources>
                     </Button>
-                    <!--<Image Width="70" Source="/Images/signOutIcon.png"/>-->
                 </TabItem.Header>
             </TabItem>
         </TabControl>
