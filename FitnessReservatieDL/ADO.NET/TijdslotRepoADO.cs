@@ -26,34 +26,7 @@ namespace FitnessReservatieDL.ADO.NET
             return connectie;
         }
 
-        public IReadOnlyList<Tijdslot> SelecteerBeginuur()
-        {
-            string query = "SELECT * FROM Tijdslot WHERE tijdslot < (SELECT MAX(tijdslot) FROM Tijdslot)";
-            List<Tijdslot> tijdsloten = new List<Tijdslot>();
-            SqlConnection connection = GetConnection();
-            using (SqlCommand command = connection.CreateCommand())
-            {
-                command.CommandText = query;
-                connection.Open();
-                try
-                {
-                    IDataReader reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        tijdsloten.Add(new Tijdslot((int)reader["tijdslot"]));
-                    }
-                    reader.Close();
-                    return tijdsloten;
-                }
-                catch (Exception ex)
-                {
-                    throw new TijdslotADOException("SelecteerBeginuur", ex);
-                }
-                finally { connection.Close(); }
-            }
-        }
-
-        public IReadOnlyList<Tijdslot> SelecteerEinduur()
+        public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             string query = "SELECT * FROM Tijdslot";
             List<Tijdslot> tijdsloten = new List<Tijdslot>();

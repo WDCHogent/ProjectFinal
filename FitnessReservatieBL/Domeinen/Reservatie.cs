@@ -10,23 +10,14 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Reservatie
     {
-        //    //TODO : Replacment for program-class > to reservatiebeheerder
-        //    //Klant.VoegReservatieToe(this);
-        //    //Toestel.VoegReservatieToe(this);
 
-        //public Reservatie(int reservatienummer, Klant klant, DateTime datum, Toestel toestel, Tijdslot beginuur, Tijdslot einduur)
-        //{
-        //    ZetReservatienummer(reservatienummer);
-        //    ZetKlant(klant);
-        //    ZetDatum(datum);
-        //    ZetToestel(toestel);
-        //    ZetBeginuur(beginuur);
-        //    ZetEinduur(einduur);
-        //}
-
-        public Reservatie(int reservatienummer, Klant klant, DateTime datum)
+        public Reservatie(int reservatienummer, Klant klant, DateTime datum) : this(klant, datum)
         {
             ZetReservatienummer(reservatienummer);
+        }
+
+        public Reservatie(Klant klant, DateTime datum)
+        {
             ZetKlant(klant);
             ZetDatum(datum);
         }
@@ -34,9 +25,6 @@ namespace FitnessReservatieBL.Domeinen
         public int Reservatienummer { get; set; }
         public Klant Klant { get; private set; }
         public DateTime Datum { get; private set; }
-        public Tijdslot Beginuur { get; private set; }
-        public Tijdslot Einduur { get; private set; }
-        public Toestel Toestel { get; private set; }
 
         public void ZetReservatienummer(int reservatienummer)
         {
@@ -57,29 +45,9 @@ namespace FitnessReservatieBL.Domeinen
             Datum = datum;
         }
 
-        public void ZetToestel(Toestel toestel)
-        {
-            if (toestel == null) throw new ReservatieException("Reservatie - ZetToestel'");
-            Toestel = toestel;
-        }
-
-        public void ZetBeginuur(Tijdslot beginuur)
-        {
-            if (beginuur == null) throw new ReservatieException("Reservatie - ZetBeginuur - 'Gelieve een beginuur op te geven'");
-            Beginuur = beginuur;
-        }
-
-        public void ZetEinduur(Tijdslot einduur)
-        {
-            if (einduur == null) throw new ReservatieException("Reservatie - ZetEinduur - 'Gelieve een einduur op te geven'");
-            if (einduur.Tslot < Beginuur.Tslot) throw new ReservatieException("Reservatie - ZetEinduur - 'Einduur kan niet kleiner zijn dan beginuur'");
-            if (einduur.Tslot - Beginuur.Tslot > 4) throw new ReservatieException("Reservatie - ZetEinduur - 'Een tijdslot kan niet groeter zijn dan 4u'");
-            Einduur = einduur;
-        }
-
         public override string ToString()
         {
-            return $"{Klant} | {Datum} ~ {Beginuur}h-{Einduur}h ~ {Toestel}";
+            return $"{Reservatienummer},{Klant},{Datum}";
         }
     }
 }

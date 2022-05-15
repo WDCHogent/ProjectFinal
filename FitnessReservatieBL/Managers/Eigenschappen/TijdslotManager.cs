@@ -18,23 +18,11 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
             this._tijdslotRepo = repo;
         }
 
-        public IReadOnlyList<Tijdslot> SelecteerBeginuur()
+        public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             try
             {
-                return _tijdslotRepo.SelecteerBeginuur();
-            }
-            catch (Exception ex)
-            {
-                throw new TijdslotManagerException("TijdslotManager - SelecteerBeginuur", ex);
-            }
-        }
-
-        public IReadOnlyList<Tijdslot> SelecteerEinduur()
-        {
-            try
-            {
-                return _tijdslotRepo.SelecteerEinduur();
+                return _tijdslotRepo.SelecteerTijdslot();
             }
             catch (Exception ex)
             {

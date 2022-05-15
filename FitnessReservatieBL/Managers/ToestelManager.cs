@@ -19,7 +19,7 @@ namespace FitnessReservatieBL.Managers
             this._toestelRepo = repo;
         }
 
-        public IReadOnlyList<Toestel> GeefVrijeToestellenVoorGeselecteerdTijdslot(string datum, string toesteltype, int beginuur, int einduur)
+        public IReadOnlyList<Toestel> GeefVrijeToestellenVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur)
         {
             //if (klantnummer <= 0) throw new ToestelManagerException("ToestelManager - GeefVrijToestel - Ongeldige input");
             try

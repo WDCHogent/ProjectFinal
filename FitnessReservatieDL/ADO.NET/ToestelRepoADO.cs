@@ -24,7 +24,7 @@ namespace FitnessReservatieDL.ADO.NET
         {
             return new SqlConnection(connectieString);
         }
-        public IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(string datum, string toesteltype, int beginuur, int einduur)
+        public IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur)
         {
             //if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
             string query = "SELECT t.toestelnummer,t.toestelnaam,t.status,tt.toesteltypeid,tt.toesteltypenaam FROM Toestel t " +
@@ -39,7 +39,7 @@ namespace FitnessReservatieDL.ADO.NET
             {
                 cmd.CommandText = query;
                 cmd.Parameters.AddWithValue("@toesteltype", toesteltype);
-                cmd.Parameters.AddWithValue("@datum", datum);
+                cmd.Parameters.AddWithValue("@datum", datum.ToString("yyyy-MM-dd"));
                 cmd.Parameters.AddWithValue("@beginuur", beginuur);
                 cmd.Parameters.AddWithValue("@einduur", einduur);
                 conn.Open();

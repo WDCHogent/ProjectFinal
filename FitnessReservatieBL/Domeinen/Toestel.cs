@@ -24,8 +24,6 @@ namespace FitnessReservatieBL.Domeinen
         public Status Status { get; private set; }
         public ToestelType ToestelType { get; private set; }
 
-        private List<Reservatie> _reservaties = new List<Reservatie>();
-
         public void ZetToestelNummer(int toestelNummer)
         {
             if (toestelNummer <= 0) throw new ToestelException("Toestel - ZetToestelNummer - 'Mag niet leeg zijn'");
@@ -44,27 +42,10 @@ namespace FitnessReservatieBL.Domeinen
             Status = status;
         }
 
-        public void ZetToestelType(ToestelType toestelType)
+        public void ZetToestelType(ToestelType toesteltype)
         {
-            ToestelType = toestelType;
-        }
-
-        internal void VoegReservatieToe(Reservatie reservatie)
-        {
-            if (reservatie == null) throw new ToestelException("Toestel - VoegReservatieToe");
-            if (reservatie.Toestel != this) throw new ToestelException("Toestel - VoegReservatieToe");
-            if (this.HeeftReservatie(reservatie)) throw new ToestelException("Toestel - VoegReservatieToe - 'Deze reservatie bestaat al'");
-            _reservaties.Add(reservatie);
-        }
-
-        internal bool HeeftReservatie(Reservatie reservatie)
-        {
-            return _reservaties.Contains(reservatie);
-        }
-
-        public IReadOnlyList<Reservatie> GeefReservaties()
-        {
-            return _reservaties;
+            if (toesteltype == null) throw new ReservatieInfoException("ReservatieInfo - ZetToestelType - 'Mag niet leeg zijn'");
+            ToestelType = toesteltype;
         }
 
         public override string ToString()

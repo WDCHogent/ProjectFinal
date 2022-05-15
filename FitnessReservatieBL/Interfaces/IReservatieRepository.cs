@@ -10,7 +10,9 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IReservatieRepository
     {
-        IReadOnlyList<DTOReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer);
         bool BestaatReservatie(Reservatie reservatie);
+        IReadOnlyList<DTOReservatieInfo> SelecteerReservatie(int? klantnummer, int? toestelnummer);
+        Reservatie MaakReservatie(Reservatie reservatie);
+        Reservatie GeefReservatie(Reservatie reservatie);
     }
 }
