@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace FitnessReservatie.UI
 {
@@ -398,19 +399,21 @@ namespace FitnessReservatie.UI
                     _reservatieInfoManager.MaakReservatieInfo(reservatie.Reservatienummer, Convert.ToInt32(ComboBoxBeginuurSelector1.Text.Remove(ComboBoxBeginuurSelector1.Text.Length - 1)), Convert.ToInt32(ComboBoxEinduurSelector1.Text.Remove(ComboBoxEinduurSelector1.Text.Length - 1)), geselecteerdToestel);
                 }
 
+                KlantWindow newklantwindow = new KlantWindow(_ingelogdeKlant);
+                this.Close();
+                newklantwindow.Show();
 
+                //Cleart inputvelden bij maken reservatie
+                //DatePickerDatumSelector.SelectedDate = DateTime.Today;
 
-                //if (string.IsNullOrWhiteSpace(NaamTextBox.Text)) MessageBox.Show("naam is leeg");
-                //else
-                //{
-                //    naam = NaamTextBox.Text;
-                //    if (!string.IsNullOrWhiteSpace(LengteTextBox.Text)) lengte = int.Parse(LengteTextBox.Text);
-                //    if (!string.IsNullOrWhiteSpace(GewichtTextBox.Text)) gewicht = int.Parse(GewichtTextBox.Text);
-                //    if (!string.IsNullOrWhiteSpace(RugnummerTextBox.Text)) rugnummer = int.Parse(RugnummerTextBox.Text);
-                //    spelerManager.RegistreerSpeler(naam, lengte, gewicht);
-                //    MessageBox.Show($"{naam} is toegevoegd", "Registreer Speler");
-                //    Close();
-                //}
+                //ComboBoxToesteltypeSelector1.Items.Clear();
+                //ComboBoxBeginuurSelector1.Items.Clear();
+                //ComboBoxEinduurSelector1.Items.Clear();
+
+                //ComboBoxToesteltypeSelector2.Items.Clear();
+                //ComboBoxBeginuurSelector2.Items.Clear();
+                //ComboBoxEinduurSelector2.Items.Clear();
+                //
             }
             catch (Exception ex)
             {
