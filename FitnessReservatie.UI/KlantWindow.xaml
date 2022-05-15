@@ -218,7 +218,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1">
-                        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" DisplayDate="2022-05-09" FirstDayOfWeek="Monday" Margin="15" SelectedDateChanged="DatePickerDatumSelector_SelectedDateChanged" >
+                        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" FirstDayOfWeek="Monday" Margin="15" SelectedDateChanged="DatePickerDatumSelector_SelectedDateChanged">
                             <DatePicker.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>

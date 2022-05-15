@@ -30,9 +30,9 @@ namespace FitnessReservatieDL.ADO.NET
             string query = "SELECT t.toestelnummer,t.toestelnaam,t.status,tt.toesteltypeid,tt.toesteltypenaam FROM Toestel t " +
             "LEFT JOIN Toesteltype tt ON t.toesteltype = tt.toesteltypeid " +
             "WHERE t.[status]= 'operatief' AND tt.toesteltypenaam = @toesteltype AND t.toestelnummer " +
-            "NOT IN(SELECT i.toestelnummer FROM ReservatieInfo i " +
+            "NOT IN (SELECT i.toestelnummer FROM ReservatieInfo i " +
             "LEFT JOIN Reservatie r ON i.reservatienummer = r.reservatienummer " +
-            "WHERE r.datum LIKE '@datum' AND (i.beginuur BETWEEN @beginuur AND @einduur - 1 OR i.einduur BETWEEN @beginuur + 1 AND @einduur))";
+            "WHERE r.datum LIKE @datum AND (i.beginuur BETWEEN @beginuur AND @einduur - 1 OR i.einduur BETWEEN @beginuur + 1 AND @einduur))";
             SqlConnection conn = GetConnection();
             List<Toestel> beschikbareToestellen = new List<Toestel>();
             using (SqlCommand cmd = conn.CreateCommand())
