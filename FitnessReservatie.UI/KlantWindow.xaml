@@ -286,7 +286,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="4" VerticalAlignment="Bottom">
-                        <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxEinduurSelector2_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxEinduurSelector2_SelectionChanged" IsEnabled="False" SelectedIndex="0">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
