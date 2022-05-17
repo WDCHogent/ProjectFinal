@@ -27,5 +27,12 @@ namespace FitnessReservatie.UI
             this._ingelogdeAdmin = admin;
             LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
         }
+
+        private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainwindow = new MainWindow();
+            this.Close();
+            mainwindow.Show();
+        }
     }
 }

@@ -51,6 +51,7 @@ namespace FitnessReservatie.UI
                 ListViewReservations.Items.Add(reservatieKlant);
             }
 
+
             LabelKlantnummerReturned.Content += $"{_ingelogdeKlant.Klantnummer}";
             LabelNaamReturned.Content += $"{_ingelogdeKlant.Naam}";
             LabelVoornaamReturned.Content += $"{_ingelogdeKlant.Voornaam}";
@@ -487,5 +488,6 @@ namespace FitnessReservatie.UI
                 MessageBox.Show(ex.Message, "Reservation Failed");
             }
         }
+
     }
 }
