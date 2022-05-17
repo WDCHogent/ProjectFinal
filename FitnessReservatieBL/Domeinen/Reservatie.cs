@@ -40,7 +40,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public void ZetDatum(DateTime datum)
         {
-            if (datum < DateTime.Now.AddHours(-1)) throw new ReservatieException("Reservatie - ZetDatum - 'ongeldige datum'");
+            if (datum < DateTime.Now.AddDays(-1)) throw new ReservatieException("Reservatie - ZetDatum - 'ongeldige datum'");
             if (datum >= DateTime.Now.AddDays(7)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
             Datum = datum;
         }

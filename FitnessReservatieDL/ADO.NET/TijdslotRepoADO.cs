@@ -26,7 +26,7 @@ namespace FitnessReservatieDL.ADO.NET
             return connectie;
         }
 
-        public List<Tijdslot> SelecteerTijdslot()
+        public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             string query = "SELECT * FROM Tijdslot";
             List<Tijdslot> tijdsloten = new List<Tijdslot>();

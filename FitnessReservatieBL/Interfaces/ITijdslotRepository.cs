@@ -9,6 +9,6 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface ITijdslotRepository
     {
-        List<Tijdslot> SelecteerTijdslot();
+        IReadOnlyList<Tijdslot> SelecteerTijdslot();
     }
 }

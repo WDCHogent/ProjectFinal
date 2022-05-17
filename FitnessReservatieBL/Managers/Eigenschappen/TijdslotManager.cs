@@ -18,7 +18,7 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
             this._tijdslotRepo = repo;
         }
 
-        public List<Tijdslot> SelecteerTijdslot()
+        public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             try
             {
