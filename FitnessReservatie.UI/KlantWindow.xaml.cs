@@ -229,7 +229,7 @@ namespace FitnessReservatie.UI
                 
                 foreach (var klantreservatie in _klantReservatiesVoorDagX)
                 {
-                    if(Convert.ToInt32(ComboBoxEinduurSelector1.Items[1]) > klantreservatie.Beginuur && Convert.ToInt32(ComboBoxEinduurSelector1.Items[1]) < klantreservatie.Einduur)
+                    if(klantreservatie.Einduur-1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[0]) || klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[1]))
                     {
                         ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
                     }
@@ -271,6 +271,8 @@ namespace FitnessReservatie.UI
         {
             ComboBoxToesteltypeSelector2.Items.Clear();
             ComboBoxBeginuurSelector2.Items.Clear();
+
+            CheckboxAddAnother.IsEnabled = true;
 
             //Beginuur1.Value = 21u
             if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot)
