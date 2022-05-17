@@ -239,6 +239,21 @@ namespace FitnessReservatie.UI
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 2);
+                foreach (var klantreservatie in _klantReservatiesVoorDagX)
+                {
+                    if ((klantreservatie.Einduur - klantreservatie.Beginuur == 1 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[0])))
+                    {
+                        ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
+                    }
+                    else if ((klantreservatie.Einduur - klantreservatie.Beginuur == 2 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[1])))
+                    {
+                        ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
+                    }
+                    else if ((klantreservatie.Einduur - klantreservatie.Beginuur == 2 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[2])))
+                    {
+                        ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
+                    }
+                }
             }
 
             ComboBoxEinduurSelector1.IsEnabled = true;
@@ -344,6 +359,9 @@ namespace FitnessReservatie.UI
         private void ComboBoxToesteltypeSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxBeginuurSelector2.IsEnabled = true;
+
+            ComboBoxBeginuurSelector2.Items.Clear();
+            ComboBoxEinduurSelector2.Items.Clear();
         }
 
         private void ComboBoxBeginuurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -383,11 +401,25 @@ namespace FitnessReservatie.UI
             else if (_aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) >= _maxAantalTijdsloten - 1)
             {
                 ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
+                foreach (var reservatieKlantVoorDagX in _klantReservatiesVoorDagX)
+                {
+                    if (Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) == reservatieKlantVoorDagX.Beginuur - 1)
+                    {
+                        ComboBoxEinduurSelector2.Items.Remove(ComboBoxEinduurSelector2.Items[1]);
+                    }
+                }
             }
             else
             {
                 ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
                 ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 2);
+                foreach (var reservatieKlantVoorDagX in _klantReservatiesVoorDagX)
+                {
+                    if (Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) == reservatieKlantVoorDagX.Beginuur - 1)
+                    {
+                        ComboBoxEinduurSelector2.Items.Remove(ComboBoxEinduurSelector2.Items[1]);
+                    }
+                }
             }
 
             ComboBoxEinduurSelector2.IsEnabled = true;
