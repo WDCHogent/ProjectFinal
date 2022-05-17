@@ -227,7 +227,7 @@
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <ComboBox Name="ComboBoxToesteltypeSelector1" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxToesteltypeSelector1_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxToesteltypeSelector1" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxToesteltypeSelector1_SelectionChanged" IsEnabled="False">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -273,7 +273,7 @@
                     </StackPanel>
                     
                     <StackPanel Grid.Column="1" Grid.Row="3">
-                        <ComboBox Name="ComboBoxToesteltypeSelector2" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" IsEnabled="False" SelectionChanged="ComboBoxToesteltypeSelector2_SelectionChanged">
+                        <ComboBox Name="ComboBoxToesteltypeSelector2" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" IsEnabled="False" SelectionChanged="ComboBoxToesteltypeSelector2_SelectionChanged">
                         <ComboBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>

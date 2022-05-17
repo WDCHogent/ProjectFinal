@@ -214,22 +214,22 @@ namespace FitnessReservatie.UI
             //
 
             //Voegt uren toe aan ComboBoxEinduurSelector1
-            if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count-2].Tslot)
+            if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot)
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
             }
-            else if(_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten-1)
+            else if (_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten - 1)
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
             }
-            else if(_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten-2)
+            else if (_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten - 2)
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 2);
-                
+
                 foreach (var klantreservatie in _klantReservatiesVoorDagX)
                 {
-                    if((klantreservatie.Einduur-klantreservatie.Beginuur == 1 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[0])) || (klantreservatie.Einduur - klantreservatie.Beginuur == 2 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[1])))
+                    if ((klantreservatie.Einduur - klantreservatie.Beginuur == 1 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[0])) || (klantreservatie.Einduur - klantreservatie.Beginuur == 2 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector1.Items[1])))
                     {
                         ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
                     }
@@ -240,7 +240,7 @@ namespace FitnessReservatie.UI
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 2);
             }
-            
+
             ComboBoxEinduurSelector1.IsEnabled = true;
             ComboBoxEinduurSelector1.SelectedIndex = 0;
             //
@@ -350,47 +350,45 @@ namespace FitnessReservatie.UI
         {
             ComboBoxEinduurSelector2.Items.Clear();
 
-            //Beginuur2 = 21u
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotItemsSource.Count - 3 && ComboBoxEinduurSelector1.SelectedIndex == 0)
+            //Voegt uren toe aan ComboBoxEinduurSelector2
+            if (Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot)
             {
-                ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
             }
-            //
+            else if (_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten - 1)
+            {
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
+            }
+            else if (_aantalGereserveerdeUrenPerDatum == _maxAantalTijdsloten - 2)
+            {
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 2);
 
-            //Beginuur2 = 20u
-            if (ComboBoxBeginuurSelector1.SelectedIndex == _tijdslotItemsSource.Count - 4)
-            {
-                if (ComboBoxEinduurSelector1.SelectedIndex == 1)
+                foreach (var klantreservatie in _klantReservatiesVoorDagX)
                 {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                }
-                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                }
-            }
-            //
-
-            //Beginuur2 tot = 19u
-            if (ComboBoxBeginuurSelector1.SelectedIndex <= _tijdslotItemsSource.Count - 5)
-            {
-                if (ComboBoxEinduurSelector1.SelectedIndex == 2)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
-                }
-                else if (ComboBoxEinduurSelector1.SelectedIndex == 1)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 4]);
-                }
-                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
-                {
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 2]);
-                    ComboBoxEinduurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 3]);
+                    if ((klantreservatie.Einduur - klantreservatie.Beginuur == 1 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector2.Items[0])))
+                    {
+                        ComboBoxEinduurSelector2.Items.Remove(ComboBoxEinduurSelector2.Items[1]);
+                    }
+                    else if ((klantreservatie.Einduur - klantreservatie.Beginuur == 2 && klantreservatie.Einduur - 1 == Convert.ToInt32(ComboBoxEinduurSelector2.Items[1])))
+                    {
+                        ComboBoxEinduurSelector2.Items.Remove(ComboBoxEinduurSelector2.Items[1]);
+                    }
+                    else if (_aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) >= _maxAantalTijdsloten - 1)
+                    {
+                        ComboBoxEinduurSelector2.Items.Remove(ComboBoxEinduurSelector2.Items[1]);
+                    }
                 }
             }
-            //
+            else if (_aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) >= _maxAantalTijdsloten - 1)
+            {
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
+            }
+            else
+            {
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 1);
+                ComboBoxEinduurSelector2.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector2.SelectedValue) + 2);
+            }
 
             ComboBoxEinduurSelector2.IsEnabled = true;
         }
