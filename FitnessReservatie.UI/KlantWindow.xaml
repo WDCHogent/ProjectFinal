@@ -287,7 +287,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom">
-                        <ComboBox Name="ComboBoxBeginuurSelector2" Text="Please Select" Grid.Column="5" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxBeginuurSelector2_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxBeginuurSelector2" Text="Please Select" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxBeginuurSelector2_SelectionChanged" IsEnabled="False">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -299,7 +299,7 @@
                         <Label Name="LabelHour1" Content="h" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,15,0,0" Visibility="Hidden"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3" Grid.Row="4" VerticalAlignment="Bottom">
-                        <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2"  HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxEinduurSelector2_SelectionChanged" IsEnabled="False" SelectedIndex="0">
+                        <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxEinduurSelector2_SelectionChanged" IsEnabled="False" SelectedIndex="0">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
