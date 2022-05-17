@@ -218,9 +218,22 @@ namespace FitnessReservatie.UI
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
             }
-            else if(_aantalGereserveerdeUrenPerDatum >= 2)
+            else if(_aantalGereserveerdeUrenPerDatum == 3)
             {
                 ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
+            }
+            else if(_aantalGereserveerdeUrenPerDatum == 2)
+            {
+                ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 1);
+                ComboBoxEinduurSelector1.Items.Add(Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) + 2);
+                
+                foreach (var klantreservatie in _klantReservatiesVoorDagX)
+                {
+                    if(Convert.ToInt32(ComboBoxEinduurSelector1.Items[1]) > klantreservatie.Beginuur && Convert.ToInt32(ComboBoxEinduurSelector1.Items[1]) < klantreservatie.Einduur)
+                    {
+                        ComboBoxEinduurSelector1.Items.Remove(ComboBoxEinduurSelector1.Items[1]);
+                    }
+                }
             }
             else
             {
@@ -260,23 +273,23 @@ namespace FitnessReservatie.UI
             ComboBoxBeginuurSelector2.Items.Clear();
 
             //Beginuur1.Value = 21u
-            if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count-2].Tslot)
+            if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot)
             {
                 CheckboxAddAnother.IsEnabled = false;
             }
 
 
-            //Bewginuur1.Value = 20u
-            if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 3].Tslot)
+            //Beginuur1.Value = 20u
+            else if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 3].Tslot)
             {
-                if (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot)
+                if (ComboBoxEinduurSelector1.SelectedIndex == 1)
                 {
                     CheckboxAddAnother.IsEnabled = false;
                 }
-                else if (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 3].Tslot)
+                else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
                 {
                     CheckboxAddAnother.IsEnabled = true;
-                    ComboBoxBeginuurSelector2.Items.Add(_tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot);
+                    ComboBoxBeginuurSelector2.Items.Add(Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue)+1);
                     if (_aantalGereserveerdeUrenPerDatum >= _maxAantalTijdsloten - 1) CheckboxAddAnother.IsEnabled = false;
                 }
             }
@@ -301,6 +314,7 @@ namespace FitnessReservatie.UI
             //        ComboBoxBeginuurSelector2.Items.Add(_tijdslotItemsSource[this.ComboBoxBeginuurSelector1.SelectedIndex + 1]);
             //    }
             //}
+            //
 
 
             //Beginuur1 tot = 18u
