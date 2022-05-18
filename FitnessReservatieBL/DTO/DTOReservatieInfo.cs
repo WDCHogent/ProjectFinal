@@ -28,5 +28,10 @@ namespace FitnessReservatieBL.DTO
         public int Beginuur { get; set; }
         public int Einduur { get; set; }
         public string Toestelnaam { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Klantnummer},{Klantnaam},{Klantvoornaam},{Klantemail},{Datum},{Beginuur},{Einduur},{Toestelnaam}";
+        }
     }
 }

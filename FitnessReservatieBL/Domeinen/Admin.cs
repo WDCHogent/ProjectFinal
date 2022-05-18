@@ -38,5 +38,10 @@ namespace FitnessReservatieBL.Domeinen
             if (string.IsNullOrWhiteSpace(voornaam)) throw new AdminException("Admin - ZetVoornaam - 'Mag niet leeg zijn'");
             Voornaam = voornaam.Trim();
         }
+
+        public override string ToString()
+        {
+            return $"{Adminnummer},{Naam},{Voornaam}";
+        }
     }
 }

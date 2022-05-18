@@ -25,7 +25,7 @@ namespace FitnessReservatieBL.DTO
 
         public override string ToString()
         {
-            return $"{Reservatienummer} | {Datum.ToShortDateString()} ~ {Beginuur}h-{Einduur}h ~ {Toestelnaam}";
+            return $"{Reservatienummer},{Datum.ToShortDateString()},{Beginuur},{Einduur},{Toestelnaam}";
         }
     }
 }

@@ -34,7 +34,7 @@ namespace FitnessReservatieBL.Managers
 
         public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
-            if (klantnummer <= 0) throw new KlantManagerException("KlantManager - UpdateKlantReservatie - Klant is null");
+            if (klantnummer <= 0) throw new KlantManagerException("KlantManager - GeefKlantReservatie - Klant is null");
             try
             {
                 return _klantRepo.GeefKlantReservaties(klantnummer);

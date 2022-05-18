@@ -8,6 +8,6 @@ namespace FitnessReservatieBL.Domeinen.Enums
 {
     public enum Status
     {
-        operatief, onderhoud, Verwijderd
+        operatief, onderhoud, verwijderd
     }
 }

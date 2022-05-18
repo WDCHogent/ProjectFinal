@@ -76,7 +76,7 @@ namespace FitnessReservatie.UI
             _reservatieManager = new ReservatieManager(reservatieRepo);
 
             IReservatieInfoRepository reservatieInfoRepo = new ReservatieInfoRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo);
+            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo, reservatieRepo, klantRepo, toestelRepo);
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
@@ -460,7 +460,7 @@ namespace FitnessReservatie.UI
                 else
                 {
                     Reservatie reservatie = _reservatieManager.MaakReservatie(_ingelogdeKlant, DatePickerDatumSelector.SelectedDate.Value);
-                    _reservatieInfoManager.MaakReservatieInfo(reservatie.Reservatienummer, Convert.ToInt32(ComboBoxBeginuurSelector1.Text), Convert.ToInt32(ComboBoxEinduurSelector1.Text), geselecteerdToestel);
+                    _reservatieInfoManager.MaakReservatieInfo(reservatie, Convert.ToInt32(ComboBoxBeginuurSelector1.Text), Convert.ToInt32(ComboBoxEinduurSelector1.Text), geselecteerdToestel);
                 }
 
                 _reservatiesKlant.Clear();

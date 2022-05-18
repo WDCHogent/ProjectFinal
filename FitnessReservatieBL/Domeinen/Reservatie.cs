@@ -10,6 +10,9 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Reservatie
     {
+        //Zet maximale reservatiedatum limiet
+        private int _reservatieDatumLimiter = 7;
+        //
 
         public Reservatie(int reservatienummer, Klant klant, DateTime datum) : this(klant, datum)
         {
@@ -41,7 +44,7 @@ namespace FitnessReservatieBL.Domeinen
         public void ZetDatum(DateTime datum)
         {
             if (datum < DateTime.Now.AddDays(-1)) throw new ReservatieException("Reservatie - ZetDatum - 'ongeldige datum'");
-            if (datum >= DateTime.Now.AddDays(7)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
+            if (datum >= DateTime.Now.AddDays(_reservatieDatumLimiter)) throw new ReservatieException("Reservatie - ZetDatum - 'datum te ver in de toekomst'");
             Datum = datum;
         }
 

@@ -158,34 +158,14 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <ListView Name="ListViewReservations" HorizontalContentAlignment="Center" Margin="15" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0">
+                    <ListView Name="ListViewReservations" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
                     <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Status">
-                                <GridViewColumn.HeaderContainerStyle>
-                                    <Style TargetType="{x:Type GridViewColumnHeader}">
-                                        <Setter Property="FontSize" Value="16" />
-                                        <Setter Property="Foreground" Value="Black" />
-                                        <Setter Property="Background" Value="Transparent" />
-                                        <Setter Property="BorderBrush" Value="Transparent" />
-                                        <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                    </Style>
-                                </GridViewColumn.HeaderContainerStyle>
-                                <GridViewColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <StackPanel HorizontalAlignment="Center">
-                                            <Border CornerRadius="5" Background="{Binding DatumKleur}" HorizontalAlignment="Center" Padding="6 2">
-                                                <Label FontSize="12" Content="{Binding Status}" Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" />
-                                            </Border>
-                                        </StackPanel>
-                                    </DataTemplate>
-                                </GridViewColumn.CellTemplate>
-                            </GridViewColumn>
+                            <GridView>
                                 <GridViewColumn Header="Reservation №">
                                     <GridViewColumn.HeaderContainerStyle>
                                         <Style TargetType="{x:Type GridViewColumnHeader}">
                                             <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
                                             <Setter Property="Background" Value="Transparent" />
                                             <Setter Property="BorderBrush" Value="Transparent" />
                                             <Setter Property="BorderThickness" Value="0 0 0 0" />
@@ -201,7 +181,7 @@
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style TargetType="{x:Type GridViewColumnHeader}">
                                         <Setter Property="FontSize" Value="16" />
-                                        <Setter Property="Foreground" Value="Black" />
+                                        <Setter Property="Foreground" Value="#FF323232" />
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderBrush" Value="Transparent" />
                                         <Setter Property="BorderThickness" Value="0 0 0 0" />
@@ -217,7 +197,7 @@
                                 <GridViewColumn.HeaderContainerStyle>
                                     <Style TargetType="{x:Type GridViewColumnHeader}">
                                         <Setter Property="FontSize" Value="16" />
-                                        <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
                                         <Setter Property="Background" Value="Transparent" />
                                         <Setter Property="BorderBrush" Value="Transparent" />
                                         <Setter Property="BorderThickness" Value="0 0 0 0" />
@@ -233,7 +213,7 @@
                                     <GridViewColumn.HeaderContainerStyle>
                                         <Style TargetType="{x:Type GridViewColumnHeader}">
                                             <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="Black" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
                                             <Setter Property="Background" Value="Transparent" />
                                             <Setter Property="BorderBrush" Value="Transparent" />
                                             <Setter Property="BorderThickness" Value="0 0 0 0" />
@@ -241,7 +221,7 @@
                                     </GridViewColumn.HeaderContainerStyle>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <TextBlock>
+                                            <TextBlock FontWeight="Bold">
                                                 <TextBlock.Text>
                                                     <MultiBinding StringFormat="{}{0}h-{1}h">
                                                         <Binding Path="Beginuur" />

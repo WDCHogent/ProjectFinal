@@ -37,6 +37,7 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
         public void ZetEinduur(int einduur)
         {
             if (einduur <= 0) throw new ReservatieInfoException("ReservatieInfo - ZetEinduur - 'Mag niet leeg zijn'");
+            if (einduur < Beginuur) throw new ReservatieInfoException("ReservatieInfo - ZetEinduur - 'Einduur kan niet vroeger zijn dan beginuur'");
             Einduur = einduur;
         }
 
@@ -44,6 +45,11 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
         {
             if (toestel == null) throw new ReservatieInfoException("ReservatieInfo - ZetToestelType - 'Mag niet leeg zijn'");
             Toestel = toestel;
+        }
+
+        public override string ToString()
+        {
+            return $"{Reservatienummer},{Beginuur},{Einduur},{Toestel}";
         }
     }
 }

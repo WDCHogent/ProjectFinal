@@ -18,12 +18,13 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 
         public void ZetTijdslot(int tijdslot)
         {
-            if (tijdslot <= 0) throw new TijdslotException("Tijdslot - ZetTijdSlotId - 'Einduur kan niet vroeger zijn dan beginuur'");
+            if (tijdslot <= 0) throw new TijdslotException("Tijdslot - ZetTijdSlot - 'Mag niet leeg zijn'");
+            if (tijdslot > 24) throw new TijdslotException("Tijdslot - ZetTijdSlot - 'ongeldig tijdslot'");
             Tslot = tijdslot;
         }
         public override string ToString()
         {
-            return $"{Tslot}h";
+            return $"{Tslot}";
         }
     }
 }

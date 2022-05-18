@@ -24,5 +24,10 @@ namespace FitnessReservatieBL.DTO
         public int Einduur { get; set; }
         public string Klantvoornaam { get; set; }
         public string Klantnaam { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Reservatienummer},{Datum.ToShortDateString()},{Beginuur},{Einduur},{Klantvoornaam},{Klantnaam}";
+        }
     }
 }

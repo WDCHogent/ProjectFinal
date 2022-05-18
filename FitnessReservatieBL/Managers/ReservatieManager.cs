@@ -15,13 +15,14 @@ namespace FitnessReservatieBL.Managers
     {
         private IReservatieRepository _reservatieRepo;
 
-        public ReservatieManager(IReservatieRepository repo)
+        public ReservatieManager(IReservatieRepository reservatieRepo)
         {
-            this._reservatieRepo = repo;
+            this._reservatieRepo = reservatieRepo;
         }
 
         public Reservatie MaakReservatie(Klant klant, DateTime datum)
         {
+            if (klant == null) throw new ReservatieManagerException("ReservatieManager - MaakReservatie - klant is null");
             try
             {
                 Reservatie reservatie = new Reservatie(klant, datum);
@@ -37,7 +38,7 @@ namespace FitnessReservatieBL.Managers
                 }
                 else
                 {
-                    throw new ReservatieManagerException("MaakReservatie - speler bestaat al");
+                    throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
                 }
             }
             catch (ReservatieManagerException)
