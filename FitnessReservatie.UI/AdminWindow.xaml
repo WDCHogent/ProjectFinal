@@ -126,37 +126,133 @@
                 <TabItem.Header>
                     <Image Width="70" Source="/Images/ListIcon.png"/>
                 </TabItem.Header>
-                <StackPanel>
-                    <Button Content="Device Tracker" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
-                        <Button.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="10"/>
-                            </Style>
-                        </Button.Resources>
-                        <Button.Style>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="#FF323232"/>
-                                <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsMouseOver" Value="True">
-                                        <Setter Property="Background" Value="#FF323232"/>
-                                        <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                    <ListView Name="ListViewReservations" HorizontalContentAlignment="Center" Margin="15" IsEnabled="False" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.ColumnSpan="1" Grid.Row="0">
+                        <Button Content="Device Tracker" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="10"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Style>
+                                <Style TargetType="{x:Type Button}">
+                                    <Setter Property="Background" Value="#FF323232"/>
+                                    <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="{x:Type Button}">
+                                                <Border Background="{TemplateBinding Background}">
+                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                                </Border>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Background" Value="#FF323232"/>
+                                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+                        <ListView Name="ListViewDeviceTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="№">
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="FontSize" Value="16" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label FontWeight="Bold" Content="{Binding ToestelNummer}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Device Name">
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="FontSize" Value="16" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label FontWeight="Bold" Content="{Binding ToestelNaam}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="DeviceType">
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="FontSize" Value="16" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label FontWeight="Bold" Content="{Binding ToestelType}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Status">
+                                    <GridViewColumn.HeaderContainerStyle>
+                                        <Style TargetType="{x:Type GridViewColumnHeader}">
+                                            <Setter Property="FontSize" Value="16" />
+                                            <Setter Property="Foreground" Value="#FF323232" />
+                                            <Setter Property="Background" Value="Transparent" />
+                                            <Setter Property="BorderBrush" Value="Transparent" />
+                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                        </Style>
+                                    </GridViewColumn.HeaderContainerStyle>
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Label FontWeight="Bold" Content="{Binding Status}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
                 </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15">
+                        <Label Content="Device №"/>
+                        <TextBox />
+                        <Label Content="Device Name"/>
+                        <TextBox />
+                        <Label Content="Device Type"/>
+                        <TextBox />
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
+                        <RadioButton Name="RadioButtonAll" Margin="2" Content="All" Checked="RadioButtonAll_Checked"/>
+                        <RadioButton Name="RadioButtonAvailable" Margin="2" Content="Available" Checked="RadioButtonAvailable_Checked"/>
+                        <RadioButton Name="RadioButtonService" Margin="2" Content="Service" Checked="RadioButtonService_Checked"/>
+                        <RadioButton Name="RadioButtonDeleted" Margin="2" Content="Deleted" Checked="RadioButtonDeleted_Checked"/>
+                    </StackPanel>
+                </Grid>
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>

@@ -161,7 +161,7 @@
                     <ListView Name="ListViewReservations" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
                     <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Reservation №">
+                                <GridViewColumn Header="№">
                                     <GridViewColumn.HeaderContainerStyle>
                                         <Style TargetType="{x:Type GridViewColumnHeader}">
                                             <Setter Property="FontSize" Value="16" />

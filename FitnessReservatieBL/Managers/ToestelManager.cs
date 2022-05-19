@@ -1,4 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Enums;
 using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
@@ -28,7 +29,19 @@ namespace FitnessReservatieBL.Managers
             }
             catch (Exception ex)
             {
-                throw new ToestelManagerException("ToestelManager - GeefVrijToestel", ex);
+                throw new ToestelManagerException("ToestelManager - GeefVrijeToestellenVoorGeselecteerdTijdslot", ex);
+            }
+        }
+
+        public IReadOnlyList<Toestel> GeefToestellenMetStatus(Status status)
+        {
+            try
+            {
+                return _toestelRepo.GeefToestellenMetStatus(status);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelManagerException("ToestelManager - GeefToestellenMetStatus", ex);
             }
         }
     }

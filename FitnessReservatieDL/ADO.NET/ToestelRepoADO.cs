@@ -1,7 +1,6 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Eigenschappen;
 using FitnessReservatieBL.Domeinen.Enums;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -66,5 +65,39 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
+        public IReadOnlyList<Toestel> GeefToestellenMetStatus(Status status)
+        {
+            //if (status.GetType() != typeof(Status)) throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus - 'Ongeldige input'");
+            string query = "SELECT t.toestelnummer, t.toestelnaam, t.status, tt.toesteltypeid, tt.toesteltypenaam FROM Toestel t " +
+                "LEFT JOIN Toesteltype tt ON t.toesteltype=tt.toesteltypeid " +
+                "WHERE status=@status";
+            List<Toestel> toestellen = new List<Toestel>();
+            SqlConnection conn = GetConnection();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                conn.Open();
+                try
+                {
+                    cmd.Parameters.AddWithValue("@status", status.ToString());
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        Toestel toestel = new Toestel((int)reader["toestelnummer"], (string)reader["toestelnaam"], status, new ToestelType((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
+                        toestellen.Add(toestel);
+                    }
+                    reader.Close();
+                    return toestellen.AsReadOnly();
+                }
+                catch (Exception ex)
+                {
+                    throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }
