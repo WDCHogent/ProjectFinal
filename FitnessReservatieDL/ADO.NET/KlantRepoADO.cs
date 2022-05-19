@@ -28,7 +28,7 @@ namespace FitnessReservatieDL.ADO.NET
             if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
             string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
             if (klantnummer.HasValue) query += "WHERE klantnummer=@klantnummer";
-            else query += "WHERE mailadres=@mailadres"; 
+            else query += "WHERE mailadres=@mailadres";
             Klant klant = null;
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
@@ -67,7 +67,10 @@ namespace FitnessReservatieDL.ADO.NET
         public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer)
         {
             if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-            string query = "SELECT r.reservatienummer, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +
+
+            string query1 = "SELECT Count(*) FROM Reservatie WHERE klantnummer=@klantnummer";
+
+            string query2 = "SELECT r.reservatienummer, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +
             "LEFT JOIN ReservatieInfo i ON r.reservatienummer = i.reservatienummer " +
             "LEFT JOIN toestel t ON i.toestelnummer = t.toestelnummer " +
             "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
@@ -76,27 +79,45 @@ namespace FitnessReservatieDL.ADO.NET
             List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
             using (SqlCommand cmd = conn.CreateCommand())
             {
-                cmd.CommandText = query;
+                cmd.CommandText = query1;
                 cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
                 conn.Open();
+
                 try
                 {
-                    IDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
+                    int entries = (int)cmd.ExecuteScalar();
+                    if (entries == 0)
                     {
-                        DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"],(DateTime)reader["datum"],(int)reader["beginuur"],(int)reader["einduur"],(string)reader["toestelNaam"]);
-                        klantenreservaties.Add(klantenreservatie);
+                        return new List<DTOKlantReservatieInfo>();
                     }
-                    return klantenreservaties.AsReadOnly();
+                    else
+                    {
+                        cmd.CommandText = query2;
+                        IDataReader reader = cmd.ExecuteReader();
+                        try
+                        {
+                            while (reader.Read())
+                            {
+                                DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
+                                klantenreservaties.Add(klantenreservatie);
+                            }
+                            return klantenreservaties.AsReadOnly();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'query2'", ex);
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
-                    throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties", ex);
+                    throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'query1'", ex);
                 }
                 finally
                 {
                     conn.Close();
                 }
+
             }
         }
     }

@@ -9,9 +9,13 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 {
     public class ReservatieInfo
     {
-        public ReservatieInfo(int reservatienummer, int beginuur, int einduur, Toestel toestel)
+        public ReservatieInfo(int reservatienummer, int beginuur, int einduur, Toestel toestel) : this(beginuur, einduur, toestel)
         {
             ZetReservatienummer(reservatienummer);
+        }
+
+        public ReservatieInfo(int beginuur, int einduur, Toestel toestel)
+        {
             ZetBeginuur(beginuur);
             ZetEinduur(einduur);
             ZetToestel(toestel);

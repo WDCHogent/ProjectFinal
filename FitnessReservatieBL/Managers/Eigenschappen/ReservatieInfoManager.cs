@@ -23,36 +23,33 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
             this._klantRepo = klantRepo;
         }
 
+        public ReservatieInfo ValideerReservatieInfo(DateTime datum, int beginuur, int einduur, Toestel toestel)
+        {
+            if (toestel == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - ValideerReservatieInfo - 'Geen vrije toestellen meer'");
+            try
+            {
+                ReservatieInfo reservatieinfo = _reservatieInfoRepo.ValideerReservatieInfo(datum, beginuur, einduur, toestel);
+                return reservatieinfo;
+            }
+            catch (Exception ex)
+            {
+                throw new ReservatieInfoManagerException("ReservatieInfoManager - ValideerReservatieInfo", ex);
+            }
+        }
+
         public void MaakReservatieInfo(Reservatie reservatie, int beginuur, int einduur, Toestel toestel)
         {
             if (reservatie == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Reservatie is null'");
             else if (toestel == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Geen vrije toestellen meer'");
-
-            //Controles klant
-            int GereserveerdeUren = 0;
-            foreach (var klantreservatie in _klantRepo.GeefKlantReservaties(reservatie.Klant.Klantnummer)) { if (klantreservatie.Datum == reservatie.Datum) GereserveerdeUren += klantreservatie.Einduur-klantreservatie.Beginuur; }
-
-            bool toestelReedsGereserveerd = false;
-            foreach (var klantreservatie in _klantRepo.GeefKlantReservaties(reservatie.Klant.Klantnummer)) { if (klantreservatie.Datum == reservatie.Datum && klantreservatie.Toestelnaam == toestel.ToestelNaam) toestelReedsGereserveerd = true; }
-
-            if (GereserveerdeUren >= 4) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Daglimiet overschreden'");
-            if ((GereserveerdeUren + (einduur - beginuur)) >= 4) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Daglimiet overschreden'");
-
-            if ((toestelReedsGereserveerd == true)) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Toestel werd reeds gereserveerd'");
-            //
 
             try
             {
                 ReservatieInfo reservatieinfo = new ReservatieInfo(reservatie.Reservatienummer, beginuur, einduur, toestel);
                 _reservatieInfoRepo.MaakReservatieInfo(reservatieinfo);
             }
-            catch (ReservatieInfoManagerException)
-            {
-                throw;
-            }
             catch (Exception ex)
             {
-                throw new ReservatieInfoManagerException("MaakReservatieInfo", ex);
+                throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo", ex);
             }
         }
     }
