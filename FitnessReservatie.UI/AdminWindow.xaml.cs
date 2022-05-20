@@ -1,7 +1,9 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Eigenschappen;
 using FitnessReservatieBL.Domeinen.Enums;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
+using FitnessReservatieBL.Managers.Eigenschappen;
 using FitnessReservatieDL.ADO.NET;
 using System;
 using System.Collections.Generic;
@@ -28,15 +30,28 @@ namespace FitnessReservatie.UI
     {
         private Admin _ingelogdeAdmin;
         private ToestelManager _toestelManager;
+        private ToestelTypeManager _toestelTypeManager;
 
         public AdminWindow(Admin admin)
         {
             InitializeComponent();          
             this._ingelogdeAdmin = admin;
+            var connectiestring = ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString();
+            
             LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
 
+            //IRepositories instancieren
             IToestelRepository toestelRepo = new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelManager = new ToestelManager(toestelRepo);
+
+            IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
+            _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
+            //
+
+            foreach (var toesteltype in _toestelTypeManager.SelecteerToestelType())
+            {
+                ComboBoxToestelType.Items.Add(toesteltype.ToestelNaam);
+            }
         }
 
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
@@ -46,48 +61,58 @@ namespace FitnessReservatie.UI
             mainwindow.Show();
         }
 
-        private void RadioButtonAll_Checked(object sender, RoutedEventArgs e)
+        private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
         {
             ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.operatief))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.operatief))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.onderhoud))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.onderhoud))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.verwijderd))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.verwijderd))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
 
-        private void RadioButtonAvailable_Checked(object sender, RoutedEventArgs e)
+        private void RadioButtonDeviceAvailable_Checked(object sender, RoutedEventArgs e)
         {
             ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.operatief))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.operatief))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
 
-        private void RadioButtonService_Checked(object sender, RoutedEventArgs e)
+        private void RadioButtonDeviceService_Checked(object sender, RoutedEventArgs e)
         {
             ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.onderhoud))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.onderhoud))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
 
-        private void RadioButtonDeleted_Checked(object sender, RoutedEventArgs e)
+        private void RadioButtonDeviceDeleted_Checked(object sender, RoutedEventArgs e)
         {
             ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenMetStatus(Status.verwijderd))
+            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.verwijderd))
             {
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
+        private void ButtonDeviceSearch_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+        }
+
+        private void ButtonCustomerSearch_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

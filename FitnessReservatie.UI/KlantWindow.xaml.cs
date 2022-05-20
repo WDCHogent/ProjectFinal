@@ -19,72 +19,87 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class KlantWindow : Window
     {
+        //Aangemelde klantinfo
         private Klant _ingelogdeKlant;
+        //
+
+        //Klantreservatie voor geselecteerde dag 
+        private List<DTOKlantReservatieInfo> _klantReservatiesVoorDagX = new List<DTOKlantReservatieInfo>();
+        
+        //Klantreservaties        
         private ObservableCollection<DTOKlantReservatieInfo> _reservatiesKlant;
+        //
+
+        //Combobox shenanigans
         private IReadOnlyList<ToestelType> _toesteltypeItemsSource;
         private IReadOnlyList<Tijdslot> _tijdslotItemsSource;
+        //
 
+        //Tijdslot controles & Maxima aantal tijdsloten.
         private int _aantalGereserveerdeUrenPerDatum;
-        private List<DTOKlantReservatieInfo> _klantReservatiesVoorDagX = new List<DTOKlantReservatieInfo>();
         private int _maxAantalTijdsloten = 4;
+        //
 
+        //IRepositories
         private ToestelTypeManager _toestelTypeManager;
         private TijdslotManager _tijdslotManager;
-
         private ReservatieManager _reservatieManager;
         private ReservatieInfoManager _reservatieInfoManager;
-
         private KlantManager _klantManager;
         private ToestelManager _toestelManager;
+        //
 
         public KlantWindow(Klant klant)
         {
             InitializeComponent();
             this._ingelogdeKlant = klant;
+            var connectiestring = ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString();
+
             LabelWelkomKlant.Content += $"{_ingelogdeKlant.Voornaam} {_ingelogdeKlant.Naam}";
 
-            IKlantRepository klantRepo = new KlantRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
+            //My Personal Information Tab
+            LabelKlantnummerReturned.Content += $"{_ingelogdeKlant.Klantnummer}";
+            LabelNaamReturned.Content += $"{_ingelogdeKlant.Naam}";
+            LabelVoornaamReturned.Content += $"{_ingelogdeKlant.Voornaam}";
+            LabelMailadresReturned.Content += $"{_ingelogdeKlant.Mailadres}";
+            //
+
+            //IRepositories instancieren
+            IKlantRepository klantRepo = new KlantRepoADO(connectiestring);
             _klantManager = new KlantManager(klantRepo);
+
+            IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(connectiestring);
+            _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
+
+            ITijdslotRepository tijdslotRepo = new TijdslotRepoADO(connectiestring);
+            _tijdslotManager = new TijdslotManager(tijdslotRepo);
+
+            IToestelRepository toestelRepo = new ToestelRepoADO(connectiestring);
+            _toestelManager = new ToestelManager(toestelRepo);
+
+            IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectiestring);
+            _reservatieManager = new ReservatieManager(reservatieRepo);
+
+            IReservatieInfoRepository reservatieInfoRepo = new ReservatieInfoRepoADO(connectiestring);
+            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo, reservatieRepo, klantRepo, toestelRepo);
+            //
+
+            //Opvulling velden 'Maak Reservatie' Tab
             _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer));
             foreach (var reservatieKlant in _reservatiesKlant)
             {
                 ListViewReservations.Items.Add(reservatieKlant);
             }
 
-
-            LabelKlantnummerReturned.Content += $"{_ingelogdeKlant.Klantnummer}";
-            LabelNaamReturned.Content += $"{_ingelogdeKlant.Naam}";
-            LabelVoornaamReturned.Content += $"{_ingelogdeKlant.Voornaam}";
-            LabelMailadresReturned.Content += $"{_ingelogdeKlant.Mailadres}";
-
-            IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
-            _toesteltypeItemsSource = _toestelTypeManager.SelecteerToestelType();
-
-            ITijdslotRepository tijdslotRepo = new TijdslotRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _tijdslotManager = new TijdslotManager(tijdslotRepo);
-
-            _tijdslotItemsSource = _tijdslotManager.SelecteerTijdslot();
-
             DatePickerDatumSelector.BlackoutDates.AddDatesInPast();
             DatePickerDatumSelector.BlackoutDates.Add(new CalendarDateRange(DateTime.Today.AddDays(8), DateTime.MaxValue));
 
-            IToestelRepository toestelRepo = new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _toestelManager = new ToestelManager(toestelRepo);
+            _toesteltypeItemsSource = _toestelTypeManager.SelecteerToestelType();
 
-            IReservatieRepository reservatieRepo = new ReservatieRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _reservatieManager = new ReservatieManager(reservatieRepo);
-
-            IReservatieInfoRepository reservatieInfoRepo = new ReservatieInfoRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo, reservatieRepo, klantRepo, toestelRepo);
+            _tijdslotItemsSource = _tijdslotManager.SelecteerTijdslot();
+            //
         }
 
-        private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainwindow = new MainWindow();
-            this.Close();
-            mainwindow.Show();
-        }
         private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             //Checkbox controle en reset
@@ -541,5 +556,11 @@ namespace FitnessReservatie.UI
             }
         }
 
+        private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mainwindow = new MainWindow();
+            this.Close();
+            mainwindow.Show();
+        }
     }
 }

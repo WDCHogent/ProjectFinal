@@ -12,6 +12,7 @@ namespace FitnessReservatieBL.Interfaces
     public interface IToestelRepository
     {
         IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur);
-        IReadOnlyList<Toestel> GeefToestellenMetStatus(Status status);
+        IReadOnlyList<DTOToestelInfo> GeefToestellenADHVStatus(Status status);
+        IReadOnlyList<DTOToestelInfo> GeefToestellenADHVParameters(int? toestelnummer, string toestelnaam, string toesteltype);
     }
 }

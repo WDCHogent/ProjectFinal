@@ -33,16 +33,30 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public IReadOnlyList<Toestel> GeefToestellenMetStatus(Status status)
+        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVStatus(Status status)
         {
             try
             {
-                return _toestelRepo.GeefToestellenMetStatus(status);
+                return _toestelRepo.GeefToestellenADHVStatus(status);
             }
             catch (Exception ex)
             {
                 throw new ToestelManagerException("ToestelManager - GeefToestellenMetStatus", ex);
             }
         }
+
+        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVParameters(int? toestelnummer, string toestelnaam, string toesteltype)
+        {
+            try
+            {
+                return _toestelRepo.GeefToestellenADHVParameters(toestelnummer, toestelnaam, toesteltype);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelManagerException("ToestelManager - GeefToestellenMetStatus", ex);
+            }
+        }
+
+
     }
 }

@@ -73,14 +73,15 @@
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
-                        <Button Content="Customer Management" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                    <StackPanel Grid.ColumnSpan="1" Grid.Row="0">
+                        <Button Content="Customer Tracker" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -109,16 +110,79 @@
                             </Button.Style>
                         </Button>
                     </StackPanel>
-                    <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
-                        
-                    <!--TODO-->
-                        
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+                        <ListView Name="ListViewCustomerTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="№">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="FontSize" Value="16" />
+                                                <Setter Property="Foreground" Value="#FF323232" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label FontWeight="Bold" Content="{Binding Klantnummer}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Customer Name">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="FontSize" Value="16" />
+                                                <Setter Property="Foreground" Value="#FF323232" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock FontWeight="Bold">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="Klantnaam" />
+                                                            <Binding Path="Klantvoornaam" />
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn Header="Mailadres">
+                                        <GridViewColumn.HeaderContainerStyle>
+                                            <Style TargetType="{x:Type GridViewColumnHeader}">
+                                                <Setter Property="FontSize" Value="16" />
+                                                <Setter Property="Foreground" Value="#FF323232" />
+                                                <Setter Property="Background" Value="Transparent" />
+                                                <Setter Property="BorderBrush" Value="Transparent" />
+                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
+                                            </Style>
+                                        </GridViewColumn.HeaderContainerStyle>
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <Label FontWeight="Bold" Content="{Binding klantemail}" />
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" >
-                        <Label Name="LabelKlantnummerReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
-                        <Label Name="LabelNaamReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
-                        <Label Name="LabelVoornaamReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
-                        <Label Name="LabelMailadresReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15">
+                        <Label Content="Customer №" Margin="-5,0,0,0"/>
+                        <TextBox Name="TextBoxKlantNummer" InputScope="Number"/>
+                        <Label Content="Customer Name" Margin="-5,0,0,0"/>
+                        <TextBox Name="TextBoxKlantNaam"/>
+                        <Button Name="ButtonCustomerSearch" Content="Search" Margin="0,15,0,0" Click="ButtonCustomerSearch_Click"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
+                        <RadioButton Name="RadioButtonCustomerAll" Margin="2" Content="All"/>
+                        <RadioButton Name="RadioButtonCustomerToday" Margin="2" Content="Today"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
@@ -182,7 +246,7 @@
                                     </GridViewColumn.HeaderContainerStyle>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding ToestelNummer}" />
+                                            <Label FontWeight="Bold" Content="{Binding Toestelnummer}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -198,7 +262,7 @@
                                     </GridViewColumn.HeaderContainerStyle>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding ToestelNaam}" />
+                                            <Label FontWeight="Bold" Content="{Binding Toestelnaam}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -214,7 +278,7 @@
                                     </GridViewColumn.HeaderContainerStyle>
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding ToestelType}" />
+                                            <Label FontWeight="Bold" Content="{Binding Toesteltypenaam}" />
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
@@ -238,19 +302,20 @@
                         </ListView.View>
                     </ListView>
                 </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15">
-                        <Label Content="Device №"/>
-                        <TextBox />
-                        <Label Content="Device Name"/>
-                        <TextBox />
-                        <Label Content="Device Type"/>
-                        <TextBox />
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,15,15,0">
+                        <Label Content="Device №" Margin="-5,0,0,0"/>
+                        <TextBox Name="TextBoxToestelNummer" InputScope="Number"/>
+                        <Label Content="Device Name" Margin="-5,0,0,0"/>
+                        <TextBox Name="TextBoxToestelNaam"/>
+                        <Label Content="Device Type" Margin="-5,0,0,0"/>
+                        <ComboBox Name="ComboBoxToestelType"/>
+                        <Button Name="ButtonDeviceSearch" Content="Search" Margin="0,15,0,0" Click="ButtonDeviceSearch_Click" IsDefault="True"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
-                        <RadioButton Name="RadioButtonAll" Margin="2" Content="All" Checked="RadioButtonAll_Checked"/>
-                        <RadioButton Name="RadioButtonAvailable" Margin="2" Content="Available" Checked="RadioButtonAvailable_Checked"/>
-                        <RadioButton Name="RadioButtonService" Margin="2" Content="Service" Checked="RadioButtonService_Checked"/>
-                        <RadioButton Name="RadioButtonDeleted" Margin="2" Content="Deleted" Checked="RadioButtonDeleted_Checked"/>
+                        <RadioButton Name="RadioButtonDeviceAll" Margin="2" Content="All" Checked="RadioButtonDeviceAll_Checked"/>
+                        <RadioButton Name="RadioButtonDeviceAvailable" Margin="2" Content="Available" Checked="RadioButtonDeviceAvailable_Checked"/>
+                        <RadioButton Name="RadioButtonDeviceService" Margin="2" Content="Service" Checked="RadioButtonDeviceService_Checked"/>
+                        <RadioButton Name="RadioButtonDeviceDeleted" Margin="2" Content="Deleted" Checked="RadioButtonDeviceDeleted_Checked"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
