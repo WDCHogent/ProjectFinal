@@ -68,7 +68,7 @@
                         <RowDefinition Height="*"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.ColumnSpan="1" Grid.Row="0">
+                    <StackPanel Grid.ColumnSpan="3" Grid.Row="0">
                         <Button Content="Customer Tracker" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -149,7 +149,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.ColumnSpan="1" Grid.Row="0">
+                    <StackPanel Grid.ColumnSpan="3" Grid.Row="0">
                         <Button Content="Device Tracker" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -187,56 +187,6 @@
                             <StackPanel>
                                 <materialDesign:PopupBox ToolTip="Nieuw Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0">
                                     <materialDesign:PopupBox.ToggleCheckedContent>
-                                        <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
-                                    </materialDesign:PopupBox.ToggleCheckedContent>
-                                    <Grid Width="300" Margin="8,8,8,8" Background="#FF323232">
-                                        <Grid.Resources>
-                                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
-                                                <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
-                                                <Setter Property="Margin" Value="8,8,8,8" />
-                                            </Style>
-                                        </Grid.Resources>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
-                                        <Grid.RowDefinitions>
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                            <RowDefinition Height="*" />
-                                        </Grid.RowDefinitions>
-                                        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="NIEUW TOESTEL" />
-                                        <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
-                                            <ComboBoxItem Content="operatief" Foreground="#FF323232"/>
-                                            <ComboBoxItem Content="onderhoud" Foreground="#FF323232"/>
-                                            <ComboBoxItem Content="verwijderd" Foreground="#FF323232"/>
-                                        </ComboBox>
-                                        <ComboBox Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
-                                        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
-                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
-                                                    </Style>
-                                                </Button.Style>
-                                            </Button>
-                                            <Button Content="_Annuleren" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
-                                                <Button.Style>
-                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
-                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
-                                                    </Style>
-                                                </Button.Style>
-                                            </Button>
-                                        </StackPanel>
-                                    </Grid>
-                                </materialDesign:PopupBox>
-
-                                <materialDesign:PopupBox ToolTip="Editeer Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0">
-                                    <materialDesign:PopupBox.ToggleCheckedContent>
                                         <materialDesign:PackIcon Kind="PlusThick" Width="24" Height="24" />
                                     </materialDesign:PopupBox.ToggleCheckedContent>
                                     <Grid Width="300" Margin="8,8,8,8" Background="#FF323232">
@@ -255,18 +205,57 @@
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="NIEUW TOESTEL" />
+                                        <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                                        <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Button Content="_Annuleren" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:PopupBox>
+
+                                <materialDesign:PopupBox Name="ButtonEdit" ToolTip="Editeer Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0" Opened="ButtonEdit_Opened">
+                                    <materialDesign:PopupBox.ToggleCheckedContent>
+                                        <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
+                                    </materialDesign:PopupBox.ToggleCheckedContent>
+                                    <Grid Width="300" Margin="8,8,8,8" Background="#FF323232">
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                                <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
+                                                <Setter Property="Margin" Value="8,8,8,8" />
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="EDITEER TOESTEL" />
-                                        <ListView Grid.Column="0" Grid.Row="1"></ListView>
-                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                        <ComboBox Name="ComboBoxStatusUpdate" Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
                                             <ComboBoxItem Content="operatief" Foreground="#FF323232"/>
                                             <ComboBoxItem Content="onderhoud" Foreground="#FF323232"/>
-                                            <ComboBoxItem Content="verwijderd" Foreground="#FF323232"/>
+                                            <ComboBoxItem Name="ComboBoxItemVerwijderd" Content="verwijderd" Foreground="#FF323232"/>
                                         </ComboBox>
-                                        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="_Updaten" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                        <StackPanel Grid.Row="2" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Name="ButtonStatusUpdate" Content="_Updaten" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="ButtonStatusUpdate_Click">
                                                 <Button.Style>
                                                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
                                                         <Setter Property="Foreground" Value="#89FFFFFF" />
@@ -289,14 +278,14 @@
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
                         <ListView Name="ListViewDeviceTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="330">
                             <ListView.View>
-                            <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnummer, StringFormat='    {0}' }" Header="№"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat='    {0}' }" Header="Device Name"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Status, StringFormat=' {0}' }" Header="Status"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toesteltypenaam, StringFormat='    {0}'}" Header="Device Type"/>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnummer, StringFormat='    {0}' }" Header="№"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat='    {0}' }" Header="Device Name"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status, StringFormat=' {0}' }" Header="Status"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Toesteltypenaam, StringFormat='    {0}'}" Header="Device Type"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
                 </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="15,25,15,0">
                         <Label Content="Device №" Margin="-5,0,0,0"/>

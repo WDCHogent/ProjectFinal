@@ -1,5 +1,6 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Enums;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
@@ -193,7 +194,30 @@ namespace FitnessReservatie.UI
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
+
+        private void ButtonEdit_Opened(object sender, RoutedEventArgs e)
+        {
+            if (ListViewDeviceTracker.SelectedItem.ToString().Contains("verwijderd"))
+            {
+                ComboBoxItemVerwijderd.IsEnabled = false;
+            }
+        }
+
+        private void ButtonStatusUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem nieuweStatus = (ComboBoxItem)ComboBoxStatusUpdate.SelectedItem;
+            MessageBoxResult result = MessageBox.Show($"U staat op het punt de status te wijzigen van \r\r >>> {ListViewDeviceTracker.SelectedItem.ToString()} naar {nieuweStatus.Content.ToString()} <<< \r\r" +
+                $"Bent u zeker dat u verder wil gaan?", "---", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+
+            switch (result)
+            {
+                case MessageBoxResult.OK: break;
+                case MessageBoxResult.Cancel: break;
+            }
+        }      
         //
+
+
 
         //Logout
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)

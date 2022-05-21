@@ -2,18 +2,11 @@
 {
     public class DTOToestelInfo
     {
-        public DTOToestelInfo(int toestelnummer, string toestelnaam, string status, string toesteltypenaam) : this(toestelnummer, toestelnaam, toesteltypenaam)
+        public DTOToestelInfo(int toestelnummer, string toestelnaam, string status, string toesteltypenaam)
         {
             Toestelnummer = toestelnummer;
             Toestelnaam = toestelnaam;
             Status = status;
-            Toesteltypenaam = toesteltypenaam;
-        }
-
-        public DTOToestelInfo(int toestelnummer, string toestelnaam, string toesteltypenaam)
-        {
-            Toestelnummer = toestelnummer;
-            Toestelnaam = toestelnaam;
             Toesteltypenaam = toesteltypenaam;
         }
 
@@ -22,5 +15,9 @@
         public string Status { get; set; }
         public string Toesteltypenaam { get; set; }
 
+        public override string ToString()
+        {
+            return $"{Toestelnaam} | {Status.ToString()}";
+        }
     }
 }

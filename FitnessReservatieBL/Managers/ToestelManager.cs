@@ -42,6 +42,28 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
+        public void UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
+        {
+            try
+            {
+                _toestelRepo.UpdateToestelStatus(toestelInfo, toestelStatus);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelManagerException("ToestelManager - UpdateToestelStatus", ex);
+            }
+        }
 
+        public void VerwijderToestel(DTOToestelInfo toestelInfo)
+        {
+            try
+            {
+                _toestelRepo.VerwijderToestel(toestelInfo);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelManagerException("ToestelManager - VerwijderToestel", ex);
+            }
+        }
     }
 }

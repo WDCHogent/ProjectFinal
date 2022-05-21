@@ -106,5 +106,39 @@ namespace FitnessReservatieDL.ADO.NET
                 }
             }
         }
+
+        public void UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
+        {
+            SqlConnection connection = GetConnection();
+            if (toestelStatus == "verwijderd");
+            string query = "UPDATE Toestel.status SET status=@status WHERE toestelnummer=@toestelnummer && status IS NOT \"verwijderd\"";
+            using (SqlCommand command = connection.CreateCommand())
+            {
+                connection.Open();
+                try
+                {
+                    command.Parameters.Add(new SqlParameter("@status", SqlDbType.VarChar));
+                    command.Parameters.Add(new SqlParameter("@toestelnummer", SqlDbType.Int));
+                    command.CommandText = query;
+                    command.Parameters["@status"].Value = toestelStatus;
+                    command.Parameters["@toestelnummer"].Value = toestelInfo.Toestelnummer;
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    throw new ToestelRepoADOException("ToestelRepoADO - UpdateToestelStatus", ex);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+        }
+
+        public void VerwijderToestel(DTOToestelInfo toestelInfo)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
