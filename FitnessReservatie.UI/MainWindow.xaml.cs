@@ -95,7 +95,7 @@ namespace FitnessReservatie.UI
                 {
                     AdminWindow adminWindow = new AdminWindow(admin);
                     this.Close();
-                    adminWindow.ShowDialog();
+                    adminWindow.Show();
                 }
                 else MessageBox.Show($"Geen Admin", "Something went wrong");
                 Close();
@@ -115,16 +115,10 @@ namespace FitnessReservatie.UI
             LabelAdminTitel.Visibility = Visibility.Visible;
             LabelKlantTitel.Visibility = Visibility.Hidden;
 
-            LabelAdmin.Visibility = Visibility.Visible;
             TextBoxAdmin.Visibility = Visibility.Visible;
-            ImageAdminUser.Visibility = Visibility.Visible;
 
-            LabelKlantnummer.Visibility = Visibility.Hidden;
             TextBoxKlantnummer.Visibility = Visibility.Hidden;
-            ImageKlantUser.Visibility = Visibility.Hidden;
-            LabelEmailadres.Visibility = Visibility.Hidden;
             TextBoxEmailadres.Visibility = Visibility.Hidden;
-            ImageKlantEmail.Visibility = Visibility.Hidden;
 
             ButtonAdminLogin.Visibility = Visibility.Visible;
             ButtonKlantLogin.Visibility = Visibility.Hidden;
@@ -141,16 +135,10 @@ namespace FitnessReservatie.UI
             LabelKlantTitel.Visibility = Visibility.Visible;
             LabelAdminTitel.Visibility = Visibility.Hidden;
 
-            LabelKlantnummer.Visibility = Visibility.Visible;
             TextBoxKlantnummer.Visibility = Visibility.Visible;
-            ImageKlantUser.Visibility = Visibility.Visible;
-            LabelEmailadres.Visibility = Visibility.Visible;
             TextBoxEmailadres.Visibility = Visibility.Visible;
-            ImageKlantEmail.Visibility = Visibility.Visible;
 
-            LabelAdmin.Visibility = Visibility.Hidden;
             TextBoxAdmin.Visibility = Visibility.Hidden;
-            ImageAdminUser.Visibility = Visibility.Hidden;
 
             ButtonKlantLogin.Visibility = Visibility.Visible;
             ButtonAdminLogin.Visibility = Visibility.Hidden;

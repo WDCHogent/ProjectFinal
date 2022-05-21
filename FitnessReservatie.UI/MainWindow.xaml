@@ -1,10 +1,12 @@
 ﻿<Window x:Class="FitnessReservatie.UI.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Background="{DynamicResource MaterialDesignPaper}"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
         xmlns:gif="http://wpfanimatedgif.codeplex.com"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:FitnessReservatie.UI"
         mc:Ignorable="d"
         Title="Login Panel" Height="500" Width="1000" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#FFF3CA00">
@@ -15,152 +17,42 @@
         <Image Name="ImageBackgroundAdmin" HorizontalAlignment="Left" Height="456" Margin="567,-22,0,0" VerticalAlignment="Top" Width="500" gif:ImageBehavior.AnimatedSource="/Images/Fiets.gif" Visibility="Hidden"/>
 
 
-        <Button Name="ButtonAdmin" Content="f" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonAdmin_Click" Visibility="Hidden" FontSize="20" FontFamily="Wingdings 3">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-            </Button.Resources>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
+        <Button Name="ButtonAdmin" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonAdmin_Click" Visibility="Hidden" FontSize="20" Style="{StaticResource MaterialDesignFloatingActionButton}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White">
+            <materialDesign:PackIcon Kind="KeyboardReturn" />
         </Button>
+
         <Label Name="LabelAdminTitel" Content="HI THERE," HorizontalAlignment="Left" Margin="77,153,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="54" Foreground="#FFF4F4F4" Background="{x:Null}" Width="329" Visibility="Hidden"/>
-        <Label Name ="LabelAdmin" Content="Admin login" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,238,0,0" Foreground="#FFF4F4F4" Width="118" Visibility="Hidden"/>
-        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" Background="#FFF4F4F4" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,242,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </TextBox.Resources>
+        <TextBox Name="TextBoxAdmin" TextWrapping="Wrap" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Margin="87,224,0,0" FontSize="16" Visibility="Hidden" TextChanged="TextBoxAdmin_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="#DDFFFFFF" CaretBrush="White" SelectionBrush="{x:Null}" BorderBrush="#89FFFFFF" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke">
+            <materialDesign:HintAssist.Hint>
+                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                    <materialDesign:PackIcon Kind="AccountCogOutline" />
+                    <TextBlock Text=" Admin Login" />
+                </StackPanel>
+            </materialDesign:HintAssist.Hint>
         </TextBox>
-        <Image Name="ImageAdminUser" HorizontalAlignment="Left" Height="21" Margin="77,244,0,0" VerticalAlignment="Top" Width="20" Source="/Images/adminIcon.png" Visibility="Hidden"/>
-        <Button Name="ButtonAdminLogin" Content="LOGIN" Height="35" Width="350" IsEnabled="False" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonAdminLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Hidden">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Resources>
+        <Button Name="ButtonAdminLogin" Content="LOGIN" Height="35" Width="350" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonAdminLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Hidden" FontWeight="Normal" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="10"/>
+
+        <Button Name="ButtonKlant" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonKlant_Click" Visibility="Visible" FontSize="20" Style="{StaticResource MaterialDesignFloatingActionButton}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White">
+            <materialDesign:PackIcon Kind="HammerScrewdriver" />
         </Button>
 
-        <Button Name="ButtonKlant" Content="@" HorizontalAlignment="Left" Margin="438,285,0,0" VerticalAlignment="Top" Width="35" Height="35" Click="ButtonKlant_Click" Visibility="Visible" FontSize="20" FontFamily="Webdings">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-            </Button.Resources>
-            <Button.Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Style>
-        </Button>
-        <Image Name="ImageKlantUser" HorizontalAlignment="Left" Height="21" Margin="77,200,0,0" VerticalAlignment="Top" Width="20" Source="/Images/userIcon.png" Visibility="Visible"/>
-        <Image Name="ImageKlantEmail" HorizontalAlignment="Left" Height="21" Margin="77,244,0,0" VerticalAlignment="Top" Width="20" Source="/Images/mailIcon.png" Visibility="Visible"/>
-
-        <Label Name="LabelKlantTitel" Content="HEY BUDDY," HorizontalAlignment="Left" Margin="77,108,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="65" Foreground="#FFF4F4F4" Background="{x:Null}" Width="396" Visibility="Visible"/>
-        <Label Name="LabelKlantnummer" Content="Klantnummer" FontFamily="Trebuchet MS" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" Margin="102,196,0,0" Foreground="#FFF4F4F4" Width="120" Visibility="Visible"/>
-        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="#FFF4F4F4" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="248" Margin="222,200,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </TextBox.Resources>
+        <Label Name="LabelKlantTitel" Content="HEY BUDDY," HorizontalAlignment="Left" Margin="77,108,0,0" VerticalAlignment="Top" IsEnabled="False" FontFamily="Unispace" FontSize="65" Foreground="White" Background="{x:Null}" Width="396" Visibility="Visible"/>
+        <TextBox Name="TextBoxKlantnummer" TextWrapping="Wrap" Background="{x:Null}" FontFamily="Trebuchet MS" InputScope="Number" HorizontalAlignment="Left" VerticalAlignment="Top" Width="383" Margin="87,185,0,0" FontSize="16" TextChanged="TextBoxKlantnummer_TextChanged" Visibility="Visible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke">
+            <materialDesign:HintAssist.Hint>
+                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                    <materialDesign:PackIcon Kind="AccountOutline" />
+                    <TextBlock Text=" Customer Number" />
+                </StackPanel>
+            </materialDesign:HintAssist.Hint>
         </TextBox>
-        <Label Name="LabelEmailadres" Content="Emailadres" FontFamily="Trebuchet MS" HorizontalAlignment="Left" Margin="102,239,0,0" VerticalAlignment="Top" FontSize="16" Foreground="#FFF4F4F4" Width="120" Visibility="Visible"/>
-        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="248" Background="#FFF4F4F4" FontFamily="Trebuchet MS" Margin="222,243,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible">
-            <TextBox.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="5"/>
-                </Style>
-            </TextBox.Resources>
+        <TextBox Name="TextBoxEmailadres" TextWrapping="Wrap" Width="383" Background="{x:Null}" FontFamily="Trebuchet MS" Margin="87,228,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" FontSize="16" TextChanged="TextBoxEmailadres_TextChanged" Visibility="Visible" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Foreground="#DDFFFFFF" CaretBrush="White" SelectionBrush="{x:Null}" BorderBrush="#89FFFFFF" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke">
+            <materialDesign:HintAssist.Hint>
+                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                    <materialDesign:PackIcon Kind="At" />
+                    <TextBlock Text=" Email Address" />
+                </StackPanel>
+            </materialDesign:HintAssist.Hint>
         </TextBox>
-        <Button Name="ButtonKlantLogin" Height="35" Width="350" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonKlantLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Visible" Content="LOGIN" FontWeight="Normal" IsEnabled="False">
-            <Button.Resources>
-                <Style TargetType="Border">
-                    <Setter Property="CornerRadius" Value="15"/>
-                </Style>
-                <Style TargetType="{x:Type Button}">
-                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                    <Setter Property="Foreground" Value="#FF323232"/>
-                    <Setter Property="Opacity" Value="0.8"/>
-                    <Setter Property="Template">
-                        <Setter.Value>
-                            <ControlTemplate TargetType="{x:Type Button}">
-                                <Border Background="{TemplateBinding Background}">
-                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                </Border>
-                            </ControlTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Style.Triggers>
-                        <Trigger Property="IsEnabled" Value="True">
-                            <Setter Property="Background" Value="#FF323232"/>
-                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                            <Setter Property="Opacity" Value="1"/>
-                        </Trigger>
-                    </Style.Triggers>
-                </Style>
-            </Button.Resources>
-        </Button>
+        <Button Name="ButtonKlantLogin" Height="35" Width="350" FontFamily="Unispace" HorizontalAlignment="Left" VerticalAlignment="Top" FontSize="16" Click="ButtonKlantLogin_Click" Margin="77,285,0,0" IsDefault="True" Visibility="Visible" Content="LOGIN" FontWeight="Normal" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="10"/>
     </Grid>
 </Window>

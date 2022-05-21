@@ -54,8 +54,6 @@
     <Resource Include="Images\Fiets.gif" />
     <Resource Include="Images\loopband.gif" />
     <Resource Include="Images\SettingsIconAdmin.png" />
-    <Resource Include="Images\userIcon.png" />
-    <Resource Include="Images\mailIcon.png" />
     <Resource Include="Images\WalterKlant.png" />
     <Resource Include="Images\signOutIcon.png" />
     <Resource Include="Images\ListIcon.png" />
