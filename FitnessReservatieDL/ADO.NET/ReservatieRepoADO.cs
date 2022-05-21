@@ -1,14 +1,9 @@
 ﻿using FitnessReservatieBL.Domeinen;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessReservatieDL.ADO.NET
 {
@@ -89,7 +84,7 @@ namespace FitnessReservatieDL.ADO.NET
 
         public Reservatie GeefReservatie(Reservatie reservatie)
         {
-            if (reservatie==null) throw new ReservatieRepoADOException("ReservatieRepoADOE - SelecteerReservatie - 'Ongeldige input'");
+            if (reservatie == null) throw new ReservatieRepoADOException("ReservatieRepoADOE - SelecteerReservatie - 'Ongeldige input'");
             string query = "SELECT reservatienummer FROM Reservatie WHERE klantnummer=@klantnummer AND datum=@datum";
             Reservatie geselecteerdeReservatie = null;
             SqlConnection conn = GetConnection();

@@ -4,9 +4,6 @@ using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers
 {
@@ -41,7 +38,19 @@ namespace FitnessReservatieBL.Managers
             }
             catch (Exception ex)
             {
-                throw new KlantManagerException("KlantManager - GeefKlantReservaties", ex); ;
+                throw new KlantManagerException("KlantManager - GeefKlantReservaties", ex);
+            }
+        }
+
+        public IReadOnlyList<Klant> ZoekKlanten(int klantnummer, string zoekterm)
+        {
+            try
+            {
+                return _klantRepo.ZoekKlanten(klantnummer, zoekterm);
+            }
+            catch (Exception ex)
+            {
+                throw new KlantManagerException("KlantManager - ZoekKlanten", ex);
             }
         }
     }

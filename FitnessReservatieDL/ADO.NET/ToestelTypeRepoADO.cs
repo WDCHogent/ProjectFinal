@@ -1,5 +1,4 @@
 ﻿using FitnessReservatieBL.Domeinen.Eigenschappen;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
@@ -38,7 +37,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        toesteltypes.Add(new ToestelType((int)reader["toesteltypeid"],(string)reader["toesteltypenaam"]));
+                        toesteltypes.Add(new ToestelType((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
                     }
                     reader.Close();
                     return toesteltypes;

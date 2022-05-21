@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FitnessReservatieBL.DTO
+﻿namespace FitnessReservatieBL.DTO
 {
     public class DTOToestelInfo
     {
@@ -16,7 +10,7 @@ namespace FitnessReservatieBL.DTO
             Toesteltypenaam = toesteltypenaam;
         }
 
-        public DTOToestelInfo (int toestelnummer, string toestelnaam, string toesteltypenaam)
+        public DTOToestelInfo(int toestelnummer, string toestelnaam, string toesteltypenaam)
         {
             Toestelnummer = toestelnummer;
             Toestelnaam = toestelnaam;

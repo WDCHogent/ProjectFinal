@@ -123,8 +123,8 @@ namespace FitnessReservatie.UI
             ButtonAdminLogin.Visibility = Visibility.Visible;
             ButtonKlantLogin.Visibility = Visibility.Hidden;
 
-            ButtonAdmin.Visibility= Visibility.Visible;
-            ButtonKlant.Visibility= Visibility.Hidden;
+            ButtonAdmin.Visibility = Visibility.Visible;
+            ButtonKlant.Visibility = Visibility.Hidden;
         }
 
         private void ButtonAdmin_Click(object sender, RoutedEventArgs e)

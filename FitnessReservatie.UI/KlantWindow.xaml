@@ -24,24 +24,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="Uniform" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-110,-116,966,-4"/>
+        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="UniformToFill" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-110,-116,966,-4"/>
         <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
-        <TabControl Name="TabControlKlant" TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="25" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
+        <TabControl Name="TabControlKlant" TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="15" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
             <TabControl.Resources>
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentPresenter Content="{TemplateBinding Content}">
-                                    <ContentPresenter.LayoutTransform>
-                                        <RotateTransform Angle="270" />
-                                    </ContentPresenter.LayoutTransform>
-                                </ContentPresenter>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Padding" Value="3" />
-                </Style>
                 <ControlTemplate x:Key="simpleTI" TargetType="TabItem">
                     <Grid>
                         <Border Name="Border" 
@@ -162,7 +148,7 @@
                     <ListView Name="ListViewReservations" Margin="15" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" MaxHeight="375" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
                             <ListView.View>
                                 <GridView>
-                                <GridViewColumn DisplayMemberBinding="{Binding Reservatienummer}" Header="№"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Reservatienummer, StringFormat='   {0}' }" Header="№"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Datum, StringFormat='yyyy-MM-dd'}" Header="Date"/>
                                 <GridViewColumn Header="Timeslot">
                                     <GridViewColumn.CellTemplate>
@@ -178,7 +164,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Toestelnaam}" Header="Device"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat=' {0}'}" Header="Device"/>
                             </GridView>
                             </ListView.View>
                         </ListView>
@@ -206,7 +192,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.ColumnSpan="3" Grid.Row="0">
+                    <StackPanel Grid.ColumnSpan="4" Grid.Row="0">
                         <Button Content="Make Reservation" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
@@ -337,34 +323,7 @@
 
 
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,15,0,0">
-                        <Button Name="ButtonBevestigReservatie" Content="Confirm Selction" Margin="325,0,325,0" Height="30" FontSize="12" FontFamily="Unispace" IsEnabled="False" Click="ButtonBevestigReservatie_Click">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                </Style>
-                            </Button.Resources>
-                            <Button.Style>
-                                <Style TargetType="{x:Type Button}">
-                                    <Setter Property="Background" Value="#FFF4F4F4"/>
-                                    <Setter Property="Foreground" Value="#FF323232"/>
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="{x:Type Button}">
-                                                <Border Background="{TemplateBinding Background}">
-                                                    <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsEnabled" Value="True">
-                                            <Setter Property="Background" Value="#FF323232"/>
-                                            <Setter Property="Foreground" Value="#FFF4F4F4"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Style>
-                        </Button>
+                        <Button Name="ButtonBevestigReservatie" Content="Confirm Selction" Margin="300,0,300,0" Height="35" FontSize="12" FontFamily="Unispace" IsEnabled="False" Click="ButtonBevestigReservatie_Click" Style="{StaticResource MaterialDesignRaisedButton}" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="10"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

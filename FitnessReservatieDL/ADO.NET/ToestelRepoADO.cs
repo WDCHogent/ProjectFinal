@@ -66,49 +66,15 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVStatus(Status status)
-        {
-            if (status.GetType() != typeof(Status)) throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus - 'Ongeldige input'");
-            string query = "SELECT t.toestelnummer, t.toestelnaam, t.status, tt.toesteltypenaam FROM Toestel t " +
-                "LEFT JOIN Toesteltype tt ON t.toesteltype=tt.toesteltypeid " +
-                "WHERE status=@status";
-            List<DTOToestelInfo> toestellen = new List<DTOToestelInfo>();
-            SqlConnection conn = GetConnection();
-            using (SqlCommand cmd = conn.CreateCommand())
-            {
-                cmd.CommandText = query;
-                conn.Open();
-                try
-                {
-                    cmd.Parameters.AddWithValue("@status", status.ToString());
-                    IDataReader reader = cmd.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        DTOToestelInfo toestel = new DTOToestelInfo((int)reader["toestelnummer"], (string)reader["toestelnaam"], (string)reader["status"], (string)reader["toesteltypenaam"]);
-                        toestellen.Add(toestel);
-                    }
-                    reader.Close();
-                    return toestellen.AsReadOnly();
-                }
-                catch (Exception ex)
-                {
-                    throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus", ex);
-                }
-                finally
-                {
-                    conn.Close();
-                }
-            }
-        }
-
-        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVParameters(int? toestelnummer, string toestelnaam, string toesteltype)
+        public IReadOnlyList<DTOToestelInfo> ZoekToestellen(Status? status, int toestelnummer, string toestelnaam, string toesteltype)
         {
             //if (status.GetType() != typeof(Status)) throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus - 'Ongeldige input'");
             string query = "SELECT t.toestelnummer, t.toestelnaam, t.status, tt.toesteltypenaam FROM Toestel t " +
                 "LEFT JOIN Toesteltype tt ON t.toesteltype=tt.toesteltypeid ";
-            if (toestelnummer.HasValue) query += "WHERE toestelnummer=@toestelnummer";
-            if (!string.IsNullOrWhiteSpace(toestelnaam)) query += "WHERE toestelnaam=@toestelnaam";
-            if (!string.IsNullOrWhiteSpace(toesteltype)) query += "WHERE toesteltypenaam=@toesteltypenaam";
+            if (status != null) query += "WHERE status=@status";
+            else if (toestelnummer > 0) query += "WHERE toestelnummer=@toestelnummer";
+            else if (!string.IsNullOrWhiteSpace(toestelnaam)) query += "WHERE toestelnaam LIKE '%' + @toestelnaam + '%'";
+            else if (!string.IsNullOrWhiteSpace(toesteltype)) query += "WHERE toesteltypenaam=@toesteltypenaam";
             List<DTOToestelInfo> toestellen = new List<DTOToestelInfo>();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
@@ -117,13 +83,14 @@ namespace FitnessReservatieDL.ADO.NET
                 conn.Open();
                 try
                 {
-                    if (toestelnummer.HasValue) cmd.Parameters.AddWithValue("@toestelnummer", toestelnummer);
-                    if (!string.IsNullOrWhiteSpace(toestelnaam)) cmd.Parameters.AddWithValue("@toestelnaam", toestelnaam);
-                    if (!string.IsNullOrWhiteSpace(toesteltype)) cmd.Parameters.AddWithValue("@toesteltypenaam", toesteltype);
+                    if (status != null) cmd.Parameters.AddWithValue("@status", status.ToString());
+                    else if (toestelnummer > 0) cmd.Parameters.AddWithValue("@toestelnummer", toestelnummer);
+                    else if (!string.IsNullOrWhiteSpace(toestelnaam)) cmd.Parameters.AddWithValue("@toestelnaam", toestelnaam);
+                    else if (!string.IsNullOrWhiteSpace(toesteltype)) cmd.Parameters.AddWithValue("@toesteltypenaam", toesteltype);
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        DTOToestelInfo toestel = new DTOToestelInfo((int)reader["toestelnummer"], (string)reader["toestelnaam"], (string)reader["toesteltypenaam"]);
+                        DTOToestelInfo toestel = new DTOToestelInfo((int)reader["toestelnummer"], (string)reader["toestelnaam"], (string)reader["status"], (string)reader["toesteltypenaam"]);
                         toestellen.Add(toestel);
                     }
                     reader.Close();

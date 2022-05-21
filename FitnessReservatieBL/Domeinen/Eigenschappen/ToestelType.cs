@@ -1,9 +1,4 @@
 ﻿using FitnessReservatieBL.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Domeinen.Eigenschappen
 {
@@ -18,7 +13,7 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
         public int ToestelId { get; private set; }
         public string ToestelNaam { get; private set; }
 
-        public void ZetToestelId(int toestelId) 
+        public void ZetToestelId(int toestelId)
         {
             if (toestelId <= 0) throw new ToestelTypeException("ToestelType - ZetToestelId - 'Mag niet leeg zijn'");
             ToestelId = toestelId;

@@ -25,7 +25,7 @@ namespace FitnessReservatie.UI
 
         //Klantreservatie voor geselecteerde dag 
         private List<DTOKlantReservatieInfo> _klantReservatiesVoorDagX = new List<DTOKlantReservatieInfo>();
-        
+
         //Klantreservaties        
         private ObservableCollection<DTOKlantReservatieInfo> _reservatiesKlant;
         //

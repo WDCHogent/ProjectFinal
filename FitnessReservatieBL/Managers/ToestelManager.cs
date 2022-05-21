@@ -5,9 +5,6 @@ using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers
 {
@@ -33,23 +30,11 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVStatus(Status status)
+        public IReadOnlyList<DTOToestelInfo> ZoekToestellen(Status? status, int toestelnummer, string toestelnaam, string toesteltype)
         {
             try
             {
-                return _toestelRepo.GeefToestellenADHVStatus(status);
-            }
-            catch (Exception ex)
-            {
-                throw new ToestelManagerException("ToestelManager - GeefToestellenMetStatus", ex);
-            }
-        }
-
-        public IReadOnlyList<DTOToestelInfo> GeefToestellenADHVParameters(int? toestelnummer, string toestelnaam, string toesteltype)
-        {
-            try
-            {
-                return _toestelRepo.GeefToestellenADHVParameters(toestelnummer, toestelnaam, toesteltype);
+                return _toestelRepo.ZoekToestellen(status, toestelnummer, toestelnaam, toesteltype);
             }
             catch (Exception ex)
             {

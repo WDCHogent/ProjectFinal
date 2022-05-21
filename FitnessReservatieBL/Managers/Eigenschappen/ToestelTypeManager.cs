@@ -1,5 +1,4 @@
 ﻿using FitnessReservatieBL.Domeinen.Eigenschappen;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;

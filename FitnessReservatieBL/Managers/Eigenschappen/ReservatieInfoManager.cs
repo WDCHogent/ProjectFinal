@@ -1,10 +1,8 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Eigenschappen;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
-using System.Collections.Generic;
 
 namespace FitnessReservatieBL.Managers.Eigenschappen
 {
@@ -15,7 +13,7 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
         private IKlantRepository _klantRepo;
         private IToestelRepository _toestelRepo;
 
-        public ReservatieInfoManager(IReservatieInfoRepository reservatieInfoRepo, IReservatieRepository reservatieRepo, IKlantRepository klantRepo ,IToestelRepository toestelRepo)
+        public ReservatieInfoManager(IReservatieInfoRepository reservatieInfoRepo, IReservatieRepository reservatieRepo, IKlantRepository klantRepo, IToestelRepository toestelRepo)
         {
             this._reservatieInfoRepo = reservatieInfoRepo;
             this._reservatieRepo = reservatieRepo;

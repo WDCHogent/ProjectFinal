@@ -1,13 +1,7 @@
 ﻿using FitnessReservatieBL.Domeinen;
-using FitnessReservatieBL.Domeinen.Eigenschappen;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
 using FitnessReservatieBL.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FitnessReservatieBL.Managers
 {
@@ -26,7 +20,7 @@ namespace FitnessReservatieBL.Managers
             try
             {
                 Reservatie reservatie = new Reservatie(klant, datum);
-                if(!_reservatieRepo.BestaatReservatie(reservatie))
+                if (!_reservatieRepo.BestaatReservatie(reservatie))
                 {
                     reservatie = _reservatieRepo.MaakReservatie(reservatie);
                     return reservatie;

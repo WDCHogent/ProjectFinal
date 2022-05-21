@@ -1,25 +1,12 @@
 ﻿using FitnessReservatieBL.Domeinen;
-using FitnessReservatieBL.Domeinen.Eigenschappen;
 using FitnessReservatieBL.Domeinen.Enums;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
 using FitnessReservatieDL.ADO.NET;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace FitnessReservatie.UI
 {
@@ -31,13 +18,14 @@ namespace FitnessReservatie.UI
         private Admin _ingelogdeAdmin;
         private ToestelManager _toestelManager;
         private ToestelTypeManager _toestelTypeManager;
+        private KlantManager _klantManager;
 
         public AdminWindow(Admin admin)
         {
-            InitializeComponent();          
+            InitializeComponent();
             this._ingelogdeAdmin = admin;
             var connectiestring = ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString();
-            
+
             LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
 
             //IRepositories instancieren
@@ -46,6 +34,9 @@ namespace FitnessReservatie.UI
 
             IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
+
+            IKlantRepository klantRepo = new KlantRepoADO(connectiestring);
+            _klantManager = new KlantManager(klantRepo);
             //
 
             foreach (var toesteltype in _toestelTypeManager.SelecteerToestelType())
@@ -54,65 +45,164 @@ namespace FitnessReservatie.UI
             }
         }
 
+        //Customer panel Tab
+        private void TextBoxKlantNummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonCustomerSearch.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxKlantNummer.Text)) TextBoxKlantNaam.IsEnabled = false;
+            else
+            {
+                TextBoxKlantNaam.IsEnabled = true;
+                ButtonCustomerSearch.IsEnabled = false;
+            }
+        }
+        private void TextBoxKlantNaam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonCustomerSearch.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxKlantNaam.Text)) TextBoxKlantNummer.IsEnabled = false;
+            else
+            {
+                TextBoxKlantNummer.IsEnabled = true;
+                ButtonCustomerSearch.IsEnabled = false;
+            }
+        }
+        private void ButtonCustomerSearch_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewCustomerTracker.Items.Clear();
+            bool x = int.TryParse(TextBoxKlantNummer.Text, out int klantnummer);
+            string klantnaam = TextBoxKlantNaam.Text.Trim();
+            foreach (var klant in _klantManager.ZoekKlanten(klantnummer, klantnaam))
+            {
+                ListViewCustomerTracker.Items.Add(klant);
+            }
+        }
+
+        private void RadioButtonCustomerAll_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewCustomerTracker.Items.Clear();
+            foreach (var klant in _klantManager.ZoekKlanten(0, null))
+            {
+                ListViewCustomerTracker.Items.Add(klant);
+            }
+        }
+        //
+
+        //Device Panel
+        private void TextBoxToestelNummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonDeviceSearch.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxToestelNummer.Text))
+            {
+                TextBoxToestelNaam.IsEnabled = false;
+                ComboBoxToestelType.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxToestelNaam.IsEnabled = true;
+                ComboBoxToestelType.IsEnabled = true;
+                ButtonCustomerSearch.IsEnabled = false;
+            }
+        }
+        private void TextBoxToestelNaam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ButtonDeviceSearch.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxToestelNaam.Text))
+            {
+                TextBoxToestelNummer.IsEnabled = false;
+                ComboBoxToestelType.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxToestelNummer.IsEnabled = true;
+                ComboBoxToestelType.IsEnabled = true;
+                ButtonCustomerSearch.IsEnabled = false;
+            }
+        }
+        private void ComboBoxToestelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ButtonDeviceSearch.IsEnabled = true;
+            if (ComboBoxToestelType.SelectedIndex!=-1)
+            {
+                TextBoxToestelNaam.IsEnabled = false;
+                TextBoxToestelNummer.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxToestelNaam.IsEnabled = true;
+                TextBoxToestelNummer.IsEnabled = true;
+                ButtonCustomerSearch.IsEnabled = false;
+            }
+        }
+        private void ButtonDeviceSearch_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+            bool x = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
+            string toestelnaam = TextBoxToestelNaam.Text.Trim();
+            string toesteltype;
+            if (ComboBoxToestelType.SelectedIndex == -1)
+            {
+                toesteltype = null;
+            }
+            else toesteltype = ComboBoxToestelType.SelectedValue.ToString();
+            foreach (var toestel in _toestelManager.ZoekToestellen(null, toestelnummer, toestelnaam, toesteltype))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+            TextBoxToestelNummer.Clear();
+            TextBoxToestelNaam.Clear();
+            ComboBoxToestelType.SelectedIndex = -1;
+        }
+
+        private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.operatief, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.onderhoud, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.verwijderd, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+        }
+        private void RadioButtonDeviceAvailable_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.operatief, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+        }
+        private void RadioButtonDeviceService_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.onderhoud, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+        }
+        private void RadioButtonDeviceDeleted_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewDeviceTracker.Items.Clear();
+            foreach (var toestel in _toestelManager.ZoekToestellen(Status.verwijderd, 0, null, null))
+            {
+                ListViewDeviceTracker.Items.Add(toestel);
+            }
+        }
+        //
+
+        //Logout
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainwindow = new MainWindow();
             this.Close();
             mainwindow.Show();
         }
-
-        private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
-        {
-            ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.operatief))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.onderhoud))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.verwijderd))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-        }
-
-        private void RadioButtonDeviceAvailable_Checked(object sender, RoutedEventArgs e)
-        {
-            ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.operatief))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-        }
-
-        private void RadioButtonDeviceService_Checked(object sender, RoutedEventArgs e)
-        {
-            ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.onderhoud))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-        }
-
-        private void RadioButtonDeviceDeleted_Checked(object sender, RoutedEventArgs e)
-        {
-            ListViewDeviceTracker.Items.Clear();
-            foreach (var toestel in _toestelManager.GeefToestellenADHVStatus(Status.verwijderd))
-            {
-                ListViewDeviceTracker.Items.Add(toestel);
-            }
-        }
-        private void ButtonDeviceSearch_Click(object sender, RoutedEventArgs e)
-        {
-            ListViewDeviceTracker.Items.Clear();
-        }
-
-        private void ButtonCustomerSearch_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        //
 
     }
 }

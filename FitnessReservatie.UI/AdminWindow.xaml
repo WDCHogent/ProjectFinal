@@ -25,22 +25,8 @@
         </Grid.RowDefinitions>
         <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Situps.gif" Stretch="Uniform" Source="/Images/Situps.gif" Grid.ColumnSpan="2" Margin="0,0,972,-4"/>
         <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
-        <TabControl TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="25" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" >
+        <TabControl TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="15" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
             <TabControl.Resources>
-                <Style TargetType="{x:Type TabItem}">
-                    <Setter Property="HeaderTemplate">
-                        <Setter.Value>
-                            <DataTemplate>
-                                <ContentPresenter Content="{TemplateBinding Content}">
-                                    <ContentPresenter.LayoutTransform>
-                                        <RotateTransform Angle="270" />
-                                    </ContentPresenter.LayoutTransform>
-                                </ContentPresenter>
-                            </DataTemplate>
-                        </Setter.Value>
-                    </Setter>
-                    <Setter Property="Padding" Value="3" />
-                </Style>
                 <ControlTemplate x:Key="simpleTI" TargetType="TabItem">
                     <Grid>
                         <Border Name="Border" 
@@ -70,7 +56,7 @@
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Image Width="70" Source="/Images/userIcon1.png"/>
+                    <materialDesign:PackIcon Kind="AccountSupervisorCircleOutline" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -113,93 +99,54 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
-                        <ListView Name="ListViewCustomerTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
+                        <ListView Name="ListViewCustomerTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="330">
                             <ListView.View>
                                 <GridView>
-                                    <GridViewColumn Header="№">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                                <Setter Property="FontSize" Value="16" />
-                                                <Setter Property="Foreground" Value="#FF323232" />
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="BorderBrush" Value="Transparent" />
-                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Label FontWeight="Bold" Content="{Binding Klantnummer}" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Klantnummer, StringFormat='   {0}' }" Header="№"/>
                                     <GridViewColumn Header="Customer Name">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                                <Setter Property="FontSize" Value="16" />
-                                                <Setter Property="Foreground" Value="#FF323232" />
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="BorderBrush" Value="Transparent" />
-                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
                                         <GridViewColumn.CellTemplate>
                                             <DataTemplate>
-                                                <TextBlock FontWeight="Bold">
+                                                <TextBlock>
                                                     <TextBlock.Text>
-                                                        <MultiBinding StringFormat="{}{0} {1}">
-                                                            <Binding Path="Klantnaam" />
-                                                            <Binding Path="Klantvoornaam" />
+                                                        <MultiBinding StringFormat="{}    {0} {1}">
+                                                            <Binding Path="Naam"/>
+                                                            <Binding Path="Voornaam"/>
                                                         </MultiBinding>
                                                     </TextBlock.Text>
                                                 </TextBlock>
                                             </DataTemplate>
                                         </GridViewColumn.CellTemplate>
                                     </GridViewColumn>
-                                    <GridViewColumn Header="Mailadres">
-                                        <GridViewColumn.HeaderContainerStyle>
-                                            <Style TargetType="{x:Type GridViewColumnHeader}">
-                                                <Setter Property="FontSize" Value="16" />
-                                                <Setter Property="Foreground" Value="#FF323232" />
-                                                <Setter Property="Background" Value="Transparent" />
-                                                <Setter Property="BorderBrush" Value="Transparent" />
-                                                <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                            </Style>
-                                        </GridViewColumn.HeaderContainerStyle>
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Label FontWeight="Bold" Content="{Binding klantemail}" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Mailadres, StringFormat='    {0}'}" Header="Email Adress"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15">
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,25,15,0">
                         <Label Content="Customer №" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxKlantNummer" InputScope="Number"/>
+                        <TextBox Name="TextBoxKlantNummer" InputScope="Number" TextChanged="TextBoxKlantNummer_TextChanged"/>
                         <Label Content="Customer Name" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxKlantNaam"/>
-                        <Button Name="ButtonCustomerSearch" Content="Search" Margin="0,15,0,0" Click="ButtonCustomerSearch_Click"/>
+                        <TextBox Name="TextBoxKlantNaam" TextChanged="TextBoxKlantNaam_TextChanged"/>
+                        <Button Name="ButtonCustomerSearch" Content="Search" Margin="0,15,0,-15" Click="ButtonCustomerSearch_Click" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5" IsDefault="True"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
-                        <RadioButton Name="RadioButtonCustomerAll" Margin="2" Content="All"/>
-                        <RadioButton Name="RadioButtonCustomerToday" Margin="2" Content="Today"/>
+                        <RadioButton Name="RadioButtonCustomerAll" Margin="2" Content="All" Checked="RadioButtonCustomerAll_Checked"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Image Width="70" Source="/Images/ListIcon.png"/>
+                    <materialDesign:PackIcon Kind="EyeCircleOutline" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.ColumnSpan="1" Grid.Row="0">
@@ -232,88 +179,135 @@
                             </Button.Style>
                         </Button>
                     </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15" Orientation="Horizontal">
+                        <materialDesign:PopupBox StaysOpen="True" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" PlacementMode="TopAndAlignCentres"  ToggleCheckedContentCommand="{Binding FloatingActionDemoCommand}" ToggleCheckedContentCommandParameter="wowsers" ToolTip="Configuratie" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White">
+                            <materialDesign:PopupBox.ToggleCheckedContent>
+                                <materialDesign:PackIcon Kind="Cog" Width="24" Height="24" />
+                            </materialDesign:PopupBox.ToggleCheckedContent>
+                            <StackPanel>
+                                <materialDesign:PopupBox ToolTip="Nieuw Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0">
+                                    <materialDesign:PopupBox.ToggleCheckedContent>
+                                        <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
+                                    </materialDesign:PopupBox.ToggleCheckedContent>
+                                    <Grid Width="300" Margin="8,8,8,8" Background="#FF323232">
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                                <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
+                                                <Setter Property="Margin" Value="8,8,8,8" />
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="NIEUW TOESTEL" />
+                                        <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                            <ComboBoxItem Content="operatief" Foreground="#FF323232"/>
+                                            <ComboBoxItem Content="onderhoud" Foreground="#FF323232"/>
+                                            <ComboBoxItem Content="verwijderd" Foreground="#FF323232"/>
+                                        </ComboBox>
+                                        <ComboBox Grid.Column="0" Grid.Row="3" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                                        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Button Content="_Annuleren" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:PopupBox>
+
+                                <materialDesign:PopupBox ToolTip="Editeer Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0">
+                                    <materialDesign:PopupBox.ToggleCheckedContent>
+                                        <materialDesign:PackIcon Kind="PlusThick" Width="24" Height="24" />
+                                    </materialDesign:PopupBox.ToggleCheckedContent>
+                                    <Grid Width="300" Margin="8,8,8,8" Background="#FF323232">
+                                        <Grid.Resources>
+                                            <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
+                                                <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
+                                                <Setter Property="Margin" Value="8,8,8,8" />
+                                            </Style>
+                                        </Grid.Resources>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="EDITEER TOESTEL" />
+                                        <ListView Grid.Column="0" Grid.Row="1"></ListView>
+                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}">
+                                            <ComboBoxItem Content="operatief" Foreground="#FF323232"/>
+                                            <ComboBoxItem Content="onderhoud" Foreground="#FF323232"/>
+                                            <ComboBoxItem Content="verwijderd" Foreground="#FF323232"/>
+                                        </ComboBox>
+                                        <StackPanel Grid.Row="5" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                                            <Button Content="_Updaten" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                            <Button Content="_Annuleren" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                                <Button.Style>
+                                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
+                                                        <Setter Property="Foreground" Value="#89FFFFFF" />
+                                                    </Style>
+                                                </Button.Style>
+                                            </Button>
+                                        </StackPanel>
+                                    </Grid>
+                                </materialDesign:PopupBox>
+                            </StackPanel>
+                        </materialDesign:PopupBox>
+                    </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
-                        <ListView Name="ListViewDeviceTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="375">
-                        <ListView.View>
+                        <ListView Name="ListViewDeviceTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="330">
+                            <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="№">
-                                    <GridViewColumn.HeaderContainerStyle>
-                                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                                            <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="#FF323232" />
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                        </Style>
-                                    </GridViewColumn.HeaderContainerStyle>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding Toestelnummer}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Device Name">
-                                    <GridViewColumn.HeaderContainerStyle>
-                                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                                            <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="#FF323232" />
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                        </Style>
-                                    </GridViewColumn.HeaderContainerStyle>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding Toestelnaam}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="DeviceType">
-                                    <GridViewColumn.HeaderContainerStyle>
-                                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                                            <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="#FF323232" />
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                        </Style>
-                                    </GridViewColumn.HeaderContainerStyle>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding Toesteltypenaam}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
-                                <GridViewColumn Header="Status">
-                                    <GridViewColumn.HeaderContainerStyle>
-                                        <Style TargetType="{x:Type GridViewColumnHeader}">
-                                            <Setter Property="FontSize" Value="16" />
-                                            <Setter Property="Foreground" Value="#FF323232" />
-                                            <Setter Property="Background" Value="Transparent" />
-                                            <Setter Property="BorderBrush" Value="Transparent" />
-                                            <Setter Property="BorderThickness" Value="0 0 0 0" />
-                                        </Style>
-                                    </GridViewColumn.HeaderContainerStyle>
-                                    <GridViewColumn.CellTemplate>
-                                        <DataTemplate>
-                                            <Label FontWeight="Bold" Content="{Binding Status}" />
-                                        </DataTemplate>
-                                    </GridViewColumn.CellTemplate>
-                                </GridViewColumn>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnummer, StringFormat='    {0}' }" Header="№"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat='    {0}' }" Header="Device Name"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Status, StringFormat=' {0}' }" Header="Status"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toesteltypenaam, StringFormat='    {0}'}" Header="Device Type"/>
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,15,15,0">
+                    <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="15,25,15,0">
                         <Label Content="Device №" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxToestelNummer" InputScope="Number"/>
+                        <TextBox Name="TextBoxToestelNummer" TextChanged="TextBoxToestelNummer_TextChanged"/>
                         <Label Content="Device Name" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxToestelNaam"/>
+                        <TextBox Name="TextBoxToestelNaam" InputScope="Number" TextChanged="TextBoxToestelNaam_TextChanged"/>
                         <Label Content="Device Type" Margin="-5,0,0,0"/>
-                        <ComboBox Name="ComboBoxToestelType"/>
-                        <Button Name="ButtonDeviceSearch" Content="Search" Margin="0,15,0,0" Click="ButtonDeviceSearch_Click" IsDefault="True"/>
+                        <ComboBox Name="ComboBoxToestelType" SelectionChanged="ComboBoxToestelType_SelectionChanged"/>
+                        <Button Name="ButtonDeviceSearch" Content="Search" Margin="0,15,0,-15" Click="ButtonDeviceSearch_Click" IsDefault="True" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5"/>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
+                    <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
                         <RadioButton Name="RadioButtonDeviceAll" Margin="2" Content="All" Checked="RadioButtonDeviceAll_Checked"/>
                         <RadioButton Name="RadioButtonDeviceAvailable" Margin="2" Content="Available" Checked="RadioButtonDeviceAvailable_Checked"/>
                         <RadioButton Name="RadioButtonDeviceService" Margin="2" Content="Service" Checked="RadioButtonDeviceService_Checked"/>
@@ -323,7 +317,7 @@
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Image Width="70" Source="/Images/SettingsIconAdmin.png"/>
+                    <materialDesign:PackIcon Kind="PencilCircleOutline" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -371,45 +365,12 @@
                             </Button.Style>
                         </Button>
                     </StackPanel>
-                
                 </Grid>
             </TabItem>
             <TabItem Name="TabItemLogOut" Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <Button Name="ButtonLogOut" Width="100" Height="100" Margin="0,-8,0,0" Click="ButtonLogOut_Click">
-                        <Button.Background>
-                            <ImageBrush ImageSource="/Images/signOutIcon.png">
-                                <ImageBrush.RelativeTransform>
-                                    <TransformGroup>
-                                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleX="0.7" ScaleY="0.7"/>
-                                        <SkewTransform CenterX="0.5" CenterY="0.5"/>
-                                        <RotateTransform CenterX="0.5" CenterY="0.5"/>
-                                        <TranslateTransform/>
-                                    </TransformGroup>
-                                </ImageBrush.RelativeTransform>
-                            </ImageBrush>
-                        </Button.Background>
-                        <Button.Resources>
-                            <Style TargetType="{x:Type Button}">
-                                <Setter Property="Background" Value="{x:Null}"/>
-                                <Setter Property="Foreground" Value="{x:Null}"/>
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="{x:Type Button}">
-                                            <Border Background="{TemplateBinding Background}">
-                                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                            </Border>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                                <Style.Triggers>
-                                    <Trigger Property="IsEnabled" Value="True">
-                                        <Setter Property="Background" Value="{x:Null}"/>
-                                        <Setter Property="Foreground" Value="{x:Null}"/>
-                                    </Trigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Button.Resources>
+                    <Button Name="ButtonLogOut" Width="100" Height="100" Click="ButtonLogOut_Click" Margin="-8,0,0,0" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <materialDesign:PackIcon Kind="LogoutVariant" Width="70" Height="70" Foreground="#FF323232"/>
                     </Button>
                 </TabItem.Header>
             </TabItem>

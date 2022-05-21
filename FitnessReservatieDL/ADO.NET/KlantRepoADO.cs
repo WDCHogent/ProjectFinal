@@ -120,5 +120,47 @@ namespace FitnessReservatieDL.ADO.NET
 
             }
         }
+
+        public IReadOnlyList<Klant> ZoekKlanten(int klantnummer, string zoekterm)
+        {
+            string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
+            if (klantnummer > 0) query += "WHERE klantnummer=@klantnummer";
+            else if (!string.IsNullOrWhiteSpace(zoekterm)) query += "WHERE naam LIKE '%' + @zoekterm + '%' OR voornaam LIKE '%' + @zoekterm + '%'";
+            Klant klant = null;
+            List<Klant> klanten = new List<Klant>();
+            SqlConnection conn = GetConnection();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                conn.Open();
+                try
+                {
+                    if (klantnummer > 0)
+                    {
+                        cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
+                    }
+                    else if (zoekterm != null)
+                    {
+                        cmd.Parameters.AddWithValue("@zoekterm", zoekterm);
+                    }
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        klant = new Klant((int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"]);
+                        klanten.Add(klant);
+                    }
+                    reader.Close();
+                    return klanten.AsReadOnly();
+                }
+                catch (Exception ex)
+                {
+                    throw new KlantRepoADOException("KlantRepoADO - ZoekKlant", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
     }
 }
