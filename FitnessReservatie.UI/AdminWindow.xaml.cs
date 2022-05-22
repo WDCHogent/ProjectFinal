@@ -1,6 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Enums;
-using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
@@ -122,7 +121,7 @@ namespace FitnessReservatie.UI
         private void ComboBoxToestelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonDeviceSearch.IsEnabled = true;
-            if (ComboBoxToestelType.SelectedIndex!=-1)
+            if (ComboBoxToestelType.SelectedIndex != -1)
             {
                 TextBoxToestelNaam.IsEnabled = false;
                 TextBoxToestelNummer.IsEnabled = false;
@@ -197,10 +196,12 @@ namespace FitnessReservatie.UI
 
         private void ButtonEdit_Opened(object sender, RoutedEventArgs e)
         {
-            if (ListViewDeviceTracker.SelectedItem.ToString().Contains("verwijderd"))
+            if (ListViewDeviceTracker.SelectedItem==null) ComboBoxStatusUpdate.IsEnabled = false;
+            else if (!ListViewDeviceTracker.SelectedItem.ToString().Contains("verwijderd"))
             {
-                ComboBoxItemVerwijderd.IsEnabled = false;
+                ComboBoxStatusUpdate.IsEnabled = true;
             }
+            else ComboBoxStatusUpdate.IsEnabled = false;
         }
 
         private void ButtonStatusUpdate_Click(object sender, RoutedEventArgs e)
@@ -214,7 +215,7 @@ namespace FitnessReservatie.UI
                 case MessageBoxResult.OK: break;
                 case MessageBoxResult.Cancel: break;
             }
-        }      
+        }
         //
 
 
