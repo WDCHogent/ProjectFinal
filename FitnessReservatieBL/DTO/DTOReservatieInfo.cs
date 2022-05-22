@@ -6,6 +6,7 @@ namespace FitnessReservatieBL.DTO
     {
         public DTOReservatieInfo(int reservatienummer, int klantnummer, string klantnaam, string klantvoornaam, string klantemail, DateTime datum, int beginuur, int einduur, string toestelnaam)
         {
+            Reservatienummer = reservatienummer;
             Klantnummer = klantnummer;
             Klantnaam = klantnaam;
             Klantvoornaam = klantvoornaam;
@@ -16,6 +17,7 @@ namespace FitnessReservatieBL.DTO
             Toestelnaam = toestelnaam;
         }
 
+        public int Reservatienummer { get; set; }
         public int Klantnummer { get; set; }
         public string Klantnaam { get; set; }
         public string Klantvoornaam { get; set; }
@@ -27,7 +29,7 @@ namespace FitnessReservatieBL.DTO
 
         public override string ToString()
         {
-            return $"{Klantnummer},{Klantnaam},{Klantvoornaam},{Klantemail},{Datum},{Beginuur},{Einduur},{Toestelnaam}";
+            return $"{Reservatienummer},{Klantnummer},{Klantnaam},{Klantvoornaam},{Klantemail},{Datum},{Beginuur},{Einduur},{Toestelnaam}";
         }
     }
 }

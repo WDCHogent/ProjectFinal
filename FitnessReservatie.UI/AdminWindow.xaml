@@ -122,11 +122,21 @@
                             </ListView.View>
                         </ListView>
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,25,15,0">
-                        <Label Content="Customer №" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxKlantNummer" InputScope="Number" TextChanged="TextBoxKlantNummer_TextChanged"/>
-                        <Label Content="Customer Name" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxKlantNaam" TextChanged="TextBoxKlantNaam_TextChanged"/>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,38,15,0">
+                        <TextBox Name="TextBoxKlantNummer" InputScope="Number" TextChanged="TextBoxKlantNummer_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Klantnummer" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <TextBox Name="TextBoxKlantNaam" TextChanged="TextBoxKlantNaam_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Klantnaam" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
                         <Button Name="ButtonCustomerSearch" Content="Search" Margin="0,15,0,-15" Click="ButtonCustomerSearch_Click" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5" IsDefault="True"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
@@ -136,7 +146,7 @@
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <materialDesign:PackIcon Kind="EyeCircleOutline" Width="70" Height="70" Foreground="#FF323232"/>
+                    <materialDesign:PackIcon Kind="ProgressWrench" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -287,13 +297,22 @@
                             </ListView.View>
                         </ListView>
                 </StackPanel>
-                    <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="15,25,15,0">
-                        <Label Content="Device №" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxToestelNummer" TextChanged="TextBoxToestelNummer_TextChanged"/>
-                        <Label Content="Device Name" Margin="-5,0,0,0"/>
-                        <TextBox Name="TextBoxToestelNaam" InputScope="Number" TextChanged="TextBoxToestelNaam_TextChanged"/>
-                        <Label Content="Device Type" Margin="-5,0,0,0"/>
-                        <ComboBox Name="ComboBoxToestelType" SelectionChanged="ComboBoxToestelType_SelectionChanged"/>
+                    <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="15,38,15,0">
+                        <TextBox Name="TextBoxToestelNummer" TextChanged="TextBoxToestelNummer_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Toestelnummer" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <TextBox Name="TextBoxToestelNaam" InputScope="Number" TextChanged="TextBoxToestelNaam_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Toestelnaam" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <ComboBox Name="ComboBoxToestelType" SelectionChanged="ComboBoxToestelType_SelectionChanged" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                         <Button Name="ButtonDeviceSearch" Content="Search" Margin="0,15,0,-15" Click="ButtonDeviceSearch_Click" IsDefault="True" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
@@ -306,26 +325,21 @@
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
-                    <materialDesign:PackIcon Kind="PencilCircleOutline" Width="70" Height="70" Foreground="#FF323232"/>
+                    <materialDesign:PackIcon Kind="CalendarTextOutline" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="2*"/>
                         <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.ColumnSpan="3" Grid.Row="0">
-                        <Button Content="Device Management" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
+                        <Button Content="Reservation Management" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -353,6 +367,72 @@
                                 </Style>
                             </Button.Style>
                         </Button>
+                    </StackPanel>
+                    <StackPanel Grid.Column="0" Grid.Row="1" Grid.RowSpan="2">
+                        <ListView Name="ListViewReservationTracker" Margin="15" FontFamily="Trebuchet MS" FontSize="16" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" Foreground="#FF323232" MaxHeight="330">
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Reservatienummer, StringFormat=' {0}'}" Header="№"/>
+                                    <GridViewColumn Header="Customer Name">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} {1}">
+                                                            <Binding Path="Klantnaam"/>
+                                                            <Binding Path="Klantvoornaam"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Datum, StringFormat=' {0}'}" Header="Date"/>
+                                    <GridViewColumn Header="Timeslot">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <TextBlock>
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0}h - {1}h">
+                                                            <Binding Path="Beginuur"/>
+                                                            <Binding Path="Einduur"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat=' {0}'}" Header="Device Name"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Top" Margin="15,38,15,0">
+                        <TextBox Name="TextBoxReservationNummer" InputScope="Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Reservatienummer" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <TextBox Name="TextBoxCustomerNummer" InputScope="Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="klantnummer" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <TextBox Name="TextBoxDeviceNummer" InputScope="Number" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            <materialDesign:HintAssist.Hint>
+                                <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
+                                    <TextBlock Text="Toestelnummer" />
+                                </StackPanel>
+                            </materialDesign:HintAssist.Hint>
+                        </TextBox>
+                        <Button Name="ButtonReservationSearch" Content="Search" Margin="0,15,0,-15" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5" IsDefault="True"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">
+                        <RadioButton Name="RadioButtonReservationAll" Margin="2" Content="All"/>
                     </StackPanel>
                 </Grid>
             </TabItem>
