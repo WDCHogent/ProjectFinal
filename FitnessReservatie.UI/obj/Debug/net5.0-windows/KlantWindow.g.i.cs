@@ -297,7 +297,7 @@ namespace FitnessReservatie.UI {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/FitnessReservatie.UI;component/klantwindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/FitnessReservatie.UI;V1.0.0.0;component/klantwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\KlantWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

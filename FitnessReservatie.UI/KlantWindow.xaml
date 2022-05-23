@@ -69,7 +69,7 @@
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.ColumnSpan="2" Grid.Row="0">
-                        <Button Content="My Personal Information" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                        <Button Content="Mijn Persoonlijke Info" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -99,10 +99,10 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
-                        <Label Name="LabelKlantnummer" Content="Clientnumber" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelNaam" Content="Last Name" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelVoornaam" Content="First Name" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelMailadres" Content="Email Address" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelKlantnummer" Content="Klantnummer" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelNaam" Content="Naam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelVoornaam" Content="Voornaam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Name="LabelMailadres" Content="mailadres" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" >
                         <Label Name="LabelKlantnummerReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
@@ -117,7 +117,7 @@
                     <materialDesign:PackIcon Kind="InformationOutline" Width="70" Height="70" Foreground="#FF323232"/>
                 </TabItem.Header>
                 <StackPanel>
-                    <Button Content="My Reservations" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
+                    <Button Content="Mijn Reservaties" Margin="150,0,150,15" Height="40" FontSize="16" FontFamily="Unispace">
                         <Button.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="10"/>
@@ -149,13 +149,13 @@
                             <ListView.View>
                                 <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Reservatienummer, StringFormat='   {0}' }" Header="№"/>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Datum, StringFormat='yyyy-MM-dd'}" Header="Date"/>
-                                <GridViewColumn Header="Timeslot">
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Datum, StringFormat='yyyy-MM-dd'}" Header="Datum"/>
+                                <GridViewColumn Header="Tijdslot">
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <TextBlock>
                                                 <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}   {0}h - {1}h">
+                                                    <MultiBinding StringFormat="{}   {0}u - {1}u">
                                                         <Binding Path="Beginuur"/>
                                                         <Binding Path="Einduur"/>
                                                     </MultiBinding>
@@ -164,7 +164,7 @@
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
-                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat=' {0}'}" Header="Device"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat=' {0}'}" Header="Toestel"/>
                             </GridView>
                             </ListView.View>
                         </ListView>
@@ -193,7 +193,7 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.ColumnSpan="4" Grid.Row="0">
-                        <Button Content="Make Reservation" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
+                        <Button Content="Maak Nieuwe Reservatie" Margin="150,0,150,20" Height="40" FontSize="16" FontFamily="Unispace">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -223,9 +223,9 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1">
-                        <Label Name="LabelDatePickerSelector" Content="Date : " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
-                        <Label Name="LabelToestelSelector1"  Content="Device type : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
-                        <Label Name="LabelTijdslotSelector1" Content="Time slot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Name="LabelDatePickerSelector" Content="Datum : " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Name="LabelToestelSelector1"  Content="Toesteltype : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Name="LabelTijdslotSelector1" Content="Tijdslot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1">
@@ -236,7 +236,7 @@
                                 </Style>
                             </DatePicker.Resources>
                         </DatePicker>
-                        <ComboBox Name="ComboBoxToesteltypeSelector1" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxToesteltypeSelector1_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxToesteltypeSelector1" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxToesteltypeSelector1_SelectionChanged" IsEnabled="False">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -246,7 +246,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom">
-                        <ComboBox Name="ComboBoxBeginuurSelector1" Text="Please Select" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxBeginuurSelector1_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxBeginuurSelector1" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxBeginuurSelector1_SelectionChanged" IsEnabled="False">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -255,11 +255,11 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="1">
-                        <Label Content="h" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,125,0,0"/>
+                        <Label Content="u" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,125,0,0"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3" Grid.Row="1" VerticalAlignment="Bottom">
                         <Grid>
-                            <ComboBox Name="ComboBoxEinduurSelector1" Text="Please Select" Grid.Column="6" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxEinduurSelector1_SelectionChanged" IsEnabled="False">
+                            <ComboBox Name="ComboBoxEinduurSelector1" Grid.Column="6" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" SelectionChanged="ComboBoxEinduurSelector1_SelectionChanged" IsEnabled="False">
                                 <ComboBox.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="5"/>
@@ -269,20 +269,20 @@
                         </Grid>
                 </StackPanel>
                     <StackPanel Grid.Column="4" Grid.Row="1">
-                        <Label Content="h" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,125,0,0"/>
+                        <Label Content="u" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,125,0,0"/>
                     </StackPanel>
 
 
                     <StackPanel Grid.Column="0" Grid.Row="3">
-                        <Label Name="LabelToestelSelector2"  Content="Device type : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
+                        <Label Name="LabelToestelSelector2"  Content="Toesteltype : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="0" Grid.Row="4">
-                        <Label Name="LabelTijdslotSelector2" Content="Time slot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
+                        <Label Name="LabelTijdslotSelector2" Content="Tijdslot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
                     </StackPanel>
                     
                     <StackPanel Grid.Column="1" Grid.Row="3">
-                        <ComboBox Name="ComboBoxToesteltypeSelector2" Text="Please Select" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" IsEnabled="False" SelectionChanged="ComboBoxToesteltypeSelector2_SelectionChanged">
+                        <ComboBox Name="ComboBoxToesteltypeSelector2" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" IsEnabled="False" SelectionChanged="ComboBoxToesteltypeSelector2_SelectionChanged">
                         <ComboBox.Resources>
                             <Style TargetType="Border">
                                 <Setter Property="CornerRadius" Value="5"/>
@@ -292,11 +292,11 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="right" Margin="0,0,30,0">
-                        <CheckBox Name="CheckboxAddAnother" Content="Add another." Checked="CheckboxAddAnother_Checked" Unchecked="CheckboxAddAnother_Unchecked" IsEnabled="false"/>
+                        <CheckBox Name="CheckboxAddAnother" Content="Voeg extra toestel toe." Checked="CheckboxAddAnother_Checked" Unchecked="CheckboxAddAnother_Unchecked" IsEnabled="false"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom">
-                        <ComboBox Name="ComboBoxBeginuurSelector2" Text="Please Select" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxBeginuurSelector2_SelectionChanged" IsEnabled="False">
+                        <ComboBox Name="ComboBoxBeginuurSelector2" Grid.Column="5" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxBeginuurSelector2_SelectionChanged" IsEnabled="False">
                             <ComboBox.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>
@@ -305,7 +305,7 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="4">
-                        <Label Name="LabelHour1" Content="h" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,15,0,0" Visibility="Hidden"/>
+                        <Label Name="LabelHour1" Content="u" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,15,0,0" Visibility="Hidden"/>
                     </StackPanel>
                     <StackPanel Grid.Column="3" Grid.Row="4" VerticalAlignment="Bottom">
                         <ComboBox Name="ComboBoxEinduurSelector2" Text="Please Select" Grid.Column="6" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" SelectionChanged="ComboBoxEinduurSelector2_SelectionChanged" IsEnabled="False" SelectedIndex="0">
@@ -317,13 +317,13 @@
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="4" Grid.Row="4">
-                        <Label Name="LabelHour2" Content="h" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,15,0,0" Visibility="Hidden"/>
+                        <Label Name="LabelHour2" Content="u" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,15,0,0" Visibility="Hidden"/>
                     </StackPanel>
 
 
 
                     <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="5" Margin="0,15,0,0">
-                        <Button Name="ButtonBevestigReservatie" Content="Confirm Selction" Margin="300,0,300,0" Height="35" FontSize="12" FontFamily="Unispace" IsEnabled="False" Click="ButtonBevestigReservatie_Click" Style="{StaticResource MaterialDesignRaisedButton}" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="10"/>
+                        <Button Name="ButtonBevestigReservatie" Content="Bevestig Selectie" Margin="300,0,300,0" Height="35" FontSize="12" FontFamily="Unispace" IsEnabled="False" Click="ButtonBevestigReservatie_Click" Style="{StaticResource MaterialDesignRaisedButton}" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="10"/>
                     </StackPanel>
                 </Grid>
             </TabItem>

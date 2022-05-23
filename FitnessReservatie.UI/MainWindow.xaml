@@ -41,7 +41,7 @@
             <materialDesign:HintAssist.Hint>
                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
                     <materialDesign:PackIcon Kind="AccountOutline" />
-                    <TextBlock Text=" Customer Number" />
+                    <TextBlock Text=" Klantnummer" />
                 </StackPanel>
             </materialDesign:HintAssist.Hint>
         </TextBox>
@@ -49,7 +49,7 @@
             <materialDesign:HintAssist.Hint>
                 <StackPanel Orientation="Horizontal" Margin="-2 0 0 0">
                     <materialDesign:PackIcon Kind="At" />
-                    <TextBlock Text=" Email Address" />
+                    <TextBlock Text=" Mailadres" />
                 </StackPanel>
             </materialDesign:HintAssist.Hint>
         </TextBox>
