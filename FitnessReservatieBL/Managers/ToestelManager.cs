@@ -1,4 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.Domeinen.Eigenschappen;
 using FitnessReservatieBL.Domeinen.Enums;
 using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Exceptions;
@@ -42,11 +43,11 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public void UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
+        public string UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
         {
             try
             {
-                _toestelRepo.UpdateToestelStatus(toestelInfo, toestelStatus);
+                return _toestelRepo.UpdateToestelStatus(toestelInfo, toestelStatus);
             }
             catch (Exception ex)
             {
@@ -54,11 +55,15 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public void VerwijderToestel(DTOToestelInfo toestelInfo)
+        public void SchrijfToestelInDB(string toestelnaam, string status, string toesteltypenaam)
         {
             try
             {
-                _toestelRepo.VerwijderToestel(toestelInfo);
+                Toestel toestel = new Toestel(toestelnaam, (Status)Enum.Parse(typeof(Status), status), new ToestelType(toesteltypenaam));
+                if (!_toestelRepo.BestaatToestel(toestel))
+                {
+                    _toestelRepo.SchrijfToestelInDB(toestel);     
+                }
             }
             catch (Exception ex)
             {

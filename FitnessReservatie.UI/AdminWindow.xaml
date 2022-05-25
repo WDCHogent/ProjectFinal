@@ -23,7 +23,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Situps.gif" Stretch="Uniform" Source="/Images/Situps.gif" Grid.ColumnSpan="2" Margin="0,0,972,-4"/>
+        <Image Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Situps.gif" Stretch="Uniform" Source="/Images/Situps.gif" Grid.ColumnSpan="2" Margin="0,0,972,-4"/>
         <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
         <TabControl TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="15" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
             <TabControl.Resources>
@@ -203,7 +203,7 @@
                                         <Grid.Resources>
                                             <Style TargetType="TextBox" BasedOn="{StaticResource MaterialDesignTextBox}">
                                                 <Setter Property="materialDesign:HintAssist.IsFloating" Value="True" />
-                                                <Setter Property="Margin" Value="8,8,8,8" />
+                                                <Setter Property="Margin" Value="8,8,8,8"/>
                                             </Style>
                                         </Grid.Resources>
                                         <Grid.ColumnDefinitions>
@@ -220,7 +220,7 @@
                                         <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                                         <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                                         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}">
+                                            <Button Name="ButtonNieuwToestel" Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="ButtonNieuwToestel_Click">
                                                 <Button.Style>
                                                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
                                                         <Setter Property="Foreground" Value="#89FFFFFF" />
@@ -238,7 +238,7 @@
                                     </Grid>
                                 </materialDesign:PopupBox>
 
-                                <materialDesign:PopupBox Name="ButtonEdit" ToolTip="Editeer Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0" Opened="ButtonEdit_Opened">
+                                <materialDesign:PopupBox Name="ButtonWijziging" ToolTip="Editeer Toestel" StaysOpen="True" IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Style="{StaticResource MaterialDesignMultiFloatingActionAccentPopupBox}" Background="#FF323232" BorderBrush="{x:Null}" Foreground="White" Margin="0,5,0,0" Opened="ButtonWijziging_Opened">
                                     <materialDesign:PopupBox.ToggleCheckedContent>
                                         <materialDesign:PackIcon Kind="Pencil" Width="24" Height="24" />
                                     </materialDesign:PopupBox.ToggleCheckedContent>
@@ -291,12 +291,12 @@
                                 <GridView>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnummer, StringFormat='    {0}' }" Header="№"/>
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat='    {0}' }" Header="Toestelnaam"/>
-                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status, StringFormat=' {0}' }" Header="Status"/>
+                                    <GridViewColumn DisplayMemberBinding="{Binding Path=Status, StringFormat=' {0}' }" Header="Status" />
                                     <GridViewColumn DisplayMemberBinding="{Binding Path=Toesteltypenaam, StringFormat='    {0}'}" Header="Toesteltype"/>
                                 </GridView>
                             </ListView.View>
                         </ListView>
-                </StackPanel>
+                    </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="1" VerticalAlignment="Top" Margin="15,38,15,0">
                         <TextBox Name="TextBoxToestelNummer" TextChanged="TextBoxToestelNummer_TextChanged" Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                             <materialDesign:HintAssist.Hint>
@@ -312,7 +312,7 @@
                                 </StackPanel>
                             </materialDesign:HintAssist.Hint>
                         </TextBox>
-                        <ComboBox Name="ComboBoxToestelType" SelectionChanged="ComboBoxToestelType_SelectionChanged" materialDesign:HintAssist.Hint="Status" materialDesign:HintAssist.IsFloating="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                        <ComboBox Name="ComboBoxToestelType" SelectionChanged="ComboBoxToestelType_SelectionChanged" materialDesign:HintAssist.Hint="ToestelType" materialDesign:HintAssist.IsFloating="True" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
                         <Button Name="ButtonDeviceSearch" Content="Zoek" Margin="0,15,0,-15" Click="ButtonDeviceSearch_Click" IsDefault="True" Style="{StaticResource MaterialDesignRaisedButton}" IsEnabled="false" Background="#FF323232" Foreground="White" BorderBrush="{x:Null}" materialDesign:ButtonAssist.CornerRadius="5"/>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom" Margin="15">

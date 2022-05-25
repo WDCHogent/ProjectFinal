@@ -9,7 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         x:Class="FitnessReservatie.UI.KlantWindow"
         mc:Ignorable="d"
-        Title="My Personal Panel" Height="548" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="Mijn Persoonlijk Panel" Height="548" Width="1500" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -24,7 +24,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
-        <Image Name="ImageMyReservation" Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="UniformToFill" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-110,-116,966,-4"/>
+        <Image Grid.Row="0" gif:ImageBehavior.AnimatedSource="/Images/Weights.gif" Stretch="UniformToFill" Source="/Images/Weights.gif" Grid.ColumnSpan="2" Margin="-110,-116,966,-4"/>
         <Rectangle Grid.Column="2" Grid.ColumnSpan="4" Grid.RowSpan="20" Fill="White" RadiusX="10" RadiusY="10" Margin="0,0,-10,0" VerticalAlignment="Stretch"/>
         <TabControl Name="TabControlKlant" TabStripPlacement="Right" Grid.Column="2" Grid.RowSpan="20" Margin="10,0,-2,0" Padding="15" BorderBrush="{x:Null}" Background="White" VerticalAlignment="Stretch" Height="500" Style="{StaticResource MaterialDesignNavigationRailTabControl}">
             <TabControl.Resources>
@@ -53,7 +53,7 @@
                 </ControlTemplate>
             </TabControl.Resources>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
-                <Label Name="LabelWelkomKlant" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Content="Welcome Back " HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF323232" FontFamily="Unispace" FontSize="30"/>
+                <Label Name="LabelWelkomKlant" Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0" Content="Welkom Terug " HorizontalAlignment="Left" Height="50" VerticalAlignment="Center" VerticalContentAlignment="Center" Foreground="#FF323232" FontFamily="Unispace" FontSize="30"/>
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
                 <TabItem.Header>
@@ -99,10 +99,10 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1" HorizontalAlignment="Right">
-                        <Label Name="LabelKlantnummer" Content="Klantnummer" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelNaam" Content="Naam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelVoornaam" Content="Voornaam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
-                        <Label Name="LabelMailadres" Content="mailadres" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Content="Klantnummer" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Content="Naam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Content="Voornaam" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
+                        <Label Content="mailadres" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" HorizontalAlignment="Right"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Grid.Row="1" >
                         <Label Name="LabelKlantnummerReturned" Content="" Margin="25" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232"/>
@@ -145,9 +145,9 @@
                             </Style>
                         </Button.Style>
                     </Button>
-                    <ListView Name="ListViewReservations" Margin="15" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" MaxHeight="375" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
-                            <ListView.View>
-                                <GridView>
+                    <ListView Name="ListViewReservaties" Margin="15" FontFamily="Trebuchet MS" FontSize="16" Foreground="#FF323232" MaxHeight="375" HorizontalContentAlignment="Center" HorizontalAlignment="Center">
+                        <ListView.View>
+                            <GridView>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Reservatienummer, StringFormat='   {0}' }" Header="№"/>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Datum, StringFormat='yyyy-MM-dd'}" Header="Datum"/>
                                 <GridViewColumn Header="Tijdslot">
@@ -166,8 +166,8 @@
                                 </GridViewColumn>
                                 <GridViewColumn DisplayMemberBinding="{Binding Path=Toestelnaam, StringFormat=' {0}'}" Header="Toestel"/>
                             </GridView>
-                            </ListView.View>
-                        </ListView>
+                        </ListView.View>
+                    </ListView>
                 </StackPanel>
             </TabItem>
             <TabItem Width="100" Height="100" Template="{StaticResource simpleTI}">
@@ -223,9 +223,9 @@
                         </Button>
                     </StackPanel>
                     <StackPanel Grid.Column="0" Grid.Row="1">
-                        <Label Name="LabelDatePickerSelector" Content="Datum : " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
-                        <Label Name="LabelToestelSelector1"  Content="Toesteltype : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
-                        <Label Name="LabelTijdslotSelector1" Content="Tijdslot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Content="Datum : " Grid.Column="0" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label  Content="Toesteltype : " Grid.Column="2" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
+                        <Label Content="Tijdslot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1">
@@ -267,7 +267,7 @@
                                 </ComboBox.Resources>
                             </ComboBox>
                         </Grid>
-                </StackPanel>
+                    </StackPanel>
                     <StackPanel Grid.Column="4" Grid.Row="1">
                         <Label Content="u" HorizontalContentAlignment="Left" VerticalContentAlignment="Bottom" Margin="-40,125,0,0"/>
                     </StackPanel>
@@ -280,19 +280,19 @@
                     <StackPanel Grid.Column="0" Grid.Row="4">
                         <Label Name="LabelTijdslotSelector2" Content="Tijdslot : " Grid.Column="4" Grid.Row="2" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="15" FontFamily="Trebuchet MS" Visibility="Hidden"/>
                     </StackPanel>
-                    
+
                     <StackPanel Grid.Column="1" Grid.Row="3">
                         <ComboBox Name="ComboBoxToesteltypeSelector2" Grid.Column="3" Grid.Row="2" HorizontalContentAlignment="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Width="120" Margin="15" Visibility="Hidden" IsEnabled="False" SelectionChanged="ComboBoxToesteltypeSelector2_SelectionChanged">
-                        <ComboBox.Resources>
-                            <Style TargetType="Border">
-                                <Setter Property="CornerRadius" Value="5"/>
-                            </Style>
-                        </ComboBox.Resources>
-                    </ComboBox>
+                            <ComboBox.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="5"/>
+                                </Style>
+                            </ComboBox.Resources>
+                        </ComboBox>
                     </StackPanel>
 
                     <StackPanel Grid.Column="3" Grid.Row="3" VerticalAlignment="Center" HorizontalAlignment="right" Margin="0,0,30,0">
-                        <CheckBox Name="CheckboxAddAnother" Content="Voeg extra toestel toe." Checked="CheckboxAddAnother_Checked" Unchecked="CheckboxAddAnother_Unchecked" IsEnabled="false"/>
+                        <CheckBox Name="CheckboxVoegToestelToe" Content="Voeg extra toestel toe." Checked="CheckboxVoegToestelToe_Checked" Unchecked="CheckboxVoegToestelToe_Unchecked" IsEnabled="false"/>
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="4" VerticalAlignment="Bottom">

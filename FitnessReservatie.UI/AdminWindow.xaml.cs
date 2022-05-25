@@ -1,5 +1,6 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Domeinen.Enums;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
@@ -138,7 +139,7 @@ namespace FitnessReservatie.UI
             ListViewDeviceTracker.Items.Clear();
             bool x = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
             string toestelnaam = TextBoxToestelNaam.Text.Trim();
-            string toesteltype;
+            var toesteltype = "";
             if (ComboBoxToestelType.SelectedIndex == -1)
             {
                 toesteltype = null;
@@ -151,6 +152,7 @@ namespace FitnessReservatie.UI
             TextBoxToestelNummer.Clear();
             TextBoxToestelNaam.Clear();
             ComboBoxToestelType.SelectedIndex = -1;
+            ButtonDeviceSearch.IsEnabled = false;
         }
 
         private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
@@ -194,10 +196,19 @@ namespace FitnessReservatie.UI
             }
         }
 
-        private void ButtonEdit_Opened(object sender, RoutedEventArgs e)
+        private void ButtonNieuwToestel_Click(object sender, RoutedEventArgs e)
         {
-            if (ListViewDeviceTracker.SelectedItem==null) ComboBoxStatusUpdate.IsEnabled = false;
-            else if (!ListViewDeviceTracker.SelectedItem.ToString().Contains("verwijderd"))
+
+        }
+
+
+        private void ButtonWijziging_Opened(object sender, RoutedEventArgs e)
+        {
+            if (ListViewDeviceTracker.SelectedValue == null)
+            {
+                ComboBoxStatusUpdate.IsEnabled = false;
+            }
+            else if (!ListViewDeviceTracker.SelectedValue.ToString().Contains("verwijderd"))
             {
                 ComboBoxStatusUpdate.IsEnabled = true;
             }
@@ -208,13 +219,18 @@ namespace FitnessReservatie.UI
         {
             ComboBoxItem nieuweStatus = (ComboBoxItem)ComboBoxStatusUpdate.SelectedItem;
             MessageBoxResult result = MessageBox.Show($"U staat op het punt de status te wijzigen van \r\r >>> {ListViewDeviceTracker.SelectedItem.ToString()} naar {nieuweStatus.Content.ToString()} <<< \r\r" +
-                $"Bent u zeker dat u verder wil gaan?", "---", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
+                $"Bent u zeker dat u verder wil gaan?", "Opgelet!", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
-            switch (result)
+            if (result == MessageBoxResult.OK)
             {
-                case MessageBoxResult.OK: break;
-                case MessageBoxResult.Cancel: break;
+                string updateToestel = _toestelManager.UpdateToestelStatus((DTOToestelInfo)ListViewDeviceTracker.SelectedValue, nieuweStatus.Content.ToString());
+                MessageBox.Show(updateToestel, "");
             }
+
+            ListViewDeviceTracker.Items.Clear();
+            RadioButtonDeviceAll_Checked(sender, e);
+
+            ComboBoxStatusUpdate.SelectedIndex = -1;
         }
         //
 

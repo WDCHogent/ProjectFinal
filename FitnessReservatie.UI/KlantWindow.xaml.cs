@@ -88,7 +88,7 @@ namespace FitnessReservatie.UI
             _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer));
             foreach (var reservatieKlant in _reservatiesKlant)
             {
-                ListViewReservations.Items.Add(reservatieKlant);
+                ListViewReservaties.Items.Add(reservatieKlant);
             }
 
             DatePickerDatumSelector.BlackoutDates.AddDatesInPast();
@@ -103,8 +103,8 @@ namespace FitnessReservatie.UI
         private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             //Checkbox controle en reset
-            CheckboxAddAnother.IsChecked = false;
-            CheckboxAddAnother.IsEnabled = false;
+            CheckboxVoegToestelToe.IsChecked = false;
+            CheckboxVoegToestelToe.IsEnabled = false;
             //
 
             //Cleart inputvelden bij verandering datum
@@ -152,8 +152,8 @@ namespace FitnessReservatie.UI
         private void ComboBoxToesteltypeSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Checkbox controle en reset
-            CheckboxAddAnother.IsChecked = false;
-            CheckboxAddAnother.IsEnabled = false;
+            CheckboxVoegToestelToe.IsChecked = false;
+            CheckboxVoegToestelToe.IsEnabled = false;
             //
 
             //Cleart inputvelden bij verandering Toesteltype 1
@@ -218,7 +218,7 @@ namespace FitnessReservatie.UI
         private void ComboBoxBeginuurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             //Checkbox controle en reset
-            CheckboxAddAnother.IsChecked = false;
+            CheckboxVoegToestelToe.IsChecked = false;
             ButtonBevestigReservatie.IsEnabled = true;
 
             //Cleart inputvelden bij verandering Toesteltype 1
@@ -277,7 +277,7 @@ namespace FitnessReservatie.UI
             //
         }
 
-        private void CheckboxAddAnother_Checked(object sender, RoutedEventArgs e)
+        private void CheckboxVoegToestelToe_Checked(object sender, RoutedEventArgs e)
         {
             LabelToestelSelector2.Visibility = Visibility.Visible;
             LabelTijdslotSelector2.Visibility = Visibility.Visible;
@@ -291,7 +291,7 @@ namespace FitnessReservatie.UI
             ComboBoxBeginuurSelector2.IsEnabled = false;
             ComboBoxEinduurSelector2.IsEnabled = false;
         }
-        private void CheckboxAddAnother_Unchecked(object sender, RoutedEventArgs e)
+        private void CheckboxVoegToestelToe_Unchecked(object sender, RoutedEventArgs e)
         {
             LabelToestelSelector2.Visibility = Visibility.Hidden;
             LabelTijdslotSelector2.Visibility = Visibility.Hidden;
@@ -308,8 +308,8 @@ namespace FitnessReservatie.UI
 
         private void ComboBoxEinduurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            CheckboxAddAnother.IsEnabled = true;
-            CheckboxAddAnother.IsChecked = false;
+            CheckboxVoegToestelToe.IsEnabled = true;
+            CheckboxVoegToestelToe.IsChecked = false;
 
             ComboBoxToesteltypeSelector2.Items.Clear();
             ComboBoxBeginuurSelector2.Items.Clear();
@@ -317,15 +317,15 @@ namespace FitnessReservatie.UI
             //Beginuur1.Value = 21u
             if (Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue) == _tijdslotItemsSource[_tijdslotItemsSource.Count - 2].Tslot || _aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) > _maxAantalTijdsloten)
             {
-                CheckboxAddAnother.IsEnabled = false;
-                CheckboxAddAnother.IsChecked = false;
+                CheckboxVoegToestelToe.IsEnabled = false;
+                CheckboxVoegToestelToe.IsChecked = false;
 
                 foreach (var reservatieKlantVoorDagX in _klantReservatiesVoorDagX)
                 {
                     if (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) == reservatieKlantVoorDagX.Beginuur)
                     {
-                        CheckboxAddAnother.IsEnabled = false;
-                        CheckboxAddAnother.IsChecked = false;
+                        CheckboxVoegToestelToe.IsEnabled = false;
+                        CheckboxVoegToestelToe.IsChecked = false;
                     }
                 }
             }
@@ -336,30 +336,30 @@ namespace FitnessReservatie.UI
             {
                 if (ComboBoxEinduurSelector1.SelectedIndex == 1)
                 {
-                    CheckboxAddAnother.IsEnabled = false;
-                    CheckboxAddAnother.IsChecked = false;
+                    CheckboxVoegToestelToe.IsEnabled = false;
+                    CheckboxVoegToestelToe.IsChecked = false;
                 }
                 else if (ComboBoxEinduurSelector1.SelectedIndex == 0)
                 {
-                    CheckboxAddAnother.IsEnabled = true;
+                    CheckboxVoegToestelToe.IsEnabled = true;
                     ComboBoxBeginuurSelector2.Items.Add(Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue));
                     if (_aantalGereserveerdeUrenPerDatum >= _maxAantalTijdsloten - 1)
                     {
-                        CheckboxAddAnother.IsEnabled = false;
-                        CheckboxAddAnother.IsChecked = false;
+                        CheckboxVoegToestelToe.IsEnabled = false;
+                        CheckboxVoegToestelToe.IsChecked = false;
                     }
                     else if (_aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) > _maxAantalTijdsloten - 1)
                     {
-                        CheckboxAddAnother.IsEnabled = false;
-                        CheckboxAddAnother.IsChecked = false;
+                        CheckboxVoegToestelToe.IsEnabled = false;
+                        CheckboxVoegToestelToe.IsChecked = false;
                     }
                 }
                 foreach (var reservatieKlantVoorDagX in _klantReservatiesVoorDagX)
                 {
                     if (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) == reservatieKlantVoorDagX.Beginuur)
                     {
-                        CheckboxAddAnother.IsEnabled = false;
-                        CheckboxAddAnother.IsChecked = false;
+                        CheckboxVoegToestelToe.IsEnabled = false;
+                        CheckboxVoegToestelToe.IsChecked = false;
                     }
                 }
             }
@@ -369,24 +369,24 @@ namespace FitnessReservatie.UI
             //Beginuur1 tot = 18u
             else
             {
-                CheckboxAddAnother.IsEnabled = true;
+                CheckboxVoegToestelToe.IsEnabled = true;
                 ComboBoxBeginuurSelector2.Items.Add(Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue));
                 if (_aantalGereserveerdeUrenPerDatum >= _maxAantalTijdsloten - 1)
                 {
-                    CheckboxAddAnother.IsEnabled = false;
-                    CheckboxAddAnother.IsChecked = false;
+                    CheckboxVoegToestelToe.IsEnabled = false;
+                    CheckboxVoegToestelToe.IsChecked = false;
                 }
                 else if (_aantalGereserveerdeUrenPerDatum + (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) - Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue)) > _maxAantalTijdsloten - 1)
                 {
-                    CheckboxAddAnother.IsEnabled = false;
-                    CheckboxAddAnother.IsChecked = false;
+                    CheckboxVoegToestelToe.IsEnabled = false;
+                    CheckboxVoegToestelToe.IsChecked = false;
                 }
                 foreach (var reservatieKlantVoorDagX in _klantReservatiesVoorDagX)
                 {
                     if (Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue) == reservatieKlantVoorDagX.Beginuur)
                     {
-                        CheckboxAddAnother.IsEnabled = false;
-                        CheckboxAddAnother.IsChecked = false;
+                        CheckboxVoegToestelToe.IsEnabled = false;
+                        CheckboxVoegToestelToe.IsChecked = false;
                     }
                 }
             }
@@ -476,65 +476,71 @@ namespace FitnessReservatie.UI
         {
             try
             {
+                //TODO : Verplaats GeefVrijeToestellenVoorGeselecteerdTijdslot() & ValideerReservatieInfo() naar MaakReservatie()
+
                 //Checkt vrije toestellen
                 Toestel? geselecteerdToestel = null;
-                IReadOnlyList<Toestel> beschikbareToestellen = _toestelManager.GeefVrijeToestellenVoorGeselecteerdTijdslot(DatePickerDatumSelector.SelectedDate.Value, ComboBoxToesteltypeSelector1.SelectedValue.ToString(), Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue));
-                foreach (var beschikbaarToestel in beschikbareToestellen)
+                var geselecteerdeDatum = DatePickerDatumSelector.SelectedDate;
+                if (geselecteerdeDatum != null)
                 {
-                    if (beschikbaarToestel != null)
+                    IReadOnlyList<Toestel> beschikbareToestellen = _toestelManager.GeefVrijeToestellenVoorGeselecteerdTijdslot(geselecteerdeDatum.Value, ComboBoxToesteltypeSelector1.SelectedValue.ToString(), Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue));
+                    foreach (var beschikbaarToestel in beschikbareToestellen)
                     {
-                        if (_aantalGereserveerdeUrenPerDatum != 0)
+                        if (beschikbaarToestel != null)
                         {
-                            foreach (var klantReservatieVoorDagX in _klantReservatiesVoorDagX)
+                            if (_aantalGereserveerdeUrenPerDatum != 0)
                             {
-                                if (!klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel.ToestelNaam))
+                                foreach (var klantReservatieVoorDagX in _klantReservatiesVoorDagX)
                                 {
-                                    geselecteerdToestel = beschikbaarToestel;
-                                    break;
+                                    if (!klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel.ToestelNaam))
+                                    {
+                                        geselecteerdToestel = beschikbaarToestel;
+                                        break;
+                                    }
                                 }
+                            }
+                            else
+                            {
+                                geselecteerdToestel = beschikbaarToestel;
+                                break;
                             }
                         }
                         else
                         {
-                            geselecteerdToestel = beschikbaarToestel;
-                            break;
+                            geselecteerdToestel = null;
                         }
                     }
+                    //Reservatie maken
+                    if (geselecteerdToestel == null) MessageBox.Show($"Er zijn helaas geen {ComboBoxToesteltypeSelector1.SelectedValue.ToString()}en beschikbaar meer voor tijdslot {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u", "Er ging iets mis :(");
                     else
                     {
-                        geselecteerdToestel = null;
-                    }
-                }
-                //
+                        //Voorkomt dat Reservatie wordt aangemaakt indien er geen geldige ReservatieInfo is.
+                        ReservatieInfo reservatieInfo = _reservatieInfoManager.ValideerReservatieInfo(geselecteerdeDatum.Value, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
+                        //
+                        if (reservatieInfo == null)
+                        {
+                            throw new Exception();
+                        }
+                        else
+                        {
+                            Reservatie reservatie = _reservatieManager.MaakReservatie(_ingelogdeKlant, geselecteerdeDatum.Value);
+                            _reservatieInfoManager.MaakReservatieInfo(reservatie, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
 
-                //Reservatie maken
-                if (geselecteerdToestel == null) throw new Exception();
-                else
-                {
-                    //Voorkomt dat Reservatie wordt aangemaakt indien er geen geldige ReservatieInfo is.
-                    ReservatieInfo reservatieInfo = _reservatieInfoManager.ValideerReservatieInfo(DatePickerDatumSelector.SelectedDate.Value, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
+                            MessageBox.Show($"Er werd een nieuwe reservatie aangemaakt \rop {geselecteerdeDatum.Value.ToShortDateString()} om {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u voor {geselecteerdToestel.ToestelNaam}\r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
+                        }
+                    }
                     //
-                    if (reservatieInfo == null)
-                    {
-                        throw new Exception();
-                    }
-                    else
-                    {
-                        Reservatie reservatie = _reservatieManager.MaakReservatie(_ingelogdeKlant, DatePickerDatumSelector.SelectedDate.Value);
-                        _reservatieInfoManager.MaakReservatieInfo(reservatie, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
-
-                        MessageBox.Show($"New reservation has been made at {ComboBoxBeginuurSelector1.SelectedValue}h-{ComboBoxEinduurSelector1.SelectedValue}h on {geselecteerdToestel}\r Check out the 'My Reservation Tab' to see all reservations.", "Reservation confirmed");
-                    }
                 }
+                else throw new Exception();
                 //
 
                 //ListView Refresh
                 _reservatiesKlant.Clear();
                 _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer));
-                ListViewReservations.Items.Clear();
+                ListViewReservaties.Items.Clear();
                 foreach (var reservatieKlant in _reservatiesKlant)
                 {
-                    ListViewReservations.Items.Add(reservatieKlant);
+                    ListViewReservaties.Items.Add(reservatieKlant);
                 }
                 //
 
@@ -552,7 +558,7 @@ namespace FitnessReservatie.UI
             }
             catch (Exception)
             {
-                MessageBox.Show($"There's no more available {ComboBoxToesteltypeSelector1.SelectedValue.ToString()} at {ComboBoxBeginuurSelector1.SelectedValue}h-{ComboBoxEinduurSelector1.SelectedValue}h", "Something went wrong :(");
+                MessageBox.Show($"Er ging iets mis met het maken van uw reservatie, gelieve ", "Er ging iets mis :(");
             }
         }
 
