@@ -8,6 +8,7 @@ using FitnessReservatieDL.ADO.NET;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace FitnessReservatie.UI
 {
@@ -195,13 +196,6 @@ namespace FitnessReservatie.UI
                 ListViewDeviceTracker.Items.Add(toestel);
             }
         }
-
-        private void ButtonNieuwToestel_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-
         private void ButtonWijziging_Opened(object sender, RoutedEventArgs e)
         {
             if (ListViewDeviceTracker.SelectedValue == null)
@@ -231,6 +225,28 @@ namespace FitnessReservatie.UI
             RadioButtonDeviceAll_Checked(sender, e);
 
             ComboBoxStatusUpdate.SelectedIndex = -1;
+        }
+
+        private void TextBoxNieuwToestelToestelnaam_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ComboBoxNieuwToestelToesteltype.SelectedIndex=-1;
+            ComboBoxNieuwToestelToesteltype.IsEnabled = true;
+            ButtonNieuwToestel.IsEnabled = false;
+        }
+
+        private void ComboBoxNieuwToestelToesteltype_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ButtonNieuwToestel.IsEnabled = true;
+        }
+
+        private void ButtonNieuwToestel_Click(object sender, RoutedEventArgs e)
+        {
+            ComboBoxItem toesteltype = (ComboBoxItem)ComboBoxNieuwToestelToesteltype.SelectedItem;
+            string maakToestel = _toestelManager.SchrijfToestelInDB(TextBoxNieuwToestelToestelnaam.Text, toesteltype.Content.ToString());
+            MessageBox.Show(maakToestel, "");
+
+            ListViewDeviceTracker.Items.Clear();
+            RadioButtonDeviceAll_Checked(sender, e);
         }
         //
 

@@ -109,16 +109,27 @@ namespace FitnessReservatieDL.ADO.NET
         public bool BestaatToestel(Toestel toestel)
         {
             SqlConnection conn = GetConnection();
-            string query = "SELECT count(*) FROM Toestel WHERE toestelnummer=@toestelnummer AND toesteltype=@toesteltype";
-
+            string query1 = "SELECT toesteltypeid FROM Toesteltype WHERE toesteltypenaam=@toesteltypenaam";
+            string query2 = "SELECT count(*) FROM Toestel WHERE toestelnaam=@toestelnaam AND toesteltype=@toesteltype";
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 conn.Open();
                 try
                 {
-                    cmd.CommandText = query;
-                    cmd.Parameters.AddWithValue("@klantnummer", toestel.ToestelNummer);
-                    cmd.Parameters.AddWithValue("@datum", toestel.ToestelType);
+                    int toestelTypeID = 0;
+                    cmd.Parameters.AddWithValue("@toesteltypenaam", toestel.ToestelType.ToestelNaam);
+                    cmd.CommandText = query1;
+
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        toestelTypeID = ((int)reader["toesteltypeid"]);
+                    }
+                    reader.Close();
+
+                    cmd.CommandText = query2;
+                    cmd.Parameters.AddWithValue("@toestelnaam", toestel.ToestelNaam);
+                    cmd.Parameters.AddWithValue("@toesteltype", toestelTypeID);
                     int n = (int)cmd.ExecuteScalar();
                     if (n > 0) return true;
                     else return false;
@@ -133,10 +144,10 @@ namespace FitnessReservatieDL.ADO.NET
                 }
             }
         }
-        public void SchrijfToestelInDB(Toestel toestel)
+        public string SchrijfToestelInDB(Toestel toestel)
         {
             SqlConnection conn = GetConnection();
-            string query1 = "SELECT toesteltypenaam FROM Toesteltype WHERE toesteltypenaam=@toesteltypenaam";
+            string query1 = "SELECT toesteltypeid FROM Toesteltype WHERE toesteltypenaam=@toesteltypenaam";
             string query2 = "INSERT INTO Toestel(toestelnaam,status,toesteltype) VALUES (@toestelnaam,@status,@toesteltype)";
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -145,7 +156,7 @@ namespace FitnessReservatieDL.ADO.NET
                 {
                     int toestelTypeID = 0;
 
-                    cmd.Parameters.AddWithValue("@toesteltypenaam", toestel.ToestelType);
+                    cmd.Parameters.AddWithValue("@toesteltypenaam", toestel.ToestelType.ToestelNaam);
                     cmd.CommandText = query1;
 
                     IDataReader reader = cmd.ExecuteReader();
@@ -153,13 +164,21 @@ namespace FitnessReservatieDL.ADO.NET
                     {
                         toestelTypeID = ((int)reader["toesteltypeid"]);
                     }
+                    reader.Close();
 
                     if (toestelTypeID > 0)
                     {
-                        cmd.Parameters.AddWithValue("@toesteltypenaam", toestel.ToestelNaam);
-                        cmd.Parameters.AddWithValue("@status", toestel.Status);
+                        cmd.Parameters.AddWithValue("@toestelnaam", toestel.ToestelNaam);
+                        cmd.Parameters.AddWithValue("@status", "operatief");
                         cmd.Parameters.AddWithValue("@toesteltype", toestelTypeID);
                         cmd.CommandText = query2;
+                        cmd.ExecuteNonQuery();
+
+                        return $"{toestel.ToestelNaam} werd succesvol toegevoegd aan uw toestellen.";
+                    }
+                    else
+                    {
+                        return $"{toestel.ToestelNaam} werd NIET toegevoegd aan uw toestellen.";
                     }
 
                 }

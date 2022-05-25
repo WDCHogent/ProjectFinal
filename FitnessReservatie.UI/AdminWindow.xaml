@@ -217,10 +217,13 @@
                                             <RowDefinition Height="*" />
                                         </Grid.RowDefinitions>
                                         <TextBlock Grid.Column="0" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline6TextBlock}" Margin="8,8,8,16" Text="NIEUW TOESTEL" />
-                                        <TextBox Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                                        <ComboBox Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}"/>
+                                        <TextBox Name="TextBoxNieuwToestelToestelnaam" Grid.Column="0" Grid.Row="1" materialDesign:HintAssist.Hint="Toestelnaam" materialDesign:HintAssist.Foreground="WhiteSmoke" Margin="8" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#DDFFFFFF" CaretBrush="White" BorderBrush="#89FFFFFF" SelectionBrush="{x:Null}" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TextBoxNieuwToestelToestelnaam_TextChanged"/>
+                                        <ComboBox Name="ComboBoxNieuwToestelToesteltype" Grid.Column="0" Grid.Row="2" materialDesign:HintAssist.Hint="Toesteltype" materialDesign:HintAssist.IsFloating="True" MaxDropDownHeight="200" Margin="8" materialDesign:HintAssist.Foreground="WhiteSmoke" materialDesign:TextFieldAssist.UnderlineBrush="WhiteSmoke" Foreground="#89FFFFFF" BorderBrush="#89FFFFFF" Style="{StaticResource MaterialDesignFloatingHintComboBox}" SelectionChanged="ComboBoxNieuwToestelToesteltype_SelectionChanged" IsEnabled="False">
+                                            <ComboBoxItem Content="Loopband" Foreground="#FF323232"/>
+                                            <ComboBoxItem Content="Fiets" Foreground="#FF323232"/>
+                                        </ComboBox>
                                         <StackPanel Grid.Row="3" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right">
-                                            <Button Name="ButtonNieuwToestel" Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="ButtonNieuwToestel_Click">
+                                            <Button Name="ButtonNieuwToestel" Content="_Opslaan" Command="{x:Static materialDesign:PopupBox.ClosePopupCommand}" Click="ButtonNieuwToestel_Click" IsEnabled="False">
                                                 <Button.Style>
                                                     <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignPopupBoxButton}">
                                                         <Setter Property="Foreground" Value="#89FFFFFF" />

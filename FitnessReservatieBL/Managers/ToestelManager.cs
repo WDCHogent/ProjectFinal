@@ -55,19 +55,19 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public void SchrijfToestelInDB(string toestelnaam, string status, string toesteltypenaam)
+        public string SchrijfToestelInDB(string toestelnaam, string toesteltypenaam)
         {
             try
             {
-                Toestel toestel = new Toestel(toestelnaam, (Status)Enum.Parse(typeof(Status), status), new ToestelType(toesteltypenaam));
+                Toestel toestel = new Toestel(toestelnaam, (Status)Enum.Parse(typeof(Status), "operatief"), new ToestelType(toesteltypenaam));
                 if (!_toestelRepo.BestaatToestel(toestel))
                 {
-                    _toestelRepo.SchrijfToestelInDB(toestel);     
+                    return _toestelRepo.SchrijfToestelInDB(toestel);     
                 }
             }
             catch (Exception ex)
             {
-                throw new ToestelManagerException("ToestelManager - VerwijderToestel", ex);
+                throw new ToestelManagerException("ToestelManager - SchrijfToestelInDB", ex);
             }
         }
     }
