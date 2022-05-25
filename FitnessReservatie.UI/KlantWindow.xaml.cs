@@ -19,35 +19,36 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class KlantWindow : Window
     {
-        //Aangemelde klantinfo
+        #region Aangemelde klantinfo
         private Klant _ingelogdeKlant;
-        //
+        #endregion
 
-        //Klantreservatie voor geselecteerde dag 
+        # region Klantreservatie voor geselecteerde dag 
         private List<DTOKlantReservatieInfo> _klantReservatiesVoorDagX = new List<DTOKlantReservatieInfo>();
+        #endregion
 
-        //Klantreservaties        
+        # region Klantreservaties
         private ObservableCollection<DTOKlantReservatieInfo> _reservatiesKlant;
-        //
+        #endregion
 
-        //Combobox shenanigans
+        # region Combobox shenanigans
         private IReadOnlyList<ToestelType> _toesteltypeItemsSource;
         private IReadOnlyList<Tijdslot> _tijdslotItemsSource;
-        //
+        #endregion
 
-        //Tijdslot controles & Maxima aantal tijdsloten.
+        # region Tijdslot controles & Maxima aantal tijdsloten.
         private int _aantalGereserveerdeUrenPerDatum;
         private int _maxAantalTijdsloten = 4;
-        //
+        #endregion
 
-        //IRepositories
+        #region IRepositories
         private ToestelTypeManager _toestelTypeManager;
         private TijdslotManager _tijdslotManager;
         private ReservatieManager _reservatieManager;
         private ReservatieInfoManager _reservatieInfoManager;
         private KlantManager _klantManager;
         private ToestelManager _toestelManager;
-        //
+        #endregion
 
         public KlantWindow(Klant klant)
         {
@@ -57,14 +58,14 @@ namespace FitnessReservatie.UI
 
             LabelWelkomKlant.Content += $"{_ingelogdeKlant.Voornaam} {_ingelogdeKlant.Naam}";
 
-            //My Personal Information Tab
+            #region My Personal Information Tab
             LabelKlantnummerReturned.Content += $"{_ingelogdeKlant.Klantnummer}";
             LabelNaamReturned.Content += $"{_ingelogdeKlant.Naam}";
             LabelVoornaamReturned.Content += $"{_ingelogdeKlant.Voornaam}";
             LabelMailadresReturned.Content += $"{_ingelogdeKlant.Mailadres}";
-            //
+            #endregion
 
-            //IRepositories instancieren
+            #region IRepositories instancieren
             IKlantRepository klantRepo = new KlantRepoADO(connectiestring);
             _klantManager = new KlantManager(klantRepo);
 
@@ -82,10 +83,10 @@ namespace FitnessReservatie.UI
 
             IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectiestring);
             _reservatieManager = new ReservatieManager(reservatieRepo, reservatieInfoRepo, klantRepo, toestelRepo);
-            //
+            #endregion
 
-            //Opvulling velden 'Maak Reservatie' Tab
-            _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer));
+            #region Opvulling velden 'Maak Reservatie' Tab
+            _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant));
             foreach (var reservatieKlant in _reservatiesKlant)
             {
                 ListViewReservaties.Items.Add(reservatieKlant);
@@ -97,17 +98,17 @@ namespace FitnessReservatie.UI
             _toesteltypeItemsSource = _toestelTypeManager.SelecteerToestelType();
 
             _tijdslotItemsSource = _tijdslotManager.SelecteerTijdslot();
-            //
+            #endregion
         }
 
         private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Checkbox controle en reset
+            #region Checkbox controle en reset
             CheckboxVoegToestelToe.IsChecked = false;
             CheckboxVoegToestelToe.IsEnabled = false;
-            //
+            #endregion
 
-            //Cleart inputvelden bij verandering datum
+            #region Cleart inputvelden bij verandering datum
             ComboBoxToesteltypeSelector1.Items.Clear();
             ComboBoxBeginuurSelector1.Items.Clear();
             ComboBoxEinduurSelector1.Items.Clear();
@@ -115,9 +116,9 @@ namespace FitnessReservatie.UI
             ComboBoxToesteltypeSelector2.Items.Clear();
             ComboBoxBeginuurSelector2.Items.Clear();
             ComboBoxEinduurSelector2.Items.Clear();
-            //
+            #endregion
 
-            //Checkt reservatielimiet
+            #region Checkt reservatielimiet
             _aantalGereserveerdeUrenPerDatum = 0;
             _klantReservatiesVoorDagX.Clear();
 
@@ -137,38 +138,40 @@ namespace FitnessReservatie.UI
                     }
                 }
             }
+            #endregion
 
-            //Voegt Toesteltypes toe aan ComboBoxToesteltypeSelector1
+            #region Voegt Toesteltypes toe aan ComboBoxToesteltypeSelector1
             foreach (ToestelType toesteltype in _toesteltypeItemsSource)
             {
                 ComboBoxToesteltypeSelector1.Items.Add(toesteltype.ToestelNaam);
             }
-            //
+            #endregion
 
-            //Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
+            #region Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
             ButtonBevestigReservatie.IsEnabled = false;
-            //
+            #endregion
         }
+
         private void ComboBoxToesteltypeSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Checkbox controle en reset
+            #region Checkbox controle en reset
             CheckboxVoegToestelToe.IsChecked = false;
             CheckboxVoegToestelToe.IsEnabled = false;
-            //
+            #endregion
 
-            //Cleart inputvelden bij verandering Toesteltype 1
+            #region Cleart inputvelden bij verandering Toesteltype 1
             ComboBoxBeginuurSelector1.Items.Clear();
             ComboBoxEinduurSelector1.Items.Clear();
 
             ComboBoxToesteltypeSelector2.Items.Clear();
             ComboBoxBeginuurSelector2.Items.Clear();
             ComboBoxEinduurSelector2.Items.Clear();
-            //
+            #endregion
 
-            //Voegt Beginuuren toe en ontgrendeld ComboBoxBeginuurSelector1
+            #region Voegt Beginuuren toe en ontgrendeld ComboBoxBeginuurSelector1
             for (int i = 0; i < _tijdslotItemsSource.Count - 1; i++)
             {
-                //Controle reservatie tijdsloten & toekomst
+                #region Controle reservatie tijdsloten & toekomst
                 if (DatePickerDatumSelector.SelectedDate == DateTime.Today)
                 {
                     if (_tijdslotItemsSource[i].Tslot > DateTime.Now.Hour)
@@ -187,9 +190,9 @@ namespace FitnessReservatie.UI
                         }
                     }
                 }
-                //
+                #endregion
 
-                //Controle reservatie tijdsloten
+                #region Controle reservatie tijdsloten
                 else
                 {
                     ComboBoxBeginuurSelector1.Items.Add(_tijdslotItemsSource[i].Tslot);
@@ -206,13 +209,15 @@ namespace FitnessReservatie.UI
                         }
                     }
                 }
-                //
+                #endregion
             }
+            #endregion
+
             ComboBoxBeginuurSelector1.IsEnabled = true;
 
-            //Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
+            #region Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
             ButtonBevestigReservatie.IsEnabled = false;
-            //
+            #endregion
         }
 
         private void ComboBoxBeginuurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -474,23 +479,32 @@ namespace FitnessReservatie.UI
 
         private void ButtonBevestigReservatie_Click(object sender, RoutedEventArgs e)
         {
+            DateTime geselecteerdeDatum = DatePickerDatumSelector.SelectedDate.Value;
+            int beginuur = Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue);
+            int einduur = Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue);
             try
             {
-                DateTime geselecteerdeDatum = DatePickerDatumSelector.SelectedDate.Value;
-                _reservatieManager.MaakReservatie(_ingelogdeKlant, geselecteerdeDatum, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), ComboBoxToesteltypeSelector1.SelectedValue.ToString());
-
-                MessageBox.Show($"Er werd een nieuwe reservatie aangemaakt \rop {geselecteerdeDatum.ToShortDateString()} om {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u voor {ComboBoxToesteltypeSelector1.SelectedValue.ToString()}\r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
+                //
+                _reservatieManager.MaakReservatie(_ingelogdeKlant, geselecteerdeDatum, beginuur, einduur, ComboBoxToesteltypeSelector1.SelectedValue.ToString());
                 //
 
                 //ListView Refresh
                 _reservatiesKlant.Clear();
-                _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant.Klantnummer));
+                _reservatiesKlant = new ObservableCollection<DTOKlantReservatieInfo>(_klantManager.GeefKlantReservaties(_ingelogdeKlant));
                 ListViewReservaties.Items.Clear();
+
+                DTOKlantReservatieInfo reservatieinfo = null;
                 foreach (var reservatieKlant in _reservatiesKlant)
                 {
                     ListViewReservaties.Items.Add(reservatieKlant);
+                    if (reservatieKlant.Datum == geselecteerdeDatum && reservatieKlant.Beginuur == beginuur && reservatieKlant.Einduur == einduur)
+                    {
+                        reservatieinfo = reservatieKlant;
+                    }
                 }
                 //
+
+                MessageBox.Show($"Er werd een nieuwe reservatie aangemaakt \r op {geselecteerdeDatum.ToShortDateString()} om {beginuur}u-{einduur}u voor {reservatieinfo.Toestelnaam}. \r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
 
                 //Cleart inputvelden bij maken reservatie
                 DatePickerDatumSelector.SelectedDate = DateTime.Today;
@@ -506,7 +520,7 @@ namespace FitnessReservatie.UI
             }
             catch (Exception)
             {
-                MessageBox.Show($"Er ging iets mis met het maken van uw reservatie, gelieve ", "Er ging iets mis :(");
+                MessageBox.Show($"Er kunnen helaas geen {ComboBoxToesteltypeSelector1.SelectedValue.ToString()}en meer gereserveerd worden voor tijdslot {beginuur}u-{einduur}u.", "Er ging iets mis :(");
             }
         }
 

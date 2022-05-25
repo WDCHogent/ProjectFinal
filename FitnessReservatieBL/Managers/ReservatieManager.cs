@@ -29,24 +29,28 @@ namespace FitnessReservatieBL.Managers
             {
                 Toestel geselecteerdToestel = null;
                 int aantalGereserveerdeUrenPerDatum = 0;
+
+                //Geeft vrije toestellen terug voor datum en geselecteerd tijdslot.
                 IReadOnlyList<Toestel> beschikbareToestellen = _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toestelTypeNaam, beginuur, einduur);
-                IReadOnlyList<DTOKlantReservatieInfo> reservatiesKlant = _klantRepo.GeefKlantReservaties(klant.Klantnummer);
-                List<DTOKlantReservatieInfo> klantReservatiesVoorDagX = new();
-                foreach (DTOKlantReservatieInfo klantReservatie in reservatiesKlant)
+
+                //Geeft reservaties van klant voor dag X.
+                IReadOnlyList<DTOKlantReservatieInfo> reservatiesKlantVoorDagX = _klantRepo.GeefKlantReservatiesVoorDagX(klant, datum);
+
+                //Aantal gereserveerde uren voor dag X.
+                foreach (DTOKlantReservatieInfo klantReservatie in reservatiesKlantVoorDagX)
                 {
-                    if (klantReservatie.Datum == datum)
-                    {
-                        klantReservatiesVoorDagX.Add(klantReservatie);
-                        aantalGereserveerdeUrenPerDatum += klantReservatie.Einduur - klantReservatie.Beginuur;
-                    }
+                    aantalGereserveerdeUrenPerDatum += klantReservatie.Einduur - klantReservatie.Beginuur;
                 }
+                //
+
+                //Geeft vrij toestel terug uit vrije toestellen.
                 foreach (var beschikbaarToestel in beschikbareToestellen)
                 {
                     if (beschikbaarToestel != null)
                     {
                         if (aantalGereserveerdeUrenPerDatum != 0)
                         {
-                            foreach (var klantReservatieVoorDagX in klantReservatiesVoorDagX)
+                            foreach (var klantReservatieVoorDagX in reservatiesKlantVoorDagX)
                             {
                                 if (!klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel.ToestelNaam))
                                 {
@@ -66,6 +70,8 @@ namespace FitnessReservatieBL.Managers
                         geselecteerdToestel = null;
                     }
                 }
+                //
+
                 if (geselecteerdToestel == null) throw new ReservatieInfoManagerException($"Er zijn helaas geen {toestelTypeNaam}en beschikbaar meer voor tijdslot {beginuur}u-{einduur}u");
                 else
                 {

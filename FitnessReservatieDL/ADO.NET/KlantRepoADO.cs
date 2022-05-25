@@ -64,9 +64,9 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer)
+        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(Klant klant)
         {
-            if (klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
+            if (klant.Klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
 
             string query1 = "SELECT Count(*) FROM Reservatie WHERE klantnummer=@klantnummer";
 
@@ -80,7 +80,7 @@ namespace FitnessReservatieDL.ADO.NET
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query1;
-                cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
+                cmd.Parameters.AddWithValue("@klantnummer", klant.Klantnummer);
                 conn.Open();
 
                 try
@@ -112,6 +112,62 @@ namespace FitnessReservatieDL.ADO.NET
                 catch (Exception ex)
                 {
                     throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'query1'", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
+        }
+
+        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservatiesVoorDagX(Klant klant, DateTime datum)
+        {
+            string query1 = "SELECT Count(*) FROM Reservatie WHERE klantnummer=@klantnummer";
+
+            string query2 = "SELECT r.reservatienummer, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +
+            "LEFT JOIN ReservatieInfo i ON r.reservatienummer = i.reservatienummer " +
+            "LEFT JOIN toestel t ON i.toestelnummer = t.toestelnummer " +
+            "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
+            "WHERE r.klantnummer = @klantnummer AND r.datum = @datum";
+            SqlConnection conn = GetConnection();
+            List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query1;
+                cmd.Parameters.AddWithValue("@klantnummer", klant.Klantnummer);
+                cmd.Parameters.AddWithValue("@datum", datum.ToString("yyyy-MM-dd"));
+                conn.Open();
+
+                try
+                {
+                    int entries = (int)cmd.ExecuteScalar();
+                    if (entries == 0)
+                    {
+                        return new List<DTOKlantReservatieInfo>();
+                    }
+                    else
+                    {
+                        cmd.CommandText = query2;
+                        IDataReader reader = cmd.ExecuteReader();
+                        try
+                        {
+                            while (reader.Read())
+                            {
+                                DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
+                                klantenreservaties.Add(klantenreservatie);
+                            }
+                            return klantenreservaties.AsReadOnly();
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservatiesVoorDagX - 'query2'", ex);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservatiesVoorDagX - 'query1'", ex);
                 }
                 finally
                 {

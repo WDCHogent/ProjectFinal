@@ -29,16 +29,29 @@ namespace FitnessReservatieBL.Managers
             }
         }
 
-        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(int klantnummer)
+        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(Klant klant)
         {
-            if (klantnummer <= 0) throw new KlantManagerException("KlantManager - GeefKlantReservatie - Klant is null");
+            if (klant == null) throw new KlantManagerException("KlantManager - GeefKlantReservatie - Klant is null");
             try
             {
-                return _klantRepo.GeefKlantReservaties(klantnummer);
+                return _klantRepo.GeefKlantReservaties(klant);
             }
             catch (Exception ex)
             {
                 throw new KlantManagerException("KlantManager - GeefKlantReservaties", ex);
+            }
+        }
+
+        public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservatiesVoorDagX(Klant klant, DateTime datum)
+        {
+            if (klant == null) throw new KlantManagerException("KlantManager - GeefKlantReservatiesVoorDagX - Klant is null");
+            try
+            {
+                return _klantRepo.GeefKlantReservatiesVoorDagX(klant, datum);
+            }
+            catch (Exception ex)
+            {
+                throw new KlantManagerException("KlantManager - GeefKlantReservatiesVoorDagX", ex);
             }
         }
 
