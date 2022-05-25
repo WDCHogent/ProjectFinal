@@ -10,8 +10,8 @@ namespace FitnessReservatieBL.Interfaces
     {
         IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur);
         IReadOnlyList<DTOToestelInfo> ZoekToestellen(Status? status, int toestelnummer, string toestelnaam, string toesteltype);
-        bool BestaatToestel(Toestel toestel);
-        string SchrijfToestelInDB(Toestel toestel);
+        bool BestaatToestel(Toestel toestel, int toestelTypeNummer);
+        string SchrijfToestelInDB(Toestel toestel, int toestelTypeNummer);
         string UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus);
     }
 }

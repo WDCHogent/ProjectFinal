@@ -57,7 +57,7 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public void MaakReservatieInfo(ReservatieInfo reservatieinfo)
+        public void MaakReservatieInfo(Reservatie reservatie, int beginuur, int einduur, Toestel toestel)
         {
             SqlConnection conn = GetConnection();
             string query = "INSERT INTO ReservatieInfo(reservatienummer,beginuur,einduur,toestelnummer) " +
@@ -72,10 +72,10 @@ namespace FitnessReservatieDL.ADO.NET
                     cmd.Parameters.Add(new SqlParameter("@einduur", System.Data.SqlDbType.Int));
                     cmd.Parameters.Add(new SqlParameter("@toestelnummer", System.Data.SqlDbType.Int));
                     cmd.CommandText = query;
-                    cmd.Parameters["@reservatienummer"].Value = reservatieinfo.Reservatienummer;
-                    cmd.Parameters["@beginuur"].Value = reservatieinfo.Beginuur;
-                    cmd.Parameters["@einduur"].Value = reservatieinfo.Einduur;
-                    cmd.Parameters["@toestelnummer"].Value = reservatieinfo.Toestel.ToestelNummer;
+                    cmd.Parameters["@reservatienummer"].Value = reservatie.Reservatienummer;
+                    cmd.Parameters["@beginuur"].Value = beginuur;
+                    cmd.Parameters["@einduur"].Value = einduur;
+                    cmd.Parameters["@toestelnummer"].Value = toestel.ToestelNummer;
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -88,6 +88,5 @@ namespace FitnessReservatieDL.ADO.NET
                 conn.Close();
             }
         }
-
     }
 }

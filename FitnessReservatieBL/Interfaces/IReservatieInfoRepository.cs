@@ -6,7 +6,7 @@ namespace FitnessReservatieBL.Interfaces
 {
     public interface IReservatieInfoRepository
     {
-        void MaakReservatieInfo(ReservatieInfo reservatieinfo);
+        void MaakReservatieInfo(Reservatie reservatie, int beginuur, int einduur, Toestel toestel);
         ReservatieInfo ValideerReservatieInfo(DateTime datum, int beginuur, int einduur, Toestel toestel);
     }
 }

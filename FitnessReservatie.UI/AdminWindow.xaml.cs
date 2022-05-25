@@ -31,11 +31,11 @@ namespace FitnessReservatie.UI
             LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
 
             //IRepositories instancieren
-            IToestelRepository toestelRepo = new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _toestelManager = new ToestelManager(toestelRepo);
-
             IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
             _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
+
+            IToestelRepository toestelRepo = new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
+            _toestelManager = new ToestelManager(toestelRepo,toesteltypeRepo);
 
             IKlantRepository klantRepo = new KlantRepoADO(connectiestring);
             _klantManager = new KlantManager(klantRepo);

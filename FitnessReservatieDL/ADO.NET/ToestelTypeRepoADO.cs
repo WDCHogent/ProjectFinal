@@ -44,9 +44,38 @@ namespace FitnessReservatieDL.ADO.NET
                 }
                 catch (Exception ex)
                 {
-                    throw new ToestelRepoADOException("SelecteerToestelType", ex);
+                    throw new ToestelRepoADOException("ToestelTypeRepoADO - SelecteerToestelType", ex);
                 }
                 finally { connection.Close(); }
+            }
+        }
+
+        public int GeefToestelTypeNummer(string toestelTypeNaam)
+        {
+            SqlConnection conn = GetConnection();
+            string query = "SELECT toesteltypeid FROM Toesteltype WHERE toesteltypenaam=@toesteltypenaam";
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                conn.Open();
+                try
+                {
+                    cmd.Parameters.AddWithValue("@toesteltypenaam", toestelTypeNaam);
+                    cmd.CommandText = query;
+
+                    int toesteltypeid = 0;
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        toesteltypeid = ((int)reader["toesteltypeid"]);
+                    }
+                    return toesteltypeid;
+
+                }
+                catch (Exception ex)
+                {
+                    throw new ToestelRepoADOException("ToestelTypeRepoADO - GeefToestelTypeNummer", ex);
+                }
+                finally { conn.Close(); }
             }
         }
     }

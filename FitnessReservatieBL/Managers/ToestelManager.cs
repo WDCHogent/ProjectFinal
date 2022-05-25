@@ -12,15 +12,16 @@ namespace FitnessReservatieBL.Managers
     public class ToestelManager
     {
         private IToestelRepository _toestelRepo;
+        private IToestelTypeRepository _toestelTypeRepo;
 
-        public ToestelManager(IToestelRepository repo)
+        public ToestelManager(IToestelRepository toestelRepo, IToestelTypeRepository toestelTypeRepo)
         {
-            this._toestelRepo = repo;
+            this._toestelRepo = toestelRepo;
+            this._toestelTypeRepo = toestelTypeRepo;
         }
 
         public IReadOnlyList<Toestel> GeefVrijeToestellenVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur)
         {
-            //if (klantnummer <= 0) throw new ToestelManagerException("ToestelManager - GeefVrijToestel - Ongeldige input");
             try
             {
                 return _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toesteltype, beginuur, einduur);
@@ -30,7 +31,6 @@ namespace FitnessReservatieBL.Managers
                 throw new ToestelManagerException("ToestelManager - GeefVrijeToestellenVoorGeselecteerdTijdslot", ex);
             }
         }
-
         public IReadOnlyList<DTOToestelInfo> ZoekToestellen(Status? status, int toestelnummer, string toestelnaam, string toesteltype)
         {
             try
@@ -42,9 +42,9 @@ namespace FitnessReservatieBL.Managers
                 throw new ToestelManagerException("ToestelManager - GeefToestellenMetStatus", ex);
             }
         }
-
         public string UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
         {
+            if (toestelInfo == null) throw new ToestelManagerException("ToestelManager - SchrijfToestelInDB - 'toestel is null'");
             try
             {
                 return _toestelRepo.UpdateToestelStatus(toestelInfo, toestelStatus);
@@ -54,16 +54,17 @@ namespace FitnessReservatieBL.Managers
                 throw new ToestelManagerException("ToestelManager - UpdateToestelStatus", ex);
             }
         }
-
         public string SchrijfToestelInDB(string toestelnaam, string toesteltypenaam)
         {
             try
             {
+                int toestelTypeNummer = _toestelTypeRepo.GeefToestelTypeNummer(toesteltypenaam);
                 Toestel toestel = new Toestel(toestelnaam, (Status)Enum.Parse(typeof(Status), "operatief"), new ToestelType(toesteltypenaam));
-                if (!_toestelRepo.BestaatToestel(toestel))
+                if (!_toestelRepo.BestaatToestel(toestel, toestelTypeNummer))
                 {
-                    return _toestelRepo.SchrijfToestelInDB(toestel);     
+                    return _toestelRepo.SchrijfToestelInDB(toestel, toestelTypeNummer);
                 }
+                else return $"{toestelnaam} bestaat reeds.";      
             }
             catch (Exception ex)
             {

@@ -75,13 +75,13 @@ namespace FitnessReservatie.UI
             _tijdslotManager = new TijdslotManager(tijdslotRepo);
 
             IToestelRepository toestelRepo = new ToestelRepoADO(connectiestring);
-            _toestelManager = new ToestelManager(toestelRepo);
-
-            IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectiestring);
-            _reservatieManager = new ReservatieManager(reservatieRepo);
+            _toestelManager = new ToestelManager(toestelRepo, toesteltypeRepo);
 
             IReservatieInfoRepository reservatieInfoRepo = new ReservatieInfoRepoADO(connectiestring);
-            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo, reservatieRepo, klantRepo, toestelRepo);
+            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo);
+
+            IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectiestring);
+            _reservatieManager = new ReservatieManager(reservatieRepo, reservatieInfoRepo, klantRepo, toestelRepo);
             //
 
             //Opvulling velden 'Maak Reservatie' Tab
@@ -476,62 +476,10 @@ namespace FitnessReservatie.UI
         {
             try
             {
-                //TODO : Verplaats GeefVrijeToestellenVoorGeselecteerdTijdslot() & ValideerReservatieInfo() naar MaakReservatie()
+                DateTime geselecteerdeDatum = DatePickerDatumSelector.SelectedDate.Value;
+                _reservatieManager.MaakReservatie(_ingelogdeKlant, geselecteerdeDatum, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), ComboBoxToesteltypeSelector1.SelectedValue.ToString());
 
-                //Checkt vrije toestellen
-                Toestel? geselecteerdToestel = null;
-                var geselecteerdeDatum = DatePickerDatumSelector.SelectedDate;
-                if (geselecteerdeDatum != null)
-                {
-                    IReadOnlyList<Toestel> beschikbareToestellen = _toestelManager.GeefVrijeToestellenVoorGeselecteerdTijdslot(geselecteerdeDatum.Value, ComboBoxToesteltypeSelector1.SelectedValue.ToString(), Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue));
-                    foreach (var beschikbaarToestel in beschikbareToestellen)
-                    {
-                        if (beschikbaarToestel != null)
-                        {
-                            if (_aantalGereserveerdeUrenPerDatum != 0)
-                            {
-                                foreach (var klantReservatieVoorDagX in _klantReservatiesVoorDagX)
-                                {
-                                    if (!klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel.ToestelNaam))
-                                    {
-                                        geselecteerdToestel = beschikbaarToestel;
-                                        break;
-                                    }
-                                }
-                            }
-                            else
-                            {
-                                geselecteerdToestel = beschikbaarToestel;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            geselecteerdToestel = null;
-                        }
-                    }
-                    //Reservatie maken
-                    if (geselecteerdToestel == null) MessageBox.Show($"Er zijn helaas geen {ComboBoxToesteltypeSelector1.SelectedValue.ToString()}en beschikbaar meer voor tijdslot {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u", "Er ging iets mis :(");
-                    else
-                    {
-                        //Voorkomt dat Reservatie wordt aangemaakt indien er geen geldige ReservatieInfo is.
-                        ReservatieInfo reservatieInfo = _reservatieInfoManager.ValideerReservatieInfo(geselecteerdeDatum.Value, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
-                        //
-                        if (reservatieInfo == null)
-                        {
-                            throw new Exception();
-                        }
-                        else
-                        {
-                            Reservatie reservatie = _reservatieManager.MaakReservatie(_ingelogdeKlant, geselecteerdeDatum.Value);
-                            _reservatieInfoManager.MaakReservatieInfo(reservatie, Convert.ToInt32(ComboBoxBeginuurSelector1.SelectedValue), Convert.ToInt32(ComboBoxEinduurSelector1.SelectedValue), geselecteerdToestel);
-
-                            MessageBox.Show($"Er werd een nieuwe reservatie aangemaakt \rop {geselecteerdeDatum.Value.ToShortDateString()} om {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u voor {geselecteerdToestel.ToestelNaam}\r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
-                        }
-                    }
-                    //
-                }
-                else throw new Exception();
+                MessageBox.Show($"Er werd een nieuwe reservatie aangemaakt \rop {geselecteerdeDatum.ToShortDateString()} om {ComboBoxBeginuurSelector1.SelectedValue}u-{ComboBoxEinduurSelector1.SelectedValue}u voor {ComboBoxToesteltypeSelector1.SelectedValue.ToString()}\r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
                 //
 
                 //ListView Refresh

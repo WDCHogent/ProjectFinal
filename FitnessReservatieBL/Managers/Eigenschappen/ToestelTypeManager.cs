@@ -26,5 +26,17 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
                 throw new ToestelTypeManagerException("ToestelTypeManager - SelecteerToestelType", ex);
             }
         }
+
+        public int GeefToestelTypeNummer(string toestelTypeNaam)
+        {
+            try
+            {
+                return _toestelTypeRepo.GeefToestelTypeNummer(toestelTypeNaam);
+            }
+            catch (Exception ex)
+            {
+                throw new ToestelTypeManagerException("ToestelTypeManager - GeefToestelTypeNummer", ex);
+            }
+        }
     }
 }

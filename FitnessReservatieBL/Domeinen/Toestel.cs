@@ -50,7 +50,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public override string ToString()
         {
-            return $"{ToestelNummer}, {ToestelNaam}, {Status.ToString()}, {ToestelType}";
+            return $"{ToestelNummer},{ToestelNaam},{Status.ToString()},{ToestelType}";
         }
     }
 }
