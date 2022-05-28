@@ -5,6 +5,7 @@ using FitnessReservatieBL.Interfaces;
 using FitnessReservatieBL.Managers;
 using FitnessReservatieBL.Managers.Eigenschappen;
 using FitnessReservatieDL.ADO.NET;
+using System;
 using System.Configuration;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,9 +19,12 @@ namespace FitnessReservatie.UI
     public partial class AdminWindow : Window
     {
         private Admin _ingelogdeAdmin;
-        private ToestelManager _toestelManager;
-        private ToestelTypeManager _toestelTypeManager;
         private KlantManager _klantManager;
+        private ToestelTypeManager _toestelTypeManager;
+        private TijdslotManager _tijdslotManager;
+        private ToestelManager _toestelManager;
+        private ReservatieInfoManager _reservatieInfoManager;
+        private ReservatieManager _reservatieManager;
 
         public AdminWindow(Admin admin)
         {
@@ -30,16 +34,25 @@ namespace FitnessReservatie.UI
 
             LabelWelkomAdmin.Content += $"{_ingelogdeAdmin.Voornaam} {_ingelogdeAdmin.Naam}";
 
-            //IRepositories instancieren
-            IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
-
-            IToestelRepository toestelRepo = new ToestelRepoADO(ConfigurationManager.ConnectionStrings["FinalDBConnection"].ToString());
-            _toestelManager = new ToestelManager(toestelRepo,toesteltypeRepo);
-
+            # region IRepositories instancieren
             IKlantRepository klantRepo = new KlantRepoADO(connectiestring);
             _klantManager = new KlantManager(klantRepo);
-            //
+
+            IToestelTypeRepository toesteltypeRepo = new ToestelTypeRepoADO(connectiestring);
+            _toestelTypeManager = new ToestelTypeManager(toesteltypeRepo);
+
+            ITijdslotRepository tijdslotRepo = new TijdslotRepoADO(connectiestring);
+            _tijdslotManager = new TijdslotManager(tijdslotRepo);
+
+            IToestelRepository toestelRepo = new ToestelRepoADO(connectiestring);
+            _toestelManager = new ToestelManager(toestelRepo, toesteltypeRepo);
+
+            IReservatieInfoRepository reservatieInfoRepo = new ReservatieInfoRepoADO(connectiestring);
+            _reservatieInfoManager = new ReservatieInfoManager(reservatieInfoRepo);
+
+            IReservatieRepository reservatieRepo = new ReservatieRepoADO(connectiestring);
+            _reservatieManager = new ReservatieManager(reservatieRepo, reservatieInfoRepo, klantRepo, toestelRepo);
+            #endregion
 
             foreach (var toesteltype in _toestelTypeManager.SelecteerToestelType())
             {
@@ -47,7 +60,7 @@ namespace FitnessReservatie.UI
             }
         }
 
-        //Customer panel Tab
+        #region Customer Panel Tab
         private void TextBoxKlantNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
             ButtonCustomerSearch.IsEnabled = true;
@@ -77,6 +90,8 @@ namespace FitnessReservatie.UI
             {
                 ListViewCustomerTracker.Items.Add(klant);
             }
+            RadioButtonCustomerAll.IsChecked = false;
+
         }
 
         private void RadioButtonCustomerAll_Checked(object sender, RoutedEventArgs e)
@@ -87,9 +102,9 @@ namespace FitnessReservatie.UI
                 ListViewCustomerTracker.Items.Add(klant);
             }
         }
-        //
+        #endregion
 
-        //Device Panel
+        #region Device Panel Tab
         private void TextBoxToestelNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
             ButtonDeviceSearch.IsEnabled = true;
@@ -154,6 +169,11 @@ namespace FitnessReservatie.UI
             TextBoxToestelNaam.Clear();
             ComboBoxToestelType.SelectedIndex = -1;
             ButtonDeviceSearch.IsEnabled = false;
+
+            RadioButtonDeviceAll.IsChecked = false;
+            RadioButtonDeviceService.IsChecked = false;
+            RadioButtonDeviceAvailable.IsChecked = false;
+            RadioButtonDeviceDeleted.IsChecked = false;
         }
 
         private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
@@ -248,18 +268,58 @@ namespace FitnessReservatie.UI
             ListViewDeviceTracker.Items.Clear();
             RadioButtonDeviceAll_Checked(sender, e);
         }
-        //
+        #endregion
 
+        //ListViewReservationTracker
+        
+        #region Reservation Panel Tab
+        private void TextBoxReservatieNummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
+        }
+        private void TextBoxReservatieKlantNummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
 
-        //Logout
+        }
+        private void TextBoxReservatieToestelNummer_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+        private void DatePickerReservatieSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+        private void ButtonReservatieZoek_Click(object sender, RoutedEventArgs e)
+        {
+            ListViewReservatieTracker.Items.Clear();
+            bool x = int.TryParse(TextBoxReservatieNummer.Text, out int reservatienummer);
+            bool y = int.TryParse(TextBoxKlantNummer.Text, out int klantnummer);
+            bool z = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
+            DateTime datum = DatePickerReservatieSelector.SelectedDate.Value;
+            foreach (var reservatie in _reservatieManager.ZoekReservatie(reservatienummer, klantnummer, toestelnummer, datum))
+            {
+                ListViewReservatieTracker.Items.Add(reservatie);
+            }
+            RadioButtonReservatieAll.IsChecked = false;
+        }
+        private void RadioButtonReservatieAll_Checked(object sender, RoutedEventArgs e)
+        {
+            ListViewReservatieTracker.Items.Clear();
+            foreach (var reservatie in _reservatieManager.ZoekReservatie(null, null, null, null))
+            {
+                ListViewReservatieTracker.Items.Add(reservatie);
+            }
+        }
+        #endregion
+
+        #region Logout
         private void ButtonLogOut_Click(object sender, RoutedEventArgs e)
         {
             MainWindow mainwindow = new MainWindow();
             this.Close();
             mainwindow.Show();
         }
-        //
+        #endregion
 
     }
 }

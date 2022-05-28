@@ -57,7 +57,7 @@ namespace FitnessReservatieDL.ADO.NET
             }
         }
 
-        public void MaakReservatieInfo(Reservatie reservatie, int beginuur, int einduur, Toestel toestel)
+        public void MaakReservatieInfo(Reservatie reservatie, Toestel toestel, int beginuur, int einduur)
         {
             SqlConnection conn = GetConnection();
             string query = "INSERT INTO ReservatieInfo(reservatienummer,beginuur,einduur,toestelnummer) " +

@@ -23,7 +23,7 @@ namespace FitnessReservatieDL.ADO.NET
         {
             return new SqlConnection(connectieString);
         }
-        public IReadOnlyList<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltypenaam, int beginuur, int einduur)
+        public List<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltypenaam, int beginuur, int einduur)
         {
             string query = "SELECT t.toestelnummer,t.toestelnaam,t.status,tt.toesteltypeid,tt.toesteltypenaam FROM Toestel t " +
             "LEFT JOIN Toesteltype tt ON t.toesteltype = tt.toesteltypeid " +
@@ -46,10 +46,10 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        Toestel beschikbaarToestel = new Toestel((int)reader["toestelnummer"], (string)reader["toestelnaam"], (Status)Enum.Parse(typeof(Status), (string)reader["status"]), new((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
+                        Toestel beschikbaarToestel = new ((int)reader["toestelnummer"], (string)reader["toestelnaam"], (Status)Enum.Parse(typeof(Status), (string)reader["status"]), new((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
                         beschikbareToestellen.Add(beschikbaarToestel);
                     }
-                    return beschikbareToestellen.AsReadOnly();
+                    return beschikbareToestellen;
                 }
                 catch (Exception ex)
                 {

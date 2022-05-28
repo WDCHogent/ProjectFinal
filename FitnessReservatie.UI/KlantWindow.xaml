@@ -229,7 +229,7 @@
                     </StackPanel>
 
                     <StackPanel Grid.Column="1" Grid.Row="1">
-                        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" FirstDayOfWeek="Monday" SelectedDateChanged="DatePickerDatumSelector_SelectedDateChanged" materialDesign:HintAssist.Hint="Pick Date" Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
+                        <DatePicker Name="DatePickerDatumSelector" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" Width="120" VerticalAlignment="Center" FirstDayOfWeek="Monday" SelectedDateChanged="DatePickerDatumSelector_SelectedDateChanged" materialDesign:HintAssist.Hint="Selecteer uw datum" Style="{StaticResource MaterialDesignFloatingHintDatePicker}">
                             <DatePicker.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="5"/>

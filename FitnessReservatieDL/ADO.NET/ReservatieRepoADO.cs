@@ -1,8 +1,10 @@
 ﻿using FitnessReservatieBL.Domeinen;
+using FitnessReservatieBL.DTO;
 using FitnessReservatieBL.Interfaces;
 using FitnessReservatieDL.Exceptions;
 using Microsoft.Data.SqlClient;
 using System;
+using System.Collections.Generic;
 using System.Data;
 
 namespace FitnessReservatieDL.ADO.NET
@@ -107,6 +109,48 @@ namespace FitnessReservatieDL.ADO.NET
                 catch (Exception ex)
                 {
                     throw new ReservatieRepoADOException("ReservatieRepoADO - GeefReservatie", ex);
+                }
+                finally
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        public IReadOnlyList<DTOReservatieInfo> ZoekReservatie(int? reservatienummer, int? klantnummer, int? toestelnummer, DateTime? datum)
+        {
+            string query = "SELECT r.reservatienummer, k.klantnummer, k.voornaam, k.naam, k.mailadres, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +
+                "LEFT JOIN Klant k ON r.klantnummer=k.klantnummer " +
+                "LEFT JOIN ReservatieInfo i ON r.reservatienummer=i.reservatienummer " +
+                "LEFT JOIN Toestel t ON i.toestelnummer=t.toestelnummer ";
+            if (reservatienummer > 0) query += "WHERE reservatienummer=@reservatienummer";
+            else if (klantnummer > 0) query += "WHERE klantnummer=@klantnummer";
+            else if (toestelnummer > 0) query += "WHERE toestelnummer=@toestelnummer";
+            else if (datum != null) query += "WHERE datum=@datum";
+            List<DTOReservatieInfo> reservaties = new List<DTOReservatieInfo>();
+            SqlConnection conn = GetConnection();
+            using (SqlCommand cmd = conn.CreateCommand())
+            {
+                cmd.CommandText = query;
+                conn.Open();
+                try
+                {
+                    if (reservatienummer > 0) cmd.Parameters.AddWithValue("@reservatienummer", reservatienummer);
+                    else if (klantnummer > 0) cmd.Parameters.AddWithValue("@klantnummer", klantnummer);
+                    else if (toestelnummer > 0) cmd.Parameters.AddWithValue("@toestelnummer", toestelnummer);
+                    else if (datum != null) cmd.Parameters.AddWithValue("@datum", datum);
+                    IDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        DTOReservatieInfo reservatie = new DTOReservatieInfo((int)reader["reservatienummer"], (int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelnaam"]);
+                        reservaties.Add(reservatie);
+                    }
+                    reader.Close();
+                    return reservaties.AsReadOnly();
+                }
+                catch (Exception ex)
+                {
+                    throw new ReservatieRepoADOException("ReservatielRepoADO - ZoekReservatie", ex);
                 }
                 finally
                 {
