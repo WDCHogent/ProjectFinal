@@ -47,78 +47,64 @@ namespace FitnessReservatieBL.Managers
 
                 //Geeft vrij toestel terug uit vrije toestellen.
                 if (aantalGereserveerdeUrenPerDatum >= 4) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+
+                if (beschikbareToestellen1 != null)
+                {
+                    if (aantalGereserveerdeUrenPerDatum != 0)
+                    {
+                        foreach (var beschikbaarToestel1 in beschikbareToestellen1)
+                        {
+                            foreach (var klantReservatieVoorDagX in reservatiesKlantVoorDagX)
+                            {
+                                //Controle tijdslot.
+                                if (beginuur1 == klantReservatieVoorDagX.Beginuur || einduur1 == klantReservatieVoorDagX.Einduur || beginuur2 == klantReservatieVoorDagX.Beginuur || einduur2 == klantReservatieVoorDagX.Einduur || beginuur2 == beginuur1 || einduur2 == einduur1 ) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                                if ((einduur1 - beginuur1 == 2 || einduur2 - beginuur2 == 2) && (beginuur1 == klantReservatieVoorDagX.Beginuur || beginuur1 + 1 == klantReservatieVoorDagX.Beginuur || einduur1 == klantReservatieVoorDagX.Einduur || einduur1 - 1 == klantReservatieVoorDagX.Einduur ||
+                                    beginuur2 == klantReservatieVoorDagX.Beginuur || beginuur2 + 1 == klantReservatieVoorDagX.Beginuur || einduur2 == klantReservatieVoorDagX.Einduur || einduur2 - 1 == klantReservatieVoorDagX.Einduur ||
+                                    beginuur2 == beginuur1 || beginuur2 == beginuur1 + 1 || einduur2 == einduur1 || einduur2 == einduur1 - 1)) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                                //
+
+                                else if (aantalGereserveerdeUrenPerDatum >= 1 && (einduur1 - beginuur1) == 2 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && (klantReservatieVoorDagX.Einduur == beginuur1 || klantReservatieVoorDagX.Beginuur == einduur1))
+                                {
+                                    beschikbareToestellen1.Remove(beschikbaarToestel1);
+                                }
+                                else if (aantalGereserveerdeUrenPerDatum == 2 && (einduur1 - beginuur1) >= 1 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && (klantReservatieVoorDagX.Einduur == beginuur1 || klantReservatieVoorDagX.Beginuur == einduur1))
+                                {
+                                    beschikbareToestellen1.Remove(beschikbaarToestel1);
+                                }
+                                else if (aantalGereserveerdeUrenPerDatum == 3 && (einduur1 - beginuur1) == 1 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && ((klantReservatieVoorDagX.Einduur - klantReservatieVoorDagX.Beginuur == 2 && klantReservatieVoorDagX.Einduur == beginuur1)))
+                                {
+                                    beschikbareToestellen1.Remove(beschikbaarToestel1);
+                                }
+                                else if (aantalGereserveerdeUrenPerDatum == 3 && (einduur1 - beginuur1) == 1 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && ((klantReservatieVoorDagX.Einduur - klantReservatieVoorDagX.Beginuur == 1 && klantReservatieVoorDagX.Einduur == beginuur1)))
+                                {
+                                    geselecteerdToestel1 = beschikbaarToestel1;
+                                    break;
+                                }
+
+                            }
+                            if (!beschikbareToestellen1.Contains(beschikbaarToestel1)) break;
+                        }
+                        geselecteerdToestel1 = beschikbareToestellen1[0];
+                    }
+                    else geselecteerdToestel1 = beschikbareToestellen1[0];
+                }
                 else
                 {
-                    foreach (var beschikbaarToestel1 in beschikbareToestellen1)
-                    {
-                        if (beschikbaarToestel1 != null)
-
-                        {
-                            if (aantalGereserveerdeUrenPerDatum == 1)
-                            {
-                                foreach (var klantReservatieVoorDagX in reservatiesKlantVoorDagX)
-                                {
-                                    if (klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && (klantReservatieVoorDagX.Einduur >= beginuur1 && klantReservatieVoorDagX.Beginuur <= einduur1) && einduur1 - beginuur1 == 2)
-                                    {
-                                        beschikbareToestellen1.Remove(beschikbaarToestel1);
-                                    }
-                                }
-                                geselecteerdToestel1 = beschikbareToestellen1[0];
-                                break;
-                            }
-                            if (aantalGereserveerdeUrenPerDatum >= 2)
-                            {
-                                foreach (var klantReservatieVoorDagX in reservatiesKlantVoorDagX)
-                                {
-                                    if (klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && (klantReservatieVoorDagX.Einduur >= beginuur1 && klantReservatieVoorDagX.Beginuur <= einduur1))
-                                    {
-                                        beschikbareToestellen1.Remove(beschikbaarToestel1);
-                                    }
-                                }
-                                geselecteerdToestel1 = beschikbareToestellen1[0];
-                                break;
-                            }
-                            else
-                            {
-                                geselecteerdToestel1 = beschikbaarToestel1;
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            geselecteerdToestel1 = null;
-                        }
-                    }
-                    if (toestelTypeNaam2 != null && beginuur2 != 0 && einduur2 != 0) beschikbareToestellen2 = _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toestelTypeNaam2, beginuur2, einduur2);
-                    if (beschikbareToestellen2 != null)
-                    {
-                        foreach (var beschikbaarToestel2 in beschikbareToestellen2)
-                        {
-                            if (aantalGereserveerdeUrenPerDatum + (einduur1 - beginuur1) == 2)
-                            {
-                                if (beschikbaarToestel2.ToestelNummer == geselecteerdToestel1.ToestelNummer) beschikbareToestellen2.Remove(beschikbaarToestel2);
-                                foreach (var klantReservatieVoorDagX in reservatiesKlantVoorDagX)
-                                {
-                                    if (klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel2.ToestelNaam) && ((klantReservatieVoorDagX.Einduur >= beginuur2 && klantReservatieVoorDagX.Beginuur <= einduur2) || (einduur1 >= beginuur2 && beginuur1 <= einduur2)) && einduur1 - beginuur1 == 2)
-                                    {
-                                        beschikbareToestellen2.Remove(beschikbaarToestel2);
-                                    }
-                                }
-                                geselecteerdToestel2 = beschikbareToestellen2[0];
-                                break;
-                            }
-                            else
-                            {
-                                if (einduur1 - beginuur1 == 1 && toestelTypeNaam1 == toestelTypeNaam2) geselecteerdToestel2 = geselecteerdToestel1;
-                                geselecteerdToestel2 = beschikbaarToestel2;
-                                break;
-                            }
-                        }
-                    }
-                    else
-                    {
-                        geselecteerdToestel2 = null;
-                    }
+                    geselecteerdToestel1 = null;
+                }
+                if (toestelTypeNaam2 != null && toestelTypeNaam2 == toestelTypeNaam1) beschikbareToestellen2 = beschikbareToestellen1;
+                else if (toestelTypeNaam2 != null && toestelTypeNaam2 != toestelTypeNaam1) beschikbareToestellen2 = _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toestelTypeNaam2, beginuur2, einduur2);
+                else beschikbareToestellen2 = null;
+                if (beschikbareToestellen2 != null)
+                {
+                    if (aantalGereserveerdeUrenPerDatum == 2 && einduur1 - beginuur1 == 1 && einduur2 - beginuur2 == 1 && toestelTypeNaam2 == toestelTypeNaam1 && (einduur1 == beginuur2 || beginuur1 == einduur2)) geselecteerdToestel2 = geselecteerdToestel1;
+                    else if (einduur1 - beginuur1 == 1 && einduur2 - beginuur2 == 2 && toestelTypeNaam2 == toestelTypeNaam1 && (einduur1 == beginuur2 || beginuur1 == einduur2)) geselecteerdToestel2 = beschikbareToestellen2[1];
+                    else if (einduur1 - beginuur1 == 2 && toestelTypeNaam2 == toestelTypeNaam1 && (einduur1 == beginuur2 || beginuur1 == einduur2)) geselecteerdToestel2 = beschikbareToestellen2[1];
+                    else geselecteerdToestel2 = beschikbareToestellen2[0];
+                }
+                else
+                {
+                    geselecteerdToestel2 = null;
                 }
                 //
 
