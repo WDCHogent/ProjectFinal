@@ -48,6 +48,7 @@ namespace FitnessReservatieBL.Managers
                 //Geeft vrij toestel terug uit vrije toestellen.
                 if (aantalGereserveerdeUrenPerDatum >= 4) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
 
+                #region ToestelReservatie Checks 1
                 if (beschikbareToestellen1 != null)
                 {
                     if (aantalGereserveerdeUrenPerDatum != 0)
@@ -78,13 +79,11 @@ namespace FitnessReservatieBL.Managers
                                 else if (aantalGereserveerdeUrenPerDatum == 3 && (einduur1 - beginuur1) == 1 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && ((klantReservatieVoorDagX.Einduur - klantReservatieVoorDagX.Beginuur == 1 && klantReservatieVoorDagX.Einduur == beginuur1)))
                                 {
                                     geselecteerdToestel1 = beschikbaarToestel1;
-                                    break;
                                 }
-
                             }
                             if (!beschikbareToestellen1.Contains(beschikbaarToestel1)) break;
                         }
-                        geselecteerdToestel1 = beschikbareToestellen1[0];
+                        if(geselecteerdToestel1 == null) geselecteerdToestel1 = beschikbareToestellen1[0];
                     }
                     else geselecteerdToestel1 = beschikbareToestellen1[0];
                 }
@@ -92,6 +91,9 @@ namespace FitnessReservatieBL.Managers
                 {
                     geselecteerdToestel1 = null;
                 }
+                #endregion
+
+                #region ToestelReservatie Checks 2
                 if (toestelTypeNaam2 != null && toestelTypeNaam2 == toestelTypeNaam1) beschikbareToestellen2 = beschikbareToestellen1;
                 else if (toestelTypeNaam2 != null && toestelTypeNaam2 != toestelTypeNaam1) beschikbareToestellen2 = _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toestelTypeNaam2, beginuur2, einduur2);
                 else beschikbareToestellen2 = null;
@@ -106,7 +108,7 @@ namespace FitnessReservatieBL.Managers
                 {
                     geselecteerdToestel2 = null;
                 }
-                //
+                #endregion
 
                 if (geselecteerdToestel1 == null) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
                 else
