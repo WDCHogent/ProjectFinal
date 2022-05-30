@@ -28,6 +28,7 @@ namespace FitnessReservatieBL.Managers
         {
             try
             {
+
                 Toestel geselecteerdToestel1 = null; Toestel geselecteerdToestel2 = null;
                 List<Toestel> beschikbareToestellen1 = new(); List<Toestel> beschikbareToestellen2 = new();
                 int aantalGereserveerdeUrenPerDatum = 0;
@@ -110,6 +111,7 @@ namespace FitnessReservatieBL.Managers
                 }
                 #endregion
 
+                #region Valideer & maak reservatie.
                 if (geselecteerdToestel1 == null) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
                 else
                 {
@@ -141,6 +143,7 @@ namespace FitnessReservatieBL.Managers
                         }
                     }
                 }
+                #endregion
             }
             catch (Exception ex)
             {

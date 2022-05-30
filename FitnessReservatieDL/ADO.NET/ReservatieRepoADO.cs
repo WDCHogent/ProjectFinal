@@ -123,10 +123,10 @@ namespace FitnessReservatieDL.ADO.NET
                 "LEFT JOIN Klant k ON r.klantnummer=k.klantnummer " +
                 "LEFT JOIN ReservatieInfo i ON r.reservatienummer=i.reservatienummer " +
                 "LEFT JOIN Toestel t ON i.toestelnummer=t.toestelnummer ";
-            if (reservatienummer > 0) query += "WHERE reservatienummer=@reservatienummer";
-            else if (klantnummer > 0) query += "WHERE klantnummer=@klantnummer";
-            else if (toestelnummer > 0) query += "WHERE toestelnummer=@toestelnummer";
-            else if (datum != null) query += "WHERE datum=@datum";
+            if (reservatienummer > 0) query += "WHERE r.reservatienummer=@reservatienummer";
+            else if (klantnummer > 0) query += "WHERE r.klantnummer=@klantnummer";
+            else if (toestelnummer > 0) query += "WHERE i.toestelnummer=@toestelnummer";
+            else if (datum != null) query += "WHERE r.datum=@datum";
             List<DTOReservatieInfo> reservaties = new List<DTOReservatieInfo>();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())

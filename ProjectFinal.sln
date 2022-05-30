@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatieDL", "Fitn
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFitnessReservatieDomein", "xFitnessReservatieDomein\xFitnessReservatieDomein.csproj", "{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "xFitnessReservatieManager", "xFitnessReservatieManager\xFitnessReservatieManager.csproj", "{83591C9D-9B01-4DC8-8D55-B181F32B808E}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FitnessReservatie.UI", "FitnessReservatie.UI\FitnessReservatie.UI.csproj", "{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}"
 EndProject
 Global
@@ -31,10 +29,6 @@ Global
 		{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8B2FC0E-A3CF-4A21-9B01-8F16ED0A429F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{83591C9D-9B01-4DC8-8D55-B181F32B808E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3EAFA0B8-2E5C-4B59-8385-28077B161FA9}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -18,6 +18,7 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class AdminWindow : Window
     {
+        #region IRepositories
         private Admin _ingelogdeAdmin;
         private KlantManager _klantManager;
         private ToestelTypeManager _toestelTypeManager;
@@ -25,6 +26,7 @@ namespace FitnessReservatie.UI
         private ToestelManager _toestelManager;
         private ReservatieInfoManager _reservatieInfoManager;
         private ReservatieManager _reservatieManager;
+        #endregion
 
         public AdminWindow(Admin admin)
         {
@@ -60,35 +62,35 @@ namespace FitnessReservatie.UI
             }
         }
 
-        #region Customer Panel Tab
+        #region Klanten Tab
         private void TextBoxKlantNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonCustomerSearch.IsEnabled = true;
+            ButtonKlantZoek.IsEnabled = true;
             if (!string.IsNullOrWhiteSpace(TextBoxKlantNummer.Text)) TextBoxKlantNaam.IsEnabled = false;
             else
             {
                 TextBoxKlantNaam.IsEnabled = true;
-                ButtonCustomerSearch.IsEnabled = false;
+                ButtonKlantZoek.IsEnabled = false;
             }
         }
         private void TextBoxKlantNaam_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonCustomerSearch.IsEnabled = true;
+            ButtonKlantZoek.IsEnabled = true;
             if (!string.IsNullOrWhiteSpace(TextBoxKlantNaam.Text)) TextBoxKlantNummer.IsEnabled = false;
             else
             {
                 TextBoxKlantNummer.IsEnabled = true;
-                ButtonCustomerSearch.IsEnabled = false;
+                ButtonKlantZoek.IsEnabled = false;
             }
         }
-        private void ButtonCustomerSearch_Click(object sender, RoutedEventArgs e)
+        private void ButtonKlantZoek_Click(object sender, RoutedEventArgs e)
         {
-            ListViewCustomerTracker.Items.Clear();
+            ListViewKlantTracker.Items.Clear();
             bool x = int.TryParse(TextBoxKlantNummer.Text, out int klantnummer);
             string klantnaam = TextBoxKlantNaam.Text.Trim();
             foreach (var klant in _klantManager.ZoekKlanten(klantnummer, klantnaam))
             {
-                ListViewCustomerTracker.Items.Add(klant);
+                ListViewKlantTracker.Items.Add(klant);
             }
             RadioButtonCustomerAll.IsChecked = false;
 
@@ -96,18 +98,18 @@ namespace FitnessReservatie.UI
 
         private void RadioButtonCustomerAll_Checked(object sender, RoutedEventArgs e)
         {
-            ListViewCustomerTracker.Items.Clear();
+            ListViewKlantTracker.Items.Clear();
             foreach (var klant in _klantManager.ZoekKlanten(0, null))
             {
-                ListViewCustomerTracker.Items.Add(klant);
+                ListViewKlantTracker.Items.Add(klant);
             }
         }
         #endregion
 
-        #region Device Panel Tab
+        #region Toestellen Tab
         private void TextBoxToestelNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonDeviceSearch.IsEnabled = true;
+            ButtonToestelZoek.IsEnabled = true;
             if (!string.IsNullOrWhiteSpace(TextBoxToestelNummer.Text))
             {
                 TextBoxToestelNaam.IsEnabled = false;
@@ -117,12 +119,12 @@ namespace FitnessReservatie.UI
             {
                 TextBoxToestelNaam.IsEnabled = true;
                 ComboBoxToestelType.IsEnabled = true;
-                ButtonCustomerSearch.IsEnabled = false;
+                ButtonToestelZoek.IsEnabled = false;
             }
         }
         private void TextBoxToestelNaam_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ButtonDeviceSearch.IsEnabled = true;
+            ButtonToestelZoek.IsEnabled = true;
             if (!string.IsNullOrWhiteSpace(TextBoxToestelNaam.Text))
             {
                 TextBoxToestelNummer.IsEnabled = false;
@@ -132,12 +134,12 @@ namespace FitnessReservatie.UI
             {
                 TextBoxToestelNummer.IsEnabled = true;
                 ComboBoxToestelType.IsEnabled = true;
-                ButtonCustomerSearch.IsEnabled = false;
+                ButtonToestelZoek.IsEnabled = false;
             }
         }
         private void ComboBoxToestelType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ButtonDeviceSearch.IsEnabled = true;
+            ButtonToestelZoek.IsEnabled = true;
             if (ComboBoxToestelType.SelectedIndex != -1)
             {
                 TextBoxToestelNaam.IsEnabled = false;
@@ -147,12 +149,12 @@ namespace FitnessReservatie.UI
             {
                 TextBoxToestelNaam.IsEnabled = true;
                 TextBoxToestelNummer.IsEnabled = true;
-                ButtonCustomerSearch.IsEnabled = false;
+                ButtonToestelZoek.IsEnabled = false;
             }
         }
-        private void ButtonDeviceSearch_Click(object sender, RoutedEventArgs e)
+        private void ButtonToestelZoek_Click(object sender, RoutedEventArgs e)
         {
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             bool x = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
             string toestelnaam = TextBoxToestelNaam.Text.Trim();
             var toesteltype = "";
@@ -163,12 +165,12 @@ namespace FitnessReservatie.UI
             else toesteltype = ComboBoxToestelType.SelectedValue.ToString();
             foreach (var toestel in _toestelManager.ZoekToestellen(null, toestelnummer, toestelnaam, toesteltype))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
             TextBoxToestelNummer.Clear();
             TextBoxToestelNaam.Clear();
             ComboBoxToestelType.SelectedIndex = -1;
-            ButtonDeviceSearch.IsEnabled = false;
+            ButtonToestelZoek.IsEnabled = false;
 
             RadioButtonDeviceAll.IsChecked = false;
             RadioButtonDeviceService.IsChecked = false;
@@ -178,51 +180,51 @@ namespace FitnessReservatie.UI
 
         private void RadioButtonDeviceAll_Checked(object sender, RoutedEventArgs e)
         {
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.operatief, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.onderhoud, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.verwijderd, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
         }
         private void RadioButtonDeviceAvailable_Checked(object sender, RoutedEventArgs e)
         {
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.operatief, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
         }
         private void RadioButtonDeviceService_Checked(object sender, RoutedEventArgs e)
         {
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.onderhoud, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
         }
         private void RadioButtonDeviceDeleted_Checked(object sender, RoutedEventArgs e)
         {
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             foreach (var toestel in _toestelManager.ZoekToestellen(Status.verwijderd, 0, null, null))
             {
-                ListViewDeviceTracker.Items.Add(toestel);
+                ListViewToestelTracker.Items.Add(toestel);
             }
         }
         private void ButtonWijziging_Opened(object sender, RoutedEventArgs e)
         {
-            if (ListViewDeviceTracker.SelectedValue == null)
+            if (ListViewToestelTracker.SelectedValue == null)
             {
                 ComboBoxStatusUpdate.IsEnabled = false;
             }
-            else if (!ListViewDeviceTracker.SelectedValue.ToString().Contains("verwijderd"))
+            else if (!ListViewToestelTracker.SelectedValue.ToString().Contains("verwijderd"))
             {
                 ComboBoxStatusUpdate.IsEnabled = true;
             }
@@ -232,16 +234,16 @@ namespace FitnessReservatie.UI
         private void ButtonStatusUpdate_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem nieuweStatus = (ComboBoxItem)ComboBoxStatusUpdate.SelectedItem;
-            MessageBoxResult result = MessageBox.Show($"U staat op het punt de status te wijzigen van \r\r >>> {ListViewDeviceTracker.SelectedItem.ToString()} naar {nieuweStatus.Content.ToString()} <<< \r\r" +
+            MessageBoxResult result = MessageBox.Show($"U staat op het punt de status te wijzigen van \r\r >>> {ListViewToestelTracker.SelectedItem.ToString()} naar {nieuweStatus.Content.ToString()} <<< \r\r" +
                 $"Bent u zeker dat u verder wil gaan?", "Opgelet!", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
 
             if (result == MessageBoxResult.OK)
             {
-                string updateToestel = _toestelManager.UpdateToestelStatus((DTOToestelInfo)ListViewDeviceTracker.SelectedValue, nieuweStatus.Content.ToString());
+                string updateToestel = _toestelManager.UpdateToestelStatus((DTOToestelInfo)ListViewToestelTracker.SelectedValue, nieuweStatus.Content.ToString());
                 MessageBox.Show(updateToestel, "");
             }
 
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             RadioButtonDeviceAll_Checked(sender, e);
 
             ComboBoxStatusUpdate.SelectedIndex = -1;
@@ -265,41 +267,104 @@ namespace FitnessReservatie.UI
             string maakToestel = _toestelManager.SchrijfToestelInDB(TextBoxNieuwToestelToestelnaam.Text, toesteltype.Content.ToString());
             MessageBox.Show(maakToestel, "");
 
-            ListViewDeviceTracker.Items.Clear();
+            ListViewToestelTracker.Items.Clear();
             RadioButtonDeviceAll_Checked(sender, e);
         }
         #endregion
-
-        //ListViewReservationTracker
         
-        #region Reservation Panel Tab
+        #region Reservatie Tab
         private void TextBoxReservatieNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            ButtonReservatieZoek.IsEnabled = true;
+            if(!string.IsNullOrWhiteSpace(TextBoxReservatieNummer.Text))
+            {
+                TextBoxReservatieKlantNummer.IsEnabled = false;
+                TextBoxReservatieToestelNummer.IsEnabled = false;
+                DatePickerReservatieSelector.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxReservatieKlantNummer.IsEnabled = true;
+                TextBoxReservatieToestelNummer.IsEnabled = true;
+                DatePickerReservatieSelector.IsEnabled = true;
+                ButtonReservatieZoek.IsEnabled = false;
+            }
         }
         private void TextBoxReservatieKlantNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            ButtonReservatieZoek.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxReservatieKlantNummer.Text))
+            {
+                TextBoxReservatieNummer.IsEnabled = false;
+                TextBoxReservatieToestelNummer.IsEnabled = false;
+                DatePickerReservatieSelector.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxReservatieNummer.IsEnabled = true;
+                TextBoxReservatieToestelNummer.IsEnabled = true;
+                DatePickerReservatieSelector.IsEnabled = true;
+                ButtonReservatieZoek.IsEnabled = false;
+            }
         }
         private void TextBoxReservatieToestelNummer_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            ButtonReservatieZoek.IsEnabled = true;
+            if (!string.IsNullOrWhiteSpace(TextBoxReservatieToestelNummer.Text))
+            {
+                TextBoxReservatieNummer.IsEnabled = false;
+                TextBoxReservatieKlantNummer.IsEnabled = false;
+                DatePickerReservatieSelector.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxReservatieNummer.IsEnabled = true;
+                TextBoxReservatieKlantNummer.IsEnabled = true;
+                DatePickerReservatieSelector.IsEnabled = true;
+                ButtonReservatieZoek.IsEnabled = false;
+            }
         }
         private void DatePickerReservatieSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            ButtonReservatieZoek.IsEnabled = true;
+            if (DatePickerReservatieSelector.SelectedDate != null)
+            {
+                TextBoxReservatieNummer.IsEnabled = false;
+                TextBoxReservatieKlantNummer.IsEnabled = false;
+                TextBoxReservatieToestelNummer.IsEnabled = false;
+            }
+            else
+            {
+                TextBoxReservatieNummer.IsEnabled = true;
+                TextBoxReservatieKlantNummer.IsEnabled = true;
+                TextBoxReservatieToestelNummer.IsEnabled = true;
+                ButtonReservatieZoek.IsEnabled = false;
+            }
         }
         private void ButtonReservatieZoek_Click(object sender, RoutedEventArgs e)
         {
             ListViewReservatieTracker.Items.Clear();
             bool x = int.TryParse(TextBoxReservatieNummer.Text, out int reservatienummer);
-            bool y = int.TryParse(TextBoxKlantNummer.Text, out int klantnummer);
-            bool z = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
-            DateTime datum = DatePickerReservatieSelector.SelectedDate.Value;
+            bool y = int.TryParse(TextBoxReservatieKlantNummer.Text, out int klantnummer);
+            bool z = int.TryParse(TextBoxReservatieToestelNummer.Text, out int toestelnummer);
+            DateTime? datum;
+            if(DatePickerReservatieSelector.SelectedDate != null)
+            {
+                datum = DatePickerReservatieSelector.SelectedDate.Value;
+            }
+            else
+            {
+                datum = null;
+            }
             foreach (var reservatie in _reservatieManager.ZoekReservatie(reservatienummer, klantnummer, toestelnummer, datum))
             {
                 ListViewReservatieTracker.Items.Add(reservatie);
             }
+
+            TextBoxReservatieNummer.Clear();
+            TextBoxReservatieKlantNummer.Clear();
+            TextBoxReservatieToestelNummer.Clear();
+            DatePickerReservatieSelector.SelectedDate=null;
             RadioButtonReservatieAll.IsChecked = false;
         }
         private void RadioButtonReservatieAll_Checked(object sender, RoutedEventArgs e)

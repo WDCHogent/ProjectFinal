@@ -19,27 +19,27 @@ namespace FitnessReservatie.UI
     /// </summary>
     public partial class KlantWindow : Window
     {
-        #region Aangemelde klantinfo
+        //Aangemelde klantinfo
         private Klant _ingelogdeKlant;
-        #endregion
+        //
 
-        # region Klantreservatie voor geselecteerde dag 
+        //Klantreservatie voor geselecteerde dag 
         private List<DTOKlantReservatieInfo> _klantReservatiesVoorDagX = new List<DTOKlantReservatieInfo>();
-        #endregion
+        //
 
-        # region Klantreservaties
+        //Klantreservaties
         private ObservableCollection<DTOKlantReservatieInfo> _reservatiesKlant;
-        #endregion
+        //
 
-        # region Combobox shenanigans
+        //Combobox shenanigans
         private IReadOnlyList<ToestelType> _toesteltypeItemsSource;
         private IReadOnlyList<Tijdslot> _tijdslotItemsSource;
-        #endregion
+        //
 
-        # region Tijdslot controles & Maxima aantal tijdsloten.
+        //Tijdslot controles & Maxima aantal tijdsloten.
         private int _aantalGereserveerdeUrenPerDatum;
         private int _maxAantalTijdsloten = 4;
-        #endregion
+        //
 
         #region IRepositories
         private ToestelTypeManager _toestelTypeManager;
@@ -101,14 +101,15 @@ namespace FitnessReservatie.UI
             #endregion
         }
 
+        #region Hoofd Reservatie
         private void DatePickerDatumSelector_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            #region Checkbox controle en reset
+            //Checkbox controle en reset
             CheckboxVoegToestelToe.IsChecked = false;
             CheckboxVoegToestelToe.IsEnabled = false;
-            #endregion
+            //
 
-            #region Cleart inputvelden bij verandering datum
+            //Cleart inputvelden bij verandering datum
             ComboBoxToesteltypeSelector1.Items.Clear();
             ComboBoxBeginuurSelector1.Items.Clear();
             ComboBoxEinduurSelector1.Items.Clear();
@@ -116,9 +117,9 @@ namespace FitnessReservatie.UI
             ComboBoxToesteltypeSelector2.Items.Clear();
             ComboBoxBeginuurSelector2.Items.Clear();
             ComboBoxEinduurSelector2.Items.Clear();
-            #endregion
+            //
 
-            #region Checkt reservatielimiet
+            //Checkt reservatielimiet
             _aantalGereserveerdeUrenPerDatum = 0;
             _klantReservatiesVoorDagX.Clear();
 
@@ -138,20 +139,19 @@ namespace FitnessReservatie.UI
                     }
                 }
             }
-            #endregion
+            //
 
-            #region Voegt Toesteltypes toe aan ComboBoxToesteltypeSelector1
+            //Voegt Toesteltypes toe aan ComboBoxToesteltypeSelector1
             foreach (ToestelType toesteltype in _toesteltypeItemsSource)
             {
                 ComboBoxToesteltypeSelector1.Items.Add(toesteltype.ToestelNaam);
             }
-            #endregion
+            //
 
-            #region Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
+            //Reset reservatiebutton bij verandering ComboBoxEinduurSelector1
             ButtonBevestigReservatie.IsEnabled = false;
-            #endregion
+            //
         }
-
         private void ComboBoxToesteltypeSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             #region Checkbox controle en reset
@@ -219,7 +219,6 @@ namespace FitnessReservatie.UI
             ButtonBevestigReservatie.IsEnabled = false;
             #endregion
         }
-
         private void ComboBoxBeginuurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             #region  Checkbox controle en reset
@@ -282,36 +281,6 @@ namespace FitnessReservatie.UI
             ComboBoxEinduurSelector1.SelectedIndex = 0;
             #endregion
         }
-
-        private void CheckboxVoegToestelToe_Checked(object sender, RoutedEventArgs e)
-        {
-            LabelToestelSelector2.Visibility = Visibility.Visible;
-            LabelTijdslotSelector2.Visibility = Visibility.Visible;
-            ComboBoxToesteltypeSelector2.Visibility = Visibility.Visible;
-            ComboBoxBeginuurSelector2.Visibility = Visibility.Visible;
-            ComboBoxEinduurSelector2.Visibility = Visibility.Visible;
-            LabelHour1.Visibility = Visibility.Visible;
-            LabelHour2.Visibility = Visibility.Visible;
-
-            ComboBoxToesteltypeSelector2.IsEnabled = true;
-            ComboBoxBeginuurSelector2.IsEnabled = false;
-            ComboBoxEinduurSelector2.IsEnabled = false;
-        }
-        private void CheckboxVoegToestelToe_Unchecked(object sender, RoutedEventArgs e)
-        {
-            LabelToestelSelector2.Visibility = Visibility.Hidden;
-            LabelTijdslotSelector2.Visibility = Visibility.Hidden;
-            ComboBoxToesteltypeSelector2.Visibility = Visibility.Hidden;
-            ComboBoxBeginuurSelector2.Visibility = Visibility.Hidden;
-            ComboBoxEinduurSelector2.Visibility = Visibility.Hidden;
-            LabelHour1.Visibility = Visibility.Hidden;
-            LabelHour2.Visibility = Visibility.Hidden;
-
-            ComboBoxToesteltypeSelector2.Items.Clear();
-            ComboBoxBeginuurSelector2.Items.Clear();
-            ComboBoxEinduurSelector2.Items.Clear();
-        }
-
         private void ComboBoxEinduurSelector1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             CheckboxVoegToestelToe.IsEnabled = true;
@@ -409,11 +378,46 @@ namespace FitnessReservatie.UI
             #endregion
 
         }
+        #endregion
+
+        private void CheckboxVoegToestelToe_Checked(object sender, RoutedEventArgs e)
+        {
+            LabelToestelSelector2.Visibility = Visibility.Visible;
+            LabelTijdslotSelector2.Visibility = Visibility.Visible;
+            ComboBoxToesteltypeSelector2.Visibility = Visibility.Visible;
+            ComboBoxBeginuurSelector2.Visibility = Visibility.Visible;
+            ComboBoxEinduurSelector2.Visibility = Visibility.Visible;
+            LabelHour1.Visibility = Visibility.Visible;
+            LabelHour2.Visibility = Visibility.Visible;
+
+            ComboBoxToesteltypeSelector2.IsEnabled = true;
+            ComboBoxBeginuurSelector2.IsEnabled = false;
+            ComboBoxEinduurSelector2.IsEnabled = false;
+
+            ButtonBevestigReservatie.IsEnabled = false;
+        }
+        private void CheckboxVoegToestelToe_Unchecked(object sender, RoutedEventArgs e)
+        {
+            LabelToestelSelector2.Visibility = Visibility.Hidden;
+            LabelTijdslotSelector2.Visibility = Visibility.Hidden;
+            ComboBoxToesteltypeSelector2.Visibility = Visibility.Hidden;
+            ComboBoxBeginuurSelector2.Visibility = Visibility.Hidden;
+            ComboBoxEinduurSelector2.Visibility = Visibility.Hidden;
+            LabelHour1.Visibility = Visibility.Hidden;
+            LabelHour2.Visibility = Visibility.Hidden;
+
+            ComboBoxToesteltypeSelector2.SelectedIndex = -1;
+            ComboBoxBeginuurSelector2.Items.Clear();
+            ComboBoxEinduurSelector2.Items.Clear();
+
+            ButtonBevestigReservatie.IsEnabled = true;
+        }
+
+        #region Reservatie Uitbreiding
         private void ComboBoxToesteltypeSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxBeginuurSelector2.IsEnabled = true;
         }
-
         private void ComboBoxBeginuurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBoxEinduurSelector2.Items.Clear();
@@ -479,11 +483,11 @@ namespace FitnessReservatie.UI
 
             ComboBoxEinduurSelector2.IsEnabled = true;
         }
-
         private void ComboBoxEinduurSelector2_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ButtonBevestigReservatie.IsEnabled = true;
         }
+        #endregion/
 
         private void ButtonBevestigReservatie_Click(object sender, RoutedEventArgs e)
         {
@@ -518,6 +522,7 @@ namespace FitnessReservatie.UI
                     }
                 }
                 #endregion
+
                 if (ComboBoxToesteltypeSelector2.SelectedIndex != -1)
                 {
                     MessageBox.Show($"Er werden nieuwe reservaties aangemaakt \rop {geselecteerdeDatum.ToShortDateString()} om {beginuur1}u-{einduur1}u voor {reservatieinfo1.Toestelnaam}\r& om {beginuur2}u-{einduur2}u voor {reservatieinfo2.Toestelnaam}. \r\r Kijk op het tabblad 'Mijn reservaties' om alle reservaties te zien.", "Reservering bevestigd!");
@@ -528,7 +533,7 @@ namespace FitnessReservatie.UI
                 }
 
                 #region  Cleart inputvelden bij maken reservatie
-                DatePickerDatumSelector.SelectedDate = DateTime.Today;
+                DatePickerDatumSelector.SelectedDate = null;
 
                 ComboBoxToesteltypeSelector1.Items.Clear();
                 ComboBoxBeginuurSelector1.Items.Clear();
