@@ -22,6 +22,7 @@ namespace FitnessReservatieBL.Managers
 
         public IReadOnlyList<Toestel> GeefVrijeToestellenVoorGeselecteerdTijdslot(DateTime datum, string toesteltype, int beginuur, int einduur)
         {
+            if (string.IsNullOrWhiteSpace(toesteltype) && beginuur == 0 && einduur == 0) throw new ToestelManagerException("ToestelManager - GeefVrijeToestellenVoorGeselecteerdTijdslot - Input is null");
             try
             {
                 return _toestelRepo.GeefVrijToestelVoorGeselecteerdTijdslot(datum, toesteltype, beginuur, einduur);
@@ -44,7 +45,8 @@ namespace FitnessReservatieBL.Managers
         }
         public string UpdateToestelStatus(DTOToestelInfo toestelInfo, string toestelStatus)
         {
-            if (toestelInfo == null) throw new ToestelManagerException("ToestelManager - SchrijfToestelInDB - 'toestel is null'");
+            if (toestelInfo == null) throw new ToestelManagerException("ToestelManager - UpdateToestelStatus - toestel is null");
+            if (toestelStatus == null) throw new ToestelManagerException("ToestelManager - UpdateToestelStatus - status is null");
             try
             {
                 return _toestelRepo.UpdateToestelStatus(toestelInfo, toestelStatus);

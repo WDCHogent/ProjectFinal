@@ -19,22 +19,21 @@ namespace FitnessReservatieDL.ADO.NET
 
         private SqlConnection GetConnection()
         {
-            SqlConnection connectie = new SqlConnection(_connectiestring);
-            return connectie;
+            return new SqlConnection(_connectiestring);
         }
 
         public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             string query = "SELECT * FROM Tijdslot";
             List<Tijdslot> tijdsloten = new List<Tijdslot>();
-            SqlConnection connection = GetConnection();
-            using (SqlCommand command = connection.CreateCommand())
+            SqlConnection conn = GetConnection();
+            using (SqlCommand cmd = conn.CreateCommand())
             {
-                command.CommandText = query;
-                connection.Open();
+                cmd.CommandText = query;
+                conn.Open();
                 try
                 {
-                    IDataReader reader = command.ExecuteReader();
+                    IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
                         tijdsloten.Add(new Tijdslot((int)reader["tijdslot"]));
@@ -44,9 +43,9 @@ namespace FitnessReservatieDL.ADO.NET
                 }
                 catch (Exception ex)
                 {
-                    throw new TijdslotADOException("SelecteerEinduur", ex);
+                    throw new TijdslotADOException("TijdslotRepoADO - SelecteerTijdslot", ex);
                 }
-                finally { connection.Close(); }
+                finally { conn.Close(); }
             }
         }
     }

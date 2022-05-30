@@ -16,13 +16,14 @@ namespace FitnessReservatieBL.Managers
 
         public Admin SelecteerAdmin(string adminnummer)
         {
+            if (string.IsNullOrWhiteSpace(adminnummer)) throw new AdminManagerException("AdminManager - SelecteerAdmin - input is null");
             try
             {
                 return _adminRepo.SelecteerAdmin(adminnummer);
             }
             catch (Exception ex)
             {
-                throw new AdminManagerException("KlantManager - SelecteerKlant", ex);
+                throw new AdminManagerException("AdminManager - SelecteerAdmin", ex);
             }
         }
     }

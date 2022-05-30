@@ -13,15 +13,15 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class ToestelRepoADO : IToestelRepository
     {
-        private string connectieString;
+        private string _connectiestring;
 
         public ToestelRepoADO(string connectieString)
         {
-            this.connectieString = connectieString;
+            this._connectiestring = connectieString;
         }
         private SqlConnection GetConnection()
         {
-            return new SqlConnection(connectieString);
+            return new SqlConnection(_connectiestring);
         }
         public List<Toestel> GeefVrijToestelVoorGeselecteerdTijdslot(DateTime datum, string toesteltypenaam, int beginuur, int einduur)
         {
@@ -92,7 +92,7 @@ namespace FitnessReservatieDL.ADO.NET
                 }
                 catch (Exception ex)
                 {
-                    throw new ToestelRepoADOException("ToestelRepoADO - GeefToestellenMetStatus", ex);
+                    throw new ToestelRepoADOException("ToestelRepoADO - ZoekToestellen", ex);
                 }
                 finally
                 {
@@ -176,7 +176,7 @@ namespace FitnessReservatieDL.ADO.NET
                     {
                         if (entries > 0)
                         {
-                            return $"{toestelInfo.Toestelnaam} heeft nog reservaties.";
+                            return $"{toestelInfo.Toestelnaam} heeft nog reservaties,\rhierdoor kon {toestelInfo.Toestelnaam} niet {toestelStatus} worden.";
                         }
                         else
                         {

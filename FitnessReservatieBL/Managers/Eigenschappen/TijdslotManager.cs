@@ -23,7 +23,7 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
             }
             catch (Exception ex)
             {
-                throw new TijdslotManagerException("TijdslotManager - SelecteerEinduur", ex);
+                throw new TijdslotManagerException("TijdslotManager - SelecteerTijdslot", ex);
             }
         }
     }

@@ -18,7 +18,7 @@ namespace FitnessReservatieBL.Managers
 
         public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
-            if ((!klantnummer.HasValue) && string.IsNullOrWhiteSpace(mailadres)) throw new KlantManagerException("KlantManagerException - SelecteerKlant");
+            if ((!klantnummer.HasValue) && string.IsNullOrWhiteSpace(mailadres)) throw new KlantManagerException("KlantManagerException - SelecteerKlant - Input is null");
             try
             {
                 return _klantRepo.SelecteerKlant(klantnummer, mailadres);
@@ -57,6 +57,7 @@ namespace FitnessReservatieBL.Managers
 
         public IReadOnlyList<Klant> ZoekKlanten(int klantnummer, string zoekterm)
         {
+            if ((klantnummer <= 0) && string.IsNullOrWhiteSpace(zoekterm)) throw new KlantManagerException("KlantManagerException - ZoekKlanten - Input is null");
             try
             {
                 return _klantRepo.ZoekKlanten(klantnummer, zoekterm);

@@ -25,7 +25,6 @@ namespace FitnessReservatieDL.ADO.NET
 
         public Klant SelecteerKlant(int? klantnummer, string mailadres)
         {
-            if ((!klantnummer.HasValue) && (string.IsNullOrEmpty(mailadres)) == true) throw new KlantRepoADOException("KlantRepoADO - SelecteerKlant - 'Ongeldige input'");
             string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
             if (klantnummer.HasValue) query += "WHERE klantnummer=@klantnummer";
             else query += "WHERE mailadres=@mailadres";
@@ -66,8 +65,6 @@ namespace FitnessReservatieDL.ADO.NET
 
         public IReadOnlyList<DTOKlantReservatieInfo> GeefKlantReservaties(Klant klant)
         {
-            if (klant.Klantnummer <= 0) throw new KlantRepoADOException("KlantRepoADO - GeefKlantReservaties - 'Ongeldige input'");
-
             string query1 = "SELECT Count(*) FROM Reservatie WHERE klantnummer=@klantnummer";
 
             string query2 = "SELECT r.reservatienummer, r.datum, i.beginuur, i.einduur, t.toestelnaam FROM Reservatie r " +

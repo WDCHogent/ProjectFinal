@@ -32,9 +32,7 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
 
         public void MaakReservatieInfo(Reservatie reservatie, Toestel toestel, int beginuur, int einduur)
         {
-            if (reservatie == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Reservatie is null'");
-            else if (toestel == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - 'Geen vrije toestellen meer'");
-
+            if (reservatie == null) throw new ReservatieInfoManagerException("ReservatieInfoManager - MaakReservatieInfo - Reservatie is null");
             try
             {
                 _reservatieInfoRepo.MaakReservatieInfo(reservatie, toestel, beginuur, einduur);

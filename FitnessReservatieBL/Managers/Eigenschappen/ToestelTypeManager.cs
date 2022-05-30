@@ -29,6 +29,7 @@ namespace FitnessReservatieBL.Managers.Eigenschappen
 
         public int GeefToestelTypeNummer(string toestelTypeNaam)
         {
+            if(string.IsNullOrWhiteSpace(toestelTypeNaam)) throw new ToestelTypeManagerException("ToestelTypeManager - GeefToestelTypeNummer - toesteltypenaam is null");
             try
             {
                 return _toestelTypeRepo.GeefToestelTypeNummer(toestelTypeNaam);

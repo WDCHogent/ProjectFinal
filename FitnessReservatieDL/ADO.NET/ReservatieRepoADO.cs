@@ -20,8 +20,7 @@ namespace FitnessReservatieDL.ADO.NET
 
         private SqlConnection GetConnection()
         {
-            SqlConnection connection = new SqlConnection(_connectiestring);
-            return connection;
+            return new SqlConnection(_connectiestring);
         }
 
         public bool BestaatReservatie(Reservatie reservatie)
@@ -45,7 +44,7 @@ namespace FitnessReservatieDL.ADO.NET
                 }
                 catch (Exception ex)
                 {
-                    throw new ReservatieRepoADOException("BestaatReservatie", ex);
+                    throw new ReservatieRepoADOException("ReservatieRepoADO - BestaatReservatie", ex);
                 }
                 finally
                 {
@@ -76,7 +75,7 @@ namespace FitnessReservatieDL.ADO.NET
             }
             catch (Exception ex)
             {
-                throw new ReservatieRepoADOException("MaakReservatie", ex);
+                throw new ReservatieRepoADOException("ReservatieRepoADO - MaakReservatie", ex);
             }
             finally
             {

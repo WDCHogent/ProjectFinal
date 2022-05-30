@@ -15,6 +15,8 @@ namespace FitnessReservatieBL.Managers
         private IKlantRepository _klantRepo;
         private IToestelRepository _toestelRepo;
 
+        private int _maxAantalTijdsloten = 4;
+
         public ReservatieManager(IReservatieRepository reservatieRepo, IReservatieInfoRepository reservatieInfoRepo, IKlantRepository klantRepo, IToestelRepository toestelRepo)
         {
             this._reservatieRepo = reservatieRepo;
@@ -24,7 +26,6 @@ namespace FitnessReservatieBL.Managers
         }
 
         public void MaakReservatie(Klant klant, DateTime datum, string toestelTypeNaam1, int beginuur1, int einduur1, string toestelTypeNaam2, int beginuur2, int einduur2)
-
         {
             try
             {
@@ -47,7 +48,7 @@ namespace FitnessReservatieBL.Managers
                 //
 
                 //Geeft vrij toestel terug uit vrije toestellen.
-                if (aantalGereserveerdeUrenPerDatum >= 4) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                if (aantalGereserveerdeUrenPerDatum >= _maxAantalTijdsloten) throw new ReservatieManagerException("ReservatieManager - MaakReservatie  - Maximaal aantal tijdsloten bereikt");
 
                 #region ToestelReservatie Checks 1
                 if (beschikbareToestellen1 != null)
@@ -62,7 +63,7 @@ namespace FitnessReservatieBL.Managers
                                 if (beginuur1 == klantReservatieVoorDagX.Beginuur || einduur1 == klantReservatieVoorDagX.Einduur || beginuur2 == klantReservatieVoorDagX.Beginuur || einduur2 == klantReservatieVoorDagX.Einduur || beginuur2 == beginuur1 || einduur2 == einduur1 ) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
                                 if ((einduur1 - beginuur1 == 2 || einduur2 - beginuur2 == 2) && (beginuur1 == klantReservatieVoorDagX.Beginuur || beginuur1 + 1 == klantReservatieVoorDagX.Beginuur || einduur1 == klantReservatieVoorDagX.Einduur || einduur1 - 1 == klantReservatieVoorDagX.Einduur ||
                                     beginuur2 == klantReservatieVoorDagX.Beginuur || beginuur2 + 1 == klantReservatieVoorDagX.Beginuur || einduur2 == klantReservatieVoorDagX.Einduur || einduur2 - 1 == klantReservatieVoorDagX.Einduur ||
-                                    beginuur2 == beginuur1 || beginuur2 == beginuur1 + 1 || einduur2 == einduur1 || einduur2 == einduur1 - 1)) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                                    beginuur2 == beginuur1 || beginuur2 == beginuur1 + 1 || einduur2 == einduur1 || einduur2 == einduur1 - 1)) throw new ReservatieManagerException("ReservatieManager - MaakReservatie - Er werd reeds een reservatie gemaakt binnen dit tijdslot");
                                 //
 
                                 else if (aantalGereserveerdeUrenPerDatum >= 1 && (einduur1 - beginuur1) == 2 && klantReservatieVoorDagX.Toestelnaam.Contains(beschikbaarToestel1.ToestelNaam) && (klantReservatieVoorDagX.Einduur == beginuur1 || klantReservatieVoorDagX.Beginuur == einduur1))
@@ -112,16 +113,16 @@ namespace FitnessReservatieBL.Managers
                 #endregion
 
                 #region Valideer & maak reservatie.
-                if (geselecteerdToestel1 == null) throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                if (geselecteerdToestel1 == null) throw new ReservatieManagerException($"ReservatieManager - MaakReservatie - Geen beschikbare {toestelTypeNaam1}en meer voor geselecteerd tijdslot");
                 else
                 {
                     Reservatie reservatie = new Reservatie(klant, datum);
                     ReservatieInfo reservatieInfo2 = null;
                     ReservatieInfo reservatieInfo1 = _reservatieInfoRepo.ValideerReservatieInfo(datum, beginuur1, einduur1, geselecteerdToestel1);
-                    if (toestelTypeNaam2 != null) reservatieInfo2 = _reservatieInfoRepo.ValideerReservatieInfo(datum, beginuur2, einduur2, geselecteerdToestel2);
+                    if (toestelTypeNaam2 != null && beginuur1 != 0 && einduur1 != 0) reservatieInfo2 = _reservatieInfoRepo.ValideerReservatieInfo(datum, beginuur2, einduur2, geselecteerdToestel2);
                     if (reservatieInfo1 == null)
                     {
-                        throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
+                        throw new ReservatieManagerException("ReservatieManager - MaakReservatie - Reservatie bestaat al");
                     }
                     else
                     {
@@ -137,17 +138,13 @@ namespace FitnessReservatieBL.Managers
                             _reservatieInfoRepo.MaakReservatieInfo(gemaakteReservatie, reservatieInfo1.Toestel, beginuur1, einduur1);
                             if (reservatieInfo2 != null) _reservatieInfoRepo.MaakReservatieInfo(gemaakteReservatie, reservatieInfo2.Toestel, beginuur2, einduur2);
                         }
-                        else
-                        {
-                            throw new ReservatieManagerException("ReservatieManager - MaakReservatie");
-                        }
                     }
                 }
                 #endregion
             }
             catch (Exception ex)
             {
-                throw new ReservatieManagerException("MaakReservatie", ex);
+                throw new ReservatieManagerException("ReservatieManager - MaakReservatie", ex);
             }
         }
 
