@@ -10,7 +10,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class ToestelTypeRepoADO : IToestelTypeRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public ToestelTypeRepoADO(string connectiestring)
         {
@@ -25,7 +25,7 @@ namespace FitnessReservatieDL.ADO.NET
         public IReadOnlyList<ToestelType> SelecteerToestelType()
         {
             string query = "SELECT * FROM Toesteltype";
-            List<ToestelType> toesteltypes = new List<ToestelType>();
+            List<ToestelType> toesteltypes = new ();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -36,7 +36,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        toesteltypes.Add(new ToestelType((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
+                        toesteltypes.Add(new ((int)reader["toesteltypeid"], (string)reader["toesteltypenaam"]));
                     }
                     reader.Close();
                     return toesteltypes;

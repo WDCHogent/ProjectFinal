@@ -1,14 +1,16 @@
 ﻿using FitnessReservatieBL.Exceptions;
+using System;
+using System.Linq;
 
 namespace FitnessReservatieBL.Domeinen
 {
     public class Admin
     {
-        public Admin(string adminnummer, string naam, string voornaam)
+        internal Admin(string adminnummer, string naam, string voornaam)
         {
-            Adminnummer = adminnummer;
-            Naam = naam;
-            Voornaam = voornaam;
+            ZetAdminnummer(adminnummer);
+            ZetNaam(naam);
+            ZetVoornaam(voornaam);
         }
 
         public string Adminnummer { get; private set; }
@@ -18,7 +20,8 @@ namespace FitnessReservatieBL.Domeinen
         public void ZetAdminnummer(string adminnummer)
         {
             if (string.IsNullOrWhiteSpace(adminnummer)) throw new AdminException("Admin - ZetAdminnummer - 'Mag niet leeg zijn'");
-            if (!adminnummer.StartsWith('A')) throw new AdminException("Admin - ZetAdminnummer - 'Ongeldig Adminnummer'");
+            if (adminnummer == "A000") throw new AdminException("Admin - ZetAdminnummer - 'Mag niet 0 zijn'");
+            if (!adminnummer.StartsWith('A') || (!Char.IsDigit(adminnummer, 1) && !Char.IsDigit(adminnummer, 2) && !Char.IsDigit(adminnummer, 3))) throw new AdminException("Admin - ZetAdminnummer - 'Ongeldig Adminnummer'");
             Adminnummer = adminnummer.Trim();
         }
 

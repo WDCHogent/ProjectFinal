@@ -98,3 +98,6 @@ C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\obj\Debug\
 C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\obj\Debug\net5.0\xFitnessReservatieDomein.pdb
 C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\obj\Debug\net5.0\xFitnessReservatieDomein.genruntimeconfig.cache
 C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\obj\Debug\net5.0\ref\xFitnessReservatieDomein.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\bin\Debug\net5.0\CoverletSourceRootsMapping
+C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\bin\Debug\net5.0\FitnessReservatieBL.dll
+C:\Users\woutd\Documents\GitHub\ProjectFinal\xFitnessReservatieDomein\bin\Debug\net5.0\FitnessReservatieBL.pdb

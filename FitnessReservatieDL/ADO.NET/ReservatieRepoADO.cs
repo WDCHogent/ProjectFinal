@@ -11,7 +11,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class ReservatieRepoADO : IReservatieRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public ReservatieRepoADO(string connectiestring)
         {
@@ -100,7 +100,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        geselecteerdeReservatie = new Reservatie((int)reader["reservatienummer"], reservatie.Klant, reservatie.Datum);
+                        geselecteerdeReservatie = new ((int)reader["reservatienummer"], reservatie.Klant, reservatie.Datum);
                     }
                     reader.Close();
                     return geselecteerdeReservatie;
@@ -126,7 +126,7 @@ namespace FitnessReservatieDL.ADO.NET
             else if (klantnummer > 0) query += "WHERE r.klantnummer=@klantnummer";
             else if (toestelnummer > 0) query += "WHERE i.toestelnummer=@toestelnummer";
             else if (datum != null) query += "WHERE r.datum=@datum";
-            List<DTOReservatieInfo> reservaties = new List<DTOReservatieInfo>();
+            List<DTOReservatieInfo> reservaties = new ();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -141,7 +141,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        DTOReservatieInfo reservatie = new DTOReservatieInfo((int)reader["reservatienummer"], (int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelnaam"]);
+                        DTOReservatieInfo reservatie = new ((int)reader["reservatienummer"], (int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelnaam"]);
                         reservaties.Add(reservatie);
                     }
                     reader.Close();

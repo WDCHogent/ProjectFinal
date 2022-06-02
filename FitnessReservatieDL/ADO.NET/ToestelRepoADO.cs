@@ -13,7 +13,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class ToestelRepoADO : IToestelRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public ToestelRepoADO(string connectieString)
         {
@@ -32,7 +32,7 @@ namespace FitnessReservatieDL.ADO.NET
             "LEFT JOIN Reservatie r ON i.reservatienummer = r.reservatienummer " +
             "WHERE r.datum LIKE @datum AND (i.beginuur BETWEEN @beginuur AND @einduur - 1 OR i.einduur BETWEEN @beginuur + 1 AND @einduur))";
             SqlConnection conn = GetConnection();
-            List<Toestel> beschikbareToestellen = new List<Toestel>();
+            List<Toestel> beschikbareToestellen = new ();
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query;
@@ -69,7 +69,7 @@ namespace FitnessReservatieDL.ADO.NET
             else if (toestelnummer > 0) query += "WHERE toestelnummer=@toestelnummer";
             else if (!string.IsNullOrWhiteSpace(toestelnaam)) query += "WHERE toestelnaam LIKE '%' + @toestelnaam + '%'";
             else if (!string.IsNullOrWhiteSpace(toesteltype)) query += "WHERE toesteltypenaam=@toesteltypenaam";
-            List<DTOToestelInfo> toestellen = new List<DTOToestelInfo>();
+            List<DTOToestelInfo> toestellen = new ();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -84,7 +84,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        DTOToestelInfo toestel = new DTOToestelInfo((int)reader["toestelnummer"], (string)reader["toestelnaam"], (Status)Enum.Parse(typeof(Status), (string)reader["status"]), (string)reader["toesteltypenaam"]);
+                        DTOToestelInfo toestel = new ((int)reader["toestelnummer"], (string)reader["toestelnaam"], (Status)Enum.Parse(typeof(Status), (string)reader["status"]), (string)reader["toesteltypenaam"]);
                         toestellen.Add(toestel);
                     }
                     reader.Close();

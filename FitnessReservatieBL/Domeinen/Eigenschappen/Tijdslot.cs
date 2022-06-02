@@ -4,7 +4,7 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 {
     public class Tijdslot
     {
-        public Tijdslot(int tijdslot)
+        internal Tijdslot(int tijdslot)
         {
             ZetTijdslot(tijdslot);
         }

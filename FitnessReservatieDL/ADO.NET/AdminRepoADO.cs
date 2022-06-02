@@ -9,7 +9,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class AdminRepoADO : IAdminRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public AdminRepoADO(string connectiestring)
         {
@@ -38,7 +38,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        admin = new Admin((string)reader["adminnummer"], (string)reader["naam"], (string)reader["voornaam"]);
+                        admin = new ((string)reader["adminnummer"], (string)reader["naam"], (string)reader["voornaam"]);
                     }
                     reader.Close();
                     return admin;

@@ -10,7 +10,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class ReservatieInfoRepoADO : IReservatieInfoRepository
     {
-        private string connectieString;
+        private readonly string connectieString;
 
         public ReservatieInfoRepoADO(string connectieString)
         {

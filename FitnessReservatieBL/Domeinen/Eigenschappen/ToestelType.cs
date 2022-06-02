@@ -4,13 +4,13 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 {
     public class ToestelType
     {
-        public ToestelType(int toestelId, string toestelNaam) : this(toestelNaam)
+        internal ToestelType(int toestelId, string toestelNaam) : this(toestelNaam)
         {
-            ToestelId = toestelId;
+            ZetToestelId(toestelId);
         }
-        public ToestelType(string toestelNaam)
+        internal ToestelType(string toestelNaam)
         {
-            ToestelNaam = toestelNaam;
+            ZetToestelNaam(toestelNaam);
         }
 
         public int ToestelId { get; private set; }

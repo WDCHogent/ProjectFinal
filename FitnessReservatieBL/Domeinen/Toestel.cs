@@ -6,12 +6,12 @@ namespace FitnessReservatieBL.Domeinen
 {
     public class Toestel
     {
-        public Toestel(int toestelNummer, string toestelNaam, Status status, ToestelType toestelType) : this(toestelNaam, status, toestelType)
+        internal Toestel(int toestelNummer, string toestelNaam, Status status, ToestelType toestelType) : this(toestelNaam, status, toestelType)
         {
             ZetToestelNummer(toestelNummer);
         }
 
-        public Toestel(string toestelNaam, Status status, ToestelType toestelType)
+        internal Toestel(string toestelNaam, Status status, ToestelType toestelType)
         {
             ZetToestelNaam(toestelNaam);
             ZetStatus(status);

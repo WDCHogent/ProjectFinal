@@ -10,7 +10,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class TijdslotRepoADO : ITijdslotRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public TijdslotRepoADO(string connectiestring)
         {
@@ -25,7 +25,7 @@ namespace FitnessReservatieDL.ADO.NET
         public IReadOnlyList<Tijdslot> SelecteerTijdslot()
         {
             string query = "SELECT * FROM Tijdslot";
-            List<Tijdslot> tijdsloten = new List<Tijdslot>();
+            List<Tijdslot> tijdsloten = new ();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -36,7 +36,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        tijdsloten.Add(new Tijdslot((int)reader["tijdslot"]));
+                        tijdsloten.Add(new ((int)reader["tijdslot"]));
                     }
                     reader.Close();
                     return tijdsloten;

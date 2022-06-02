@@ -86,7 +86,7 @@ namespace FitnessReservatie.UI
         private void ButtonKlantZoek_Click(object sender, RoutedEventArgs e)
         {
             ListViewKlantTracker.Items.Clear();
-            bool x = int.TryParse(TextBoxKlantNummer.Text, out int klantnummer);
+            bool x = int.TryParse(TextBoxKlantNummer.Text.Trim(), out int klantnummer);
             string klantnaam = TextBoxKlantNaam.Text.Trim();
             foreach (var klant in _klantManager.ZoekKlanten(klantnummer, klantnaam))
             {
@@ -155,7 +155,7 @@ namespace FitnessReservatie.UI
         private void ButtonToestelZoek_Click(object sender, RoutedEventArgs e)
         {
             ListViewToestelTracker.Items.Clear();
-            bool x = int.TryParse(TextBoxToestelNummer.Text, out int toestelnummer);
+            bool x = int.TryParse(TextBoxToestelNummer.Text.Trim(), out int toestelnummer);
             string toestelnaam = TextBoxToestelNaam.Text.Trim();
             var toesteltype = "";
             if (ComboBoxToestelType.SelectedIndex == -1)
@@ -264,7 +264,7 @@ namespace FitnessReservatie.UI
         private void ButtonNieuwToestel_Click(object sender, RoutedEventArgs e)
         {
             ComboBoxItem toesteltype = (ComboBoxItem)ComboBoxNieuwToestelToesteltype.SelectedItem;
-            string maakToestel = _toestelManager.SchrijfToestelInDB(TextBoxNieuwToestelToestelnaam.Text, toesteltype.Content.ToString());
+            string maakToestel = _toestelManager.SchrijfToestelInDB(TextBoxNieuwToestelToestelnaam.Text.Trim(), toesteltype.Content.ToString());
             MessageBox.Show(maakToestel, "");
 
             ListViewToestelTracker.Items.Clear();
@@ -344,9 +344,9 @@ namespace FitnessReservatie.UI
         private void ButtonReservatieZoek_Click(object sender, RoutedEventArgs e)
         {
             ListViewReservatieTracker.Items.Clear();
-            bool x = int.TryParse(TextBoxReservatieNummer.Text, out int reservatienummer);
-            bool y = int.TryParse(TextBoxReservatieKlantNummer.Text, out int klantnummer);
-            bool z = int.TryParse(TextBoxReservatieToestelNummer.Text, out int toestelnummer);
+            bool x = int.TryParse(TextBoxReservatieNummer.Text.Trim(), out int reservatienummer);
+            bool y = int.TryParse(TextBoxReservatieKlantNummer.Text.Trim(), out int klantnummer);
+            bool z = int.TryParse(TextBoxReservatieToestelNummer.Text.Trim(), out int toestelnummer);
             DateTime? datum;
             if(DatePickerReservatieSelector.SelectedDate != null)
             {

@@ -11,7 +11,7 @@ namespace FitnessReservatieDL.ADO.NET
 {
     public class KlantRepoADO : IKlantRepository
     {
-        private string _connectiestring;
+        private readonly string _connectiestring;
 
         public KlantRepoADO(string connectiestring)
         {
@@ -73,7 +73,7 @@ namespace FitnessReservatieDL.ADO.NET
             "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
             "WHERE r.klantnummer = @klantnummer ORDER BY r.datum, i.beginuur";
             SqlConnection conn = GetConnection();
-            List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
+            List<DTOKlantReservatieInfo> klantenreservaties = new();
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query1;
@@ -85,7 +85,7 @@ namespace FitnessReservatieDL.ADO.NET
                     int entries = (int)cmd.ExecuteScalar();
                     if (entries == 0)
                     {
-                        return new List<DTOKlantReservatieInfo>();
+                        return klantenreservaties;
                     }
                     else
                     {
@@ -95,7 +95,7 @@ namespace FitnessReservatieDL.ADO.NET
                         {
                             while (reader.Read())
                             {
-                                DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
+                                DTOKlantReservatieInfo klantenreservatie = new ((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
                                 klantenreservaties.Add(klantenreservatie);
                             }
                             return klantenreservaties.AsReadOnly();
@@ -128,7 +128,7 @@ namespace FitnessReservatieDL.ADO.NET
             "LEFT JOIN Klant k ON r.klantnummer = k.klantnummer " +
             "WHERE r.klantnummer = @klantnummer AND r.datum = @datum";
             SqlConnection conn = GetConnection();
-            List<DTOKlantReservatieInfo> klantenreservaties = new List<DTOKlantReservatieInfo>();
+            List<DTOKlantReservatieInfo> klantenreservaties = new();
             using (SqlCommand cmd = conn.CreateCommand())
             {
                 cmd.CommandText = query1;
@@ -141,7 +141,7 @@ namespace FitnessReservatieDL.ADO.NET
                     int entries = (int)cmd.ExecuteScalar();
                     if (entries == 0)
                     {
-                        return new List<DTOKlantReservatieInfo>();
+                        return klantenreservaties;
                     }
                     else
                     {
@@ -151,7 +151,7 @@ namespace FitnessReservatieDL.ADO.NET
                         {
                             while (reader.Read())
                             {
-                                DTOKlantReservatieInfo klantenreservatie = new DTOKlantReservatieInfo((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
+                                DTOKlantReservatieInfo klantenreservatie = new ((int)reader["reservatienummer"], (DateTime)reader["datum"], (int)reader["beginuur"], (int)reader["einduur"], (string)reader["toestelNaam"]);
                                 klantenreservaties.Add(klantenreservatie);
                             }
                             return klantenreservaties.AsReadOnly();
@@ -179,8 +179,8 @@ namespace FitnessReservatieDL.ADO.NET
             string query = "SELECT klantnummer,naam,voornaam,mailadres FROM Klant ";
             if (klantnummer > 0) query += "WHERE klantnummer=@klantnummer";
             else if (!string.IsNullOrWhiteSpace(zoekterm)) query += "WHERE naam LIKE '%' + @zoekterm + '%' OR voornaam LIKE '%' + @zoekterm + '%'";
-            Klant klant = null;
-            List<Klant> klanten = new List<Klant>();
+            Klant klant;
+            List<Klant> klanten = new();
             SqlConnection conn = GetConnection();
             using (SqlCommand cmd = conn.CreateCommand())
             {
@@ -199,7 +199,7 @@ namespace FitnessReservatieDL.ADO.NET
                     IDataReader reader = cmd.ExecuteReader();
                     while (reader.Read())
                     {
-                        klant = new Klant((int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"]);
+                        klant = new ((int)reader["klantnummer"], (string)reader["naam"], (string)reader["voornaam"], (string)reader["mailadres"]);
                         klanten.Add(klant);
                     }
                     reader.Close();

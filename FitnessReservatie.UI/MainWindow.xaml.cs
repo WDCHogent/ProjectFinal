@@ -64,9 +64,9 @@ namespace FitnessReservatie.UI
                 string mailadres;
 
                 if (string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text) && string.IsNullOrWhiteSpace(TextBoxEmailadres.Text)) MessageBox.Show("Ongeldig klantnummer of mailadres", "Something went wrong");
-                if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) klantnummer = int.Parse(TextBoxKlantnummer.Text);
+                if (!string.IsNullOrWhiteSpace(TextBoxKlantnummer.Text)) klantnummer = int.Parse(TextBoxKlantnummer.Text.Trim());
                 else klantnummer = null;
-                mailadres = TextBoxEmailadres.Text;
+                mailadres = TextBoxEmailadres.Text.Trim();
                 Klant klant = _klantManager.SelecteerKlant(klantnummer, mailadres);
                 if (klant != null)
                 {
@@ -89,7 +89,7 @@ namespace FitnessReservatie.UI
                 string adminnummer;
 
                 if (string.IsNullOrWhiteSpace(TextBoxAdmin.Text)) MessageBox.Show("Ongeldig adminnummer", "Something went wrong");
-                adminnummer = TextBoxAdmin.Text;
+                adminnummer = TextBoxAdmin.Text.Trim();
                 Admin admin = _adminManager.SelecteerAdmin(adminnummer);
                 if (admin != null)
                 {
