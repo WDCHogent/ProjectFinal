@@ -1,10 +1,5 @@
 ﻿using FitnessReservatieBL.Domeinen;
 using FitnessReservatieBL.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 
 namespace xFitnessReservatieDomein
@@ -115,7 +110,7 @@ namespace xFitnessReservatieDomein
         [InlineData(10, "Persoons", "Persoon   ", "Persoon.Persoons@email.com", 10, "Persoons", "Persoon", "Persoon.Persoons@email.com")]
         [InlineData(10, "Persoons", "Persoon", "   Persoon.Persoons@email.com", 10, "Persoons", "Persoon", "Persoon.Persoons@email.com")]
         [InlineData(10, "Persoons", "Persoon", "Persoon.Persoons@email.com   ", 10, "Persoons", "Persoon", "Persoon.Persoons@email.com")]
-        public void ctor_valid(int klantnummerIn, string naamIn, string voornaamIn, string mailadresIn, int klantnummerUit, string naamUit, string voornaamUit, string mailadresUit)
+        public void ctor_Valid(int klantnummerIn, string naamIn, string voornaamIn, string mailadresIn, int klantnummerUit, string naamUit, string voornaamUit, string mailadresUit)
         {
             Klant k = new(klantnummerIn, naamIn, voornaamIn, mailadresIn);
 
@@ -127,7 +122,7 @@ namespace xFitnessReservatieDomein
 
         [Theory]
         [InlineData(0, "Persoons", "Persoon", "Persoon.Persoons@email.com")]
-        
+
         [InlineData(10, "", "Persoon", "Persoon.Persoons@email.com")]
         [InlineData(10, "   ", "Persoon", "Persoon.Persoons@email.com")]
         [InlineData(10, null, "Persoon", "Persoon.Persoons@email.com")]
@@ -152,7 +147,7 @@ namespace xFitnessReservatieDomein
         [InlineData(10, "Persoons", "Persoon", "Persoon.Persoons@")]
         [InlineData(10, "Persoons", "Persoon", "Persoon.Persoons")]
         [InlineData(10, "Persoons", "Persoon", "Persoon.Persoons.com")]
-        public void ctor_invalid(int klantnr, string naam, string voornaam, string mailadres)
+        public void ctor_Invalid(int klantnr, string naam, string voornaam, string mailadres)
         {
             Assert.Throws<KlantException>(() => new Klant(klantnr, naam, voornaam, mailadres));
         }

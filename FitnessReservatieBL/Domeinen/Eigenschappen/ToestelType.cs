@@ -24,7 +24,7 @@ namespace FitnessReservatieBL.Domeinen.Eigenschappen
 
         public void ZetToestelNaam(string toestelNaam)
         {
-            if (string.IsNullOrEmpty(toestelNaam)) throw new ToestelException("ToestelType - ZetToestelNaam - 'Mag niet leeg zijn'");
+            if (string.IsNullOrWhiteSpace(toestelNaam)) throw new ToestelTypeException("ToestelType - ZetToestelNaam - 'Mag niet leeg zijn'");
             ToestelNaam = toestelNaam.Trim();
         }
 

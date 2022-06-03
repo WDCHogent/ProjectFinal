@@ -32,7 +32,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public void ZetToestelNaam(string toestelNaam)
         {
-            if (string.IsNullOrEmpty(toestelNaam)) throw new ToestelException("Toestel - ZetToestelNaam - 'Mag niet leeg zijn'");
+            if (string.IsNullOrWhiteSpace(toestelNaam)) throw new ToestelException("Toestel - ZetToestelNaam - 'Mag niet leeg zijn'");
             ToestelNaam = toestelNaam.Trim();
         }
 
@@ -44,7 +44,7 @@ namespace FitnessReservatieBL.Domeinen
 
         public void ZetToestelType(ToestelType toesteltype)
         {
-            if (toesteltype == null) throw new ReservatieInfoException("ReservatieInfo - ZetToestelType - 'Mag niet leeg zijn'");
+            if (toesteltype == null) throw new ToestelException("Toestel - ZetToestelType - 'Mag niet leeg zijn'");
             ToestelType = toesteltype;
         }
 

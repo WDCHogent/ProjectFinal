@@ -91,10 +91,10 @@ namespace xFitnessReservatieDomein
         [InlineData("A010", "Persoons   ", "Persoon", "A010", "Persoons", "Persoon")]
         [InlineData("A010", "Persoons", "   Persoon", "A010", "Persoons", "Persoon")]
         [InlineData("A010", "Persoons", "Persoon   ", "A010", "Persoons", "Persoon")]
-        public void ctor_valid(string adminNrIn, string naamIn, string voornaamIn, string adminNrUit, string naamUit, string voornaamUit)
+        public void ctor_Valid(string adminNrIn, string naamIn, string voornaamIn, string adminNrUit, string naamUit, string voornaamUit)
         {
             Admin a = new(adminNrIn, naamIn, voornaamIn);
-            
+
             Assert.Equal(adminNrUit, a.Adminnummer);
             Assert.Equal(naamUit, a.Naam);
             Assert.Equal(voornaamUit, a.Voornaam);
@@ -122,7 +122,7 @@ namespace xFitnessReservatieDomein
         [InlineData("A010", "Persoons", null)]
         [InlineData("A010", "Persoons", "\n")]
         [InlineData("A010", "Persoons", "\r")]
-        public void ctor_invalid(string adminnr, string naam, string voornaam)
+        public void ctor_Invalid(string adminnr, string naam, string voornaam)
         {
             Assert.Throws<AdminException>(() => new Admin(adminnr, naam, voornaam));
         }
